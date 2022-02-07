@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ParticipantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +58,16 @@ class Participant
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
      */
     private $campus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur")
+     */
+    private $organise;
+
+    public function __construct()
+    {
+        $this->organise = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,6 +166,36 @@ class Participant
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getOrganise(): Collection
+    {
+        return $this->organise;
+    }
+
+    public function addOrganise(Sortie $organise): self
+    {
+        if (!$this->organise->contains($organise)) {
+            $this->organise[] = $organise;
+            $organise->setOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganise(Sortie $organise): self
+    {
+        if ($this->organise->removeElement($organise)) {
+            // set the owning side to null (unless already changed)
+            if ($organise->getOrganisateur() === $this) {
+                $organise->setOrganisateur(null);
+            }
+        }
 
         return $this;
     }
