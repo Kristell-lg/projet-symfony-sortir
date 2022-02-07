@@ -15,4 +15,20 @@ class MainController extends AbstractController
     {
         return $this->render('main/index.html.twig', []);
     }
+
+    /**
+     * @Route("/", name="main_profil")
+     */
+    public function profil(): Response
+    {
+        return $this->render('main/profil.html.twig', []);
+    }
+
+    /**
+     * @Route("/", name="main_seDeconnecter")
+     */
+    public function seDeconnecter(): Response
+    {
+        return $this->render('main/seDeconnecter.html.twig', []);
+    }
 }
