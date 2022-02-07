@@ -1,3 +1,51 @@
-html {
+html,body {
     background-image: url("../img/backdrop.png");
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0;
 }
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background:rgba(24, 29, 49, 0.43);
+}
+
+header a {
+    padding: 10px;
+}
+
+main{
+    color: white;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+}
+nav ul{
+    display: flex;
+
+}
+
+nav li{
+    list-style: none ;
+    margin: 10px;
+    padding: 8px;
+}
+
+li a{
+    color: #50A1A4;
+    text-decoration: none;
+    font-size: large;
+}
+
+nav li a:hover{
+    color : white;
+    filter: drop-shadow(0 0 0.25rem grey);
+    text-decoration: overline;
+}
+
+main{
+    margin: 10px;
+}
+
