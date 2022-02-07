@@ -3,9 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %} Sortir.com {% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="icon" href="{{ asset('img/icon2.png') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     </head>
     <body>
+        <header>
+            <a href="{{ path('main_home') }}"><img src="{{ asset('img/logo2.png') }}" alt="logo"></a>
+            {%  include 'inc/nav.html.twig' %}
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
