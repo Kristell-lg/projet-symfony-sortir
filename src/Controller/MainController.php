@@ -31,4 +31,20 @@ class MainController extends AbstractController
     {
         return $this->render('main/seDeconnecter.html.twig', []);
     }
+
+    /**
+     * @Route("/", name="main_campus")
+     */
+    public function campus(): Response
+    {
+        return $this->render('main/campus.html.twig', []);
+    }
+
+    /**
+     * @Route("/", name="main_villes")
+     */
+    public function villes(): Response
+    {
+        return $this->render('main/villes.html.twig', []);
+    }
 }
