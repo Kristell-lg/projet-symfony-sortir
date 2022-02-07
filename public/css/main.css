@@ -7,7 +7,7 @@ html,body {
 header{
     display: flex;
     justify-content: space-between;
-    background:rgba(24, 29, 49, 0.43);
+    background:rgba(24, 29, 49, 0.75);
 }
 
 header a {
