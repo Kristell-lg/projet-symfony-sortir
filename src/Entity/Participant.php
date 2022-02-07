@@ -64,9 +64,15 @@ class Participant
      */
     private $organise;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="inscrits")
+     */
+    private $sorties;
+
     public function __construct()
     {
         $this->organise = new ArrayCollection();
+        $this->sorties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +201,33 @@ class Participant
             if ($organise->getOrganisateur() === $this) {
                 $organise->setOrganisateur(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSorties(): Collection
+    {
+        return $this->sorties;
+    }
+
+    public function addSorty(Sortie $sorty): self
+    {
+        if (!$this->sorties->contains($sorty)) {
+            $this->sorties[] = $sorty;
+            $sorty->addInscrit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSorty(Sortie $sorty): self
+    {
+        if ($this->sorties->removeElement($sorty)) {
+            $sorty->removeInscrit($this);
         }
 
         return $this;
