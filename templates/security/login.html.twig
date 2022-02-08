@@ -24,11 +24,13 @@
            value="{{ csrf_token('authenticate') }}"
     >
 
-    <div class="logincheckbox">
-        <input type="checkbox" name="_remember_me">
-        <label> Se souvenir de moi</label>
-    </div>
 
+    <div class="logincheckbox">
+
+        <input  type="checkbox" name="_remember_me">
+        <label> Se souvenir de moi</label>
+
+    </div>
 
     <a href="{{ path('app_register') }}">Pas encore de compte ? Cliquez ici pour s'inscrire !</a>
 
@@ -38,4 +40,5 @@
 
 </form>
     </main>
+
 {% endblock %}

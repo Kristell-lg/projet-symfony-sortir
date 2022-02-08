@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Liste Utilisateur {% endblock %}
+
+{% block body %}
+    {% for element in participant %}
+    <a href="" title="Regarder les détails de l'utilisateur"> {{ participant.name }} </a>
+    {% endfor %}
+{% endblock %}

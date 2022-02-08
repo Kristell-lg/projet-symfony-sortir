@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Modifier le profil{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container">
+
+            <h1 style="text-decoration: overline #50A1A4" ;>Editer son profil</h1>
+
+
+            <div class="register">
+                {{ form_start(registrationForm) }}
+                {{ form_widget(registrationForm) }}
+                <button class="btn btn-primary btn-lg btn-block" type="submit">S'inscrire</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </main>
+{% endblock %}
