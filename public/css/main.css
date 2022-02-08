@@ -11,7 +11,7 @@ header{
     background:rgba(24, 29, 49, 0.75);
 }
 
-header a {
+header a{
     padding: 10px;
 }
 
@@ -30,12 +30,13 @@ main{
     justify-content: center;
     align-items: stretch;
     padding : 20px;
-    height : 30vh;
+    height : 40vh;
     border-radius: 30px;
 }
 
 .login input {
     width: 50vh;
+    height:3vh;
     margin: 15px;
 }
 
@@ -43,20 +44,35 @@ main{
    text-decoration: overline #50A1A4;
 }
 
-.login button {
+.login a{
+    text-decoration: none;
+    color:white;
+}
+
+.login a:hover{
+    text-decoration: underline;
+}
+
+.login button{
     margin: 15px;
     border-radius: 30px;
-    height:10vh;
+    height:5vh;
     font-family: 'Source Sans Pro', sans-serif;
     color: white;
     background: #50A1A4;
     border: none;
 }
 
+.login button:hover{
+    color: #50A1A4;
+    background: white;
+}
+
 nav{
     display: flex;
     align-items: center;
 }
+
 nav ul{
     display: flex;
 
@@ -71,13 +87,11 @@ nav li{
 li a{
     color: #50A1A4;
     text-decoration: none;
-    font-size: large;
 }
 
 nav li a:hover{
     color : white;
-    filter: drop-shadow(0 0 0.25rem grey);
-    text-decoration: overline;
+    text-decoration: overline  #50A1A4;
 }
 
 main{
