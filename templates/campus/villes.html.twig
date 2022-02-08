@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | Villes {% endblock %}
+
+{% block body %}
+    <h1>Gérer les villes</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Villes</th>
+            <th>Code Postal</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for v in villes  %}
+        <tr>
+            <td>{{ v.nom | upper}}</td>
+            <td>{{ v.codePostal }}</td>
+            <td>TODO</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            {{ form_start(villesForm) }}
+            <td>{{ form_row(villesForm.nom) }}</td>
+            <td>{{ form_row(villesForm.codePostal) }}</td>
+            <td><button>Ajouter</button></td>
+            {{ form_end(villesForm) }}
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

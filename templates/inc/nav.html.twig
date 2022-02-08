@@ -1,8 +1,8 @@
 <nav>
     <ul>
         {% if is_granted("ROLE_ADMIN") %}
-            <li><h3><a href="{{ path('main_campus') }}" title="Campus">Campus</a></h3></li>
-            <li><h3><a href="{{ path('main_villes') }}" title="Villes">Ville</a></h3></li>
+            <li><h3><a href="{{ path('campusville_campus') }}" title="Campus">Campus</a></h3></li>
+            <li><h3><a href="{{ path('campusville_villes') }}" title="Villes">Ville</a></h3></li>
         {% endif %}
 
         {% if app.user %}

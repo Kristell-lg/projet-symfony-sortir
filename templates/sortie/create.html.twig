@@ -5,5 +5,11 @@
 {% endblock %}
 
 {% block body %}
- <h1>Formulaire sortie</h1>
+  <h1>Formulaire sortie</h1>
+   {{ form_start(sortieForm) }}
+   {{ form_widget(sortieForm) }}
+
+   <button>Créer une sortie</button>
+
+   {{form_end(sortieForm)}}
 {% endblock %}
