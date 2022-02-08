@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Sorties;
 use App\Form\SortiesType;
 use App\Repository\CampusRepository;
+use App\Repository\EtatsRepository;
 use App\Repository\ParticipantRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +27,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/create", name="sortie_create")
      */
-    public function create(Request $request, CampusRepository $campusRepository,ParticipantRepository $participantRepository): Response
+    public function create(Request $request, CampusRepository $campusRepository, EtatsRepository $etatsRepository,ParticipantRepository $participantRepository, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sorties();
         $sortieForm = $this->createForm(SortiesType::class,$sortie);
@@ -48,8 +50,14 @@ class SortieController extends AbstractController
                 }
             }
             $sortie->setOrganisateur($organisateur);
-            //TODO
-            dd($sortie);
+
+            $sortie->setEtats($etatsRepository->find(1));
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success','Evènement créé !');
+            return $this->redirectToRoute('main_home');
         }
 
         return $this->render('/sortie/create.html.twig', [

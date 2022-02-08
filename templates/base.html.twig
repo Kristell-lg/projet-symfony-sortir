@@ -16,6 +16,16 @@
             <a href="{{ path('main_home') }}"><img src="{{ asset('img/logo2.png') }}" alt="logo"></a>
             {%  include 'inc/nav.html.twig' %}
         </header>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages  %}
+                <div class="flash flash--{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+
         {% block body %}{% endblock %}
 
         <footer>
