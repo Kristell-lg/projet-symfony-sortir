@@ -68,6 +68,17 @@ main {
     background: white;
 }
 
+.logincheckbox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bolder;
+
+}
+
+.logincheckbox input{
+    width: 10%;
+}
 
 nav {
     display: flex;
