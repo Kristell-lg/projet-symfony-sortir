@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Sorties;
 use App\Form\SortiesType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\CampusRepository;
+use App\Repository\ParticipantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/create", name="sortie_create")
      */
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, CampusRepository $campusRepository,ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sorties();
         $sortieForm = $this->createForm(SortiesType::class,$sortie);
@@ -32,7 +33,22 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         if($sortieForm->isSubmitted() && $sortieForm->isValid()){
-            $sortie->setCampus($this->getUser()->getCampus());
+            $campusList = $campusRepository->findAll();
+            foreach ($campusList as $c){
+                if ($c->getId()===$this->getUser()->getCampus()->getId()){
+                    $campus =$c;
+                }
+            }
+            $sortie->setCampus($campus);
+
+            $participantList = $participantRepository->findAll();
+            foreach ($participantList as $p){
+                if ($p->getEmail()===$this->getUser()->getUserIdentifier()){
+                    $organisateur =$p;
+                }
+            }
+            $sortie->setOrganisateur($organisateur);
+            //TODO
             dd($sortie);
         }
 

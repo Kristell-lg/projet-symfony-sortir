@@ -2,10 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
-use App\Repository\CampusRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,6 +23,10 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Prénom'
             ])
             ->add('telephone', TextType::class, ['label' => 'Téléphone'])
+            ->add('campus', EntityType::class, [
+                'class'=>Campus::class,
+                'choice_label' => 'nom'
+            ])
             ->add('email')
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -42,15 +46,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
 
-            ])
-            ->add('campus', ChoiceType::class, [
-                'choices' => [
-                    'Rennes' => null,
-                    'Niort' => null,
-                    'Nantes' => null
-                ],
-                'multiple' => false
             ]);
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

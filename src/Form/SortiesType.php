@@ -2,8 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Campus;
-use App\Entity\Etats;
+
 use App\Entity\Lieux;
 use App\Entity\Sorties;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
