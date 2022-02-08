@@ -60,11 +60,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $actif;
 
     /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $campus;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Sorties::class, mappedBy="sortie")
      */
     private $sorties;
@@ -73,6 +68,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Sorties::class, mappedBy="orga")
      */
     private $sortiesOrganisees;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
+     */
+    private $campus;
 
     public function __construct()
     {
@@ -216,18 +216,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getCampus(): ?string
-    {
-        return $this->campus;
-    }
-
-    public function setCampus(string $campus): self
-    {
-        $this->campus = $campus;
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection|Sorties[]
@@ -282,6 +271,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
                 $sortiesOrganisee->setOrganisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }

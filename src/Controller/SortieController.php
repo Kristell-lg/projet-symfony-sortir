@@ -32,6 +32,7 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         if($sortieForm->isSubmitted() && $sortieForm->isValid()){
+            $sortie->setCampus($this->getUser()->getCampus());
             dd($sortie);
         }
 

@@ -9,6 +9,7 @@
    {{ form_start(sortieForm) }}
    {{ form_widget(sortieForm) }}
 
+    <p>Campus : {{ app.user.campus.nom }}</p>
    <button>Créer une sortie</button>
 
    {{form_end(sortieForm)}}
