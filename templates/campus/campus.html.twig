@@ -3,29 +3,32 @@
 {% block title %} {{ parent() }} | Campus {% endblock %}
 
 {% block body %}
-    <h1>Gérer les campus</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Campus</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for c in campus  %}
+    <main>
+        <div class="general">
+        <h1>Gérer les campus</h1>
+        <table>
+            <thead>
             <tr>
-                <td>{{ c.nom | upper}}</td>
-                <td>TODO</td>
+                <th>Campus</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
-        <tr>
-            {{ form_start(campusForm) }}
-            <td>{{ form_row(campusForm.nom) }}</td>
-            <td><button>Ajouter</button></td>
-            {{ form_end(campusForm) }}
-        </tr>
+            </thead>
+            <tbody>
+            {% for c in campus  %}
+                <tr>
+                    <td>{{ c.nom | upper}}</td>
+                    <td>TODO</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                {{ form_start(campusForm) }}
+                <td>{{ form_row(campusForm.nom) }}</td>
+                <td><button>Ajouter</button></td>
+                {{ form_end(campusForm) }}
+            </tr>
 
-        </tbody>
-    </table>
-
+            </tbody>
+        </table>
+        </div>
+    </main>
 {% endblock %}

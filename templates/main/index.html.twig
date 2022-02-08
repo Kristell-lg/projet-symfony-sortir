@@ -4,11 +4,13 @@
 
 {% block body %}
     <main>
-        <h1>Accueil</h1>
+        <div class="general">
+            <h1>Accueil</h1>
 
-        {% if is_granted("ROLE_ADMIN") %}
-            <button><a href="{{ path('sortie_create') }}"> Créer une sortie</a></button>
-        {% endif %}
+            {% if is_granted("ROLE_ADMIN") %}
+                <a href="{{ path('sortie_create') }}"> Créer une sortie</a>
+            {% endif %}
+        </div>
     </main>
 
 
