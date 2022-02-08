@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Sortie;
-use phpDocumentor\Reflection\Type;
+use App\Entity\Sorties;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,14 +38,9 @@ class SortieType extends AbstractType
             ->add('infosSortie',TextType::class,[
                 'label'=>'Description et infos:'
             ])
-            ->add('ville',EntityType::class,[
-                'label'=>'Ville:',
-                'required' => true
-            ])
-            ->add('lieu',EntityType::class,[
-                'label'=>'Lieu:',
-                'required' => true
-            ])
+            ->add('ville')
+
+            /*->add('lieu')
             ->add('latitude',NumberType::class,[
                 'label'=>'Latitude:',
                 'required' => true
@@ -50,14 +48,14 @@ class SortieType extends AbstractType
             ->add('longitude',NumberType::class,[
                 'label'=>'Longitude:',
                 'required' => true
-            ])
+            ])*/
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Sortie::class,
+            'data_class' => Sorties::class,
         ]);
     }
 }
