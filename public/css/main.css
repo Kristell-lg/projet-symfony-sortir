@@ -1,100 +1,154 @@
-html,body {
+html, body {
     background-image: url("../img/backdrop.png");
     font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
     height: 100vh;
 }
 
-header{
+header {
     display: flex;
     justify-content: space-between;
-    background:rgba(24, 29, 49, 0.75);
+    background: rgba(24, 29, 49, 0.75);
 }
 
-header a{
+header a {
     padding: 10px;
 }
 
-main{
-    height : 78vh;
+main {
+    height: 78vh;
     color: white;
     display: flex;
     justify-content: space-evenly;
     padding-top: 20px;
 }
 
-.login{
-    background-color:rgba(24, 29, 49, 0.75);
+.login {
+    background-color: rgba(24, 29, 49, 0.75);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    padding : 20px;
-    height : 40vh;
+    padding: 20px;
+    height: 40vh;
     border-radius: 30px;
 }
 
 .login input {
     width: 50vh;
-    height:3vh;
+    height: 3vh;
     margin: 15px;
 }
 
-.login h1{
-   text-decoration: overline #50A1A4;
+.login h1 {
+    text-decoration: overline #50A1A4;
 }
 
-.login a{
+.login a {
     text-decoration: none;
-    color:white;
+    color: white;
 }
 
-.login a:hover{
+.login a:hover {
     text-decoration: underline;
 }
 
-.login button{
+.login button {
     margin: 15px;
     border-radius: 30px;
-    height:5vh;
+    height: 5vh;
     font-family: 'Source Sans Pro', sans-serif;
     color: white;
     background: #50A1A4;
     border: none;
 }
 
-.login button:hover{
+.login button:hover {
     color: #50A1A4;
     background: white;
 }
 
-nav{
+nav {
     display: flex;
     align-items: center;
 }
 
-nav ul{
+nav ul {
     display: flex;
 
 }
 
-nav li{
-    list-style: none ;
+nav li {
+    list-style: none;
     margin: 10px;
     padding: 8px;
 }
 
-li a{
+li a {
     color: #50A1A4;
     text-decoration: none;
 }
 
-nav li a:hover{
-    color : white;
-    text-decoration: overline  #50A1A4;
+nav li a:hover {
+    color: white;
+    text-decoration: overline #50A1A4;
 }
 
-main{
+main {
     margin: 10px;
 }
 
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    clear: both;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #FFFFFF;
+    background-color: rgba(24, 29, 49, 0.75);
+    padding: 10px;
+    height: 73vh;
+    border-radius: 30px;
+    margin: 30px;
+}
+.register{
+
+}
+
+.register input {
+    width: 50vh;
+    height: 3vh;
+    margin: 15px;
+}
+
+.register h1 {
+    text-decoration: overline #50A1A4;
+    color: #FFFFFF;
+}
+.register select{
+    width: 50vh;
+    height: 3vh;
+    margin: 15px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+}
+.register button {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 7px 14px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 30px;
+    height: 5vh;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: white;
+    background: #50A1A4;
+
+}
+
+.register button :hover {
+    color: #50A1A4;
+    background: white;
+}
