@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Participant;
+use App\Repository\CampusRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -44,9 +45,9 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('campus', ChoiceType::class, [
                 'choices' => [
-                    'Rennes' => 'Rennes',
-                    'Niort' => 'Niort',
-                    'Quimper' => 'Quimper'
+                    'Rennes' => null,
+                    'Niort' => null,
+                    'Nantes' => null
                 ],
                 'multiple' => false
             ]);
