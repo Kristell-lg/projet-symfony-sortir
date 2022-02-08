@@ -5,12 +5,16 @@
 {% endblock %}
 
 {% block body %}
+<main>
+
+ <div class="generalBig">
   <h1>Formulaire sortie</h1>
-   {{ form_start(sortieForm) }}
-   {{ form_widget(sortieForm) }}
+           {{ form_start(sortieForm) }}
+           {{ form_widget(sortieForm) }}
+            <p>Campus : {{ app.user.campus.nom }}</p>
+           <button>Créer une sortie</button>
+         {{form_end(sortieForm)}}
+ </div>
+</main>
 
-    <p>Campus : {{ app.user.campus.nom }}</p>
-   <button>Créer une sortie</button>
-
-   {{form_end(sortieForm)}}
 {% endblock %}
