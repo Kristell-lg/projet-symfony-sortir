@@ -12,6 +12,7 @@ use App\Repository\CampusRepository;
 use App\Repository\EtatsRepository;
 use App\Repository\LieuxRepository;
 use App\Repository\ParticipantRepository;
+use App\Repository\SortiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,9 +24,12 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/", name="sortie_list")
      */
-    public function list(): Response
+    public function list(SortiesRepository $sortiesRepository): Response
     {
-        return $this->render('/sortie/list.html.twig', [
+
+        $sortie = $sortiesRepository->findAll();
+        return $this->render('sortie/list.html.twig', [
+            'sortie'=>$sortie
         ]);
     }
 
@@ -87,4 +91,18 @@ class SortieController extends AbstractController
             'lieu'=>''
         ]);
     }
+
+    /**
+     * @Route("sortie/list/{id}", name="sortie_details")
+     */
+    public function details(int $id, SortiesRepository $sortiesRepository): Response
+    {
+        $sortie = $sortiesRepository->find($id);
+
+
+        return $this->render('/sortie/list.html.twig', ["sortie"=>$sortie]);
+    }
+
+
+
 }
