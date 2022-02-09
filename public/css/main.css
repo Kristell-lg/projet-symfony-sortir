@@ -130,7 +130,7 @@ main {
 }
 
 .generalBig a:hover {
-    text-decoration: underline;
+    color:#50A1A4;
 }
 
 .generalBig button {
@@ -168,6 +168,22 @@ main {
 
 .generalBig .detail_lieu p{
     margin: 0.3vh;
+    padding: 0;
+}
+
+.generalBig td p{
+    margin: 1vh;
+    padding: 0;
+}
+
+.generalBig th p{
+    margin: 1vh;
+    padding-left: 3vh;
+    padding-right: 3vh;
+}
+
+.generalBig .creation_sortie{
+    margin: 1vh;
     padding: 0;
 }
 

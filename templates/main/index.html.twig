@@ -4,44 +4,48 @@
 
 {% block body %}
     <main>
-        <div class="general">
+        <div class="generalBig">
             <h1>Accueil</h1>
 
-            {% if is_granted("ROLE_ADMIN") %}
-                <a href="{{ path('sortie_create') }}"> Créer une sortie</a>
-            {% endif %}
 
             <div class="sorties">
                 <table>
                     <thead>
                     <tr>
-                        <th>Nom de la sortie</th>
-                        <th>Date de la sortie</th>
-                        <th>Date de Clôture</th>
-                        <th>Inscription/Places</th>
-                        <th>Etat</th>
-                        <th>Inscrit</th>
-                        <th>Organisateur</th>
-                        <th>Actions</th>
+                        <th><p>Nom de la sortie</p></th>
+                        <th><p>Date de la sortie</p></th>
+                        <th><p>Date de Clôture</p></th>
+                        <th><p>Inscription/Places</p></th>
+                        <th><p>Etat</p></th>
+                        <th><p>Inscrit</p></th>
+                        <th><p>Organisateur</p></th>
+                        <th><p>Actions</p></th>
 
                     </tr>
                     </thead>
                     <tbody>
                     {% for s in sortie  %}
                         <tr>
-                            <td>{{ s.nom }}</td>
-                            <td>{{ s.dateHeureDebut | date('d/m/Y')}}</td>
-                            <td>{{ s.dateLimiteInscription | date('d/m/Y')}}</td>
-                            <td>{{ s.nbInscriptionMax  }}</td>
-                            <td>{{ s.etats.libelle }}</td>
-                            <td>{# todo boolean inscrit #}</td>
-                            <td>{{ s.organisateur.nom |upper }} {{ s.organisateur.prenom}}</td>
-                            <td>{# todo action #}</td>
+                            <td><p>{{ s.nom }}</p></td>
+                            <td><p>{{ s.dateHeureDebut | date('d/m/Y')}}</p></td>
+                            <td><p>{{ s.dateLimiteInscription | date('d/m/Y')}}</p></td>
+                            <td><p>{{ s.nbInscriptionMax  }}</p></td>
+                            <td><p>{{ s.etats.libelle }}</p></td>
+                            <td><p>{# todo boolean inscrit #}</p></td>
+                            <td><p>{{ s.organisateur.nom |upper }} {{ s.organisateur.prenom}}</p></td>
+                            <td><p>{# todo action #}</p></td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
+
+            {% if is_granted("ROLE_ADMIN") %}
+                <div class="creation_sortie">
+                    <button><a href="{{ path('sortie_create') }}"> Créer une sortie</a></button>
+                </div>
+            {% endif %}
+
         </div>
     </main>
 {% endblock %}
