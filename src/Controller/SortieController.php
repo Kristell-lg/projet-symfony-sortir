@@ -59,8 +59,9 @@ class SortieController extends AbstractController
             ]);
         }
 
+
         //Traiter le formulaire et envoyer en base de données
-        if($sortieForm->isSubmitted() && $sortieForm->isValid()){
+        if($sortieForm->get('creer_btn')->isClicked() && $sortieForm->isSubmitted() && $sortieForm->isValid()){
             $campusList = $campusRepository->findAll();
             foreach ($campusList as $c){
                 if ($c->getId()===$this->getUser()->getCampus()->getId()){
@@ -85,6 +86,39 @@ class SortieController extends AbstractController
             $this->addFlash('success','Evènement créé !');
             return $this->redirectToRoute('main_home');
         }
+
+
+        // Traiter le formualire et Publier la sortie
+        if($sortieForm->get('publier_btn')->isClicked() && $sortieForm->isSubmitted() && $sortieForm->isValid()){
+            $campusList = $campusRepository->findAll();
+            foreach ($campusList as $c){
+                if ($c->getId()===$this->getUser()->getCampus()->getId()){
+                    $campus =$c;
+                }
+            }
+            $sortie->setCampus($campus);
+
+            $participantList = $participantRepository->findAll();
+            foreach ($participantList as $p){
+                if ($p->getEmail()===$this->getUser()->getUserIdentifier()){
+                    $organisateur =$p;
+                }
+            }
+            $sortie->setOrganisateur($organisateur);
+
+            $sortie->setEtats($etatsRepository->find(2));
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success','Evènement créé !');
+            return $this->redirectToRoute('main_home');
+        }
+
+        if($sortieForm->get('annuler_btn')->isClicked()){
+            return $this->redirectToRoute('main_home');
+        }
+
 
         return $this->render('/sortie/create.html.twig', [
             'sortieForm'=>$sortieForm->createView(),

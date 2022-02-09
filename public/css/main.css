@@ -100,10 +100,7 @@ main {
     border-radius: 30px;
 }
 
-.generalBig form{
-    display: flex;
 
-}
 .generalBig form .col1, .col2{
     margin: 10px;
 }
@@ -154,6 +151,11 @@ main {
     flex-direction: column;
 }
 
+.generalBig .column{
+    display: flex;
+    flex-direction: row;
+}
+
 .generalBig form div .lieu{
     display: flex;
     flex-direction: row;
@@ -187,6 +189,15 @@ main {
     padding: 0;
 }
 
+.generalBig .btn_sortie{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.generalBig .btn_sortie button{
+    width: 30vh;
+}
 
 
 
@@ -335,21 +346,22 @@ nav li a:hover {
 table {
     border:none;
     border-radius: 30px;
-    border-collapse:collapse;
-    width: 50vh;
+    border-collapse: collapse;
     color: white;
     overflow: hidden;
     box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
-    table-layout: inherit;
-    height: 30vh;
+    display: block;
+    overflow-y: auto;
+    max-height: 35vh;
 }
 
-thead, tfoot {
+thead {
     background-color: rgba(24, 29, 49, 0.92);
     border:1px solid rgba(24, 29, 49, 0.75);
 }
 
 tbody {
+
     background-color: rgba(40, 52, 75, 0.75);
     border:1px solid rgba(24, 29, 49, 0.75);
 }
@@ -358,20 +370,22 @@ th {
     border:1px dotted rgba(24, 29, 49, 0.75);
     background-color:rgba(24, 29, 49, 0.75);
     color:#50A1A4;
+    padding: 0;
 }
 
 td {
     font-weight: bold;
     border:1px solid rgba(24, 29, 49, 0.75);
     text-align:center;
-    padding: 0;
-    width: 30%;
 }
 
 td div input{
     width: 100px;
 }
 
+tr{
+    width: 100vw;
+}
 
 
 

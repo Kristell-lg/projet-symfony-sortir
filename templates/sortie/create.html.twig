@@ -11,37 +11,37 @@
   <h1>Formulaire sortie (Campus :{{ app.user.campus.nom }})</h1>
            {{ form_start(sortieForm) }}
 
-     <div class="col1">
-           {{ form_row(sortieForm.nom) }}
-           {{ form_row(sortieForm.dateHeureDebut) }}
-           {{ form_row(sortieForm.duree) }}
-           {{ form_row(sortieForm.dateLimiteInscription) }}
-     </div>
-
-     <div class="col2">
-         {{ form_row(sortieForm.nbInscriptionMax) }}
-         {{ form_row(sortieForm.infosSortie) }}
-         <div class="lieu">
-            {{ form_row(sortieForm.lieux) }}
-            {{ form_row(sortieForm.lieu_btn) }}
+     <div class="column">
+         <div class="col1">
+               {{ form_row(sortieForm.nom) }}
+               {{ form_row(sortieForm.dateHeureDebut) }}
+               {{ form_row(sortieForm.duree) }}
+               {{ form_row(sortieForm.dateLimiteInscription) }}
          </div>
 
-         {% if lieu is not empty %}
-             <div class="detail_lieu">
-                 <p>Ville : {{ lieu.villes.nom }}</p>
-                 <p>Rue : {{ lieu.rue }}</p>
-                 <p>Code Postal : {{ lieu.villes.codePostal }}</p>
-                 <p>Latitude : {{ lieu.latitude }}°</p>
-                 <p>Longitude : {{ lieu.longitude }}°</p>
+         <div class="col2">
+             {{ form_row(sortieForm.nbInscriptionMax) }}
+             {{ form_row(sortieForm.infosSortie) }}
+             <div class="lieu">
+                {{ form_row(sortieForm.lieux) }}
+                {{ form_row(sortieForm.lieu_btn) }}
              </div>
-         {% endif %}
 
-         <button>Créer une sortie</button>
-         {{form_end(sortieForm)}}
-
+             {% if lieu is not empty %}
+                 <div class="detail_lieu">
+                     <p>Ville : {{ lieu.villes.nom }}</p>
+                     <p>Rue : {{ lieu.rue }}</p>
+                     <p>Code Postal : {{ lieu.villes.codePostal }}</p>
+                     <p>Latitude : {{ lieu.latitude }}°</p>
+                     <p>Longitude : {{ lieu.longitude }}°</p>
+                 </div>
+             {% endif %}
+         </div>
      </div>
 
-
+     <div class="btn_sortie">
+         {{form_end(sortieForm)}}
+     </div>
  </div>
 </main>
 

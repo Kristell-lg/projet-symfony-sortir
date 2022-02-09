@@ -54,6 +54,17 @@ class SortiesType extends AbstractType
             ->add('lieu_btn', SubmitType::class, array(
                 'label' => '+'
             ))
+
+            ->add('creer_btn', SubmitType::class, array(
+                'label' => 'Créer la sortie'
+            ))
+
+            ->add('publier_btn', SubmitType::class, array(
+                'label' => 'Publier la sortie'
+            ))
+            ->add('annuler_btn', SubmitType::class, array(
+                'label' => 'Annuler'
+            ))
         ;
     }
 
