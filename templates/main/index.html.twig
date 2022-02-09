@@ -45,12 +45,13 @@
                                     <a href="{{ path('sortie_update', {'id':s.id}) }}">Modifier</a>
                                     {% endif %}
 
-                                    {% if s.etats.id == '2' and app.user %}
+                                    {% if s.etats.id == '2' and s.organisateur %}
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">S'inscrire</a>
                                     {% endif %}
 
-                                    {# si la sortie est publié &&  user = inscrit #}
-                                    {# >se désinscrire< #}
+                                    {% if s.etats.id == '2' and not s.organisateur and not s.sortieParticipants  %}
+                                    <a href="{{ path('sortie_details', {'id':s.id}) }}">Se désinscrire</a>
+                                    {% endif %}
                             </p></td>
                         </tr>
                     {% endfor %}
