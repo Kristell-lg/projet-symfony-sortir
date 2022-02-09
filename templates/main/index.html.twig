@@ -30,7 +30,13 @@
                     {% for s in sortie  %}
                         <tr>
                             <td>{{ s.nom }}</td>
-                            <td>TODO</td>
+                            <td>{{ s.dateHeureDebut | date('d/m/Y')}}</td>
+                            <td>{{ s.dateLimiteInscription | date('d/m/Y')}}</td>
+                            <td>{{ s.nbInscriptionMax  }}</td>
+                            <td>{{ s.etats.libelle }}</td>
+                            <td>{# todo boolean inscrit #}</td>
+                            <td>{{ s.organisateur.nom |upper }} {{ s.organisateur.prenom}}</td>
+                            <td>{# todo action #}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
