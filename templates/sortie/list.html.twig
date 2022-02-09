@@ -36,12 +36,12 @@ Sorties | {{ parent() }}
                     </tr>
                     </thead>
                     <tbody>
-                    {# for s in sortieParticipant  %}#}
+                    {% for s in sortie.sortieParticipants %}
                     <tr>
-                           {#  <td>{{ s.prenom }}</td>
-                            <td>{{ s.nom }}</td>#}
+                             <td>{{ s.prenom }}</td>
+                            <td>{{ s.nom }}</td>
                         </tr>
-{# {% endfor %}#}
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
