@@ -45,7 +45,7 @@
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Modifier</a>
                                     {% endif %}
 
-                                    {% if s.etats.id == '2' and app.user and  %}
+                                    {% if s.etats.id == '2' and app.user %}
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">S'inscrire</a>
                                     {% endif %}
 
