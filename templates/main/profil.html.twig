@@ -6,13 +6,16 @@
     <main>
         <div class="general">
             <div>
-            <h1>Bienvenue {{ participant.prenom }} !</h1>
+                <h1>Bienvenue {{ participant.prenom }} !</h1>
                 <h3>Nom : {{ participant.nom }}</h3>
                 <h3>Téléphone : {{ participant.telephone }}</h3>
                 <h3>Email : {{ participant.email }}</h3>
                 <h3>Campus de rattachement : {{ participant.campus.nom }}</h3>
 
             </div>
+            <button class="btn btn-lg btn-primary" type="submit">
+                <a href="{{ path('user_edit',{'id':app.user.id}) }}">Modifier le profil !</a>
+            </button>
         </div>
     </main>
 {% endblock %}
