@@ -223,8 +223,7 @@ nav li a:hover {
 .container{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 500px;
+    justify-content: center;
     clear: both;
     font-family: 'Source Sans Pro', sans-serif;
     color: #FFFFFF;
@@ -232,9 +231,13 @@ nav li a:hover {
     padding: 10px 30px;
     height: 70vh;
     border-radius: 30px;
-    margin: 30px;
 }
 
+.register form div{
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
 
 .register input {
     width: 50vh;
@@ -242,9 +245,10 @@ nav li a:hover {
     margin: 15px;
 }
 
-.register h1 {
+.container h1 {
     text-decoration: overline #50A1A4;
     color: #FFFFFF;
+    margin: 0;
 }
 .register select{
     width: 50vh;
@@ -291,10 +295,11 @@ table {
     border-radius: 30px;
     border-collapse:collapse;
     width: 50vh;
-    margin:auto;
     color: white;
     overflow: hidden;
     box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
+    table-layout: inherit;
+    height: 30vh;
 }
 
 thead, tfoot {
@@ -309,19 +314,21 @@ tbody {
 
 th {
     border:1px dotted rgba(24, 29, 49, 0.75);
-    padding:5px;
     background-color:rgba(24, 29, 49, 0.75);
-    width:40%;
     color:#50A1A4;
 }
 
 td {
     font-weight: bold;
     border:1px solid rgba(24, 29, 49, 0.75);
-    padding:5px;
     text-align:center;
+    padding: 0;
+    width: 30%;
 }
 
+td div input{
+    width: 100px;
+}
 
 
 
@@ -335,6 +342,12 @@ footer{
     display: flex;
     justify-content: space-around;
     color: white;
+    font-size: smaller;
+}
+
+footer p {
+    padding: 0;
+    margin: 2px;
 }
 
 
