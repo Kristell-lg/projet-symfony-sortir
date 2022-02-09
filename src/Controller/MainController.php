@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Repository\SortiesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,9 +13,11 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_home")
      */
-    public function home(): Response
+    public function home(SortiesRepository $sortiesRepository): Response
     {
-        return $this->render('main/index.html.twig', []);
+        $sortie = $sortiesRepository->findAll();
+
+        return $this->render('main/index.html.twig', ["sortie"=>$sortie]);
     }
 
     /**
