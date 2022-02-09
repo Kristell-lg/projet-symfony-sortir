@@ -57,7 +57,7 @@ main {
 }
 
 .general a:hover {
-    text-decoration: underline;
+    color: #50A1A4;
 }
 
 .general button {
