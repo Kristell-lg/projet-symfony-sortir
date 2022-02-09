@@ -3,11 +3,15 @@
 {% block title %} {{ parent() }} | Profil {% endblock %}
 
 {% block body %}
-<h1>{{ participant.prenom }}</h1>
-
-    <h3>{{ participant.nom }}</h3>
-    <h3>{{ participant.telephone }}</h3>
-    <h3>{{ participant.email }}</h3>
-    <h3>{{ participant.campus }}</h3>
-
+    <main>
+        <div class="container">
+            <h1>Bienvenu {{ participant.prenom }}</h1>
+                <div class="profil">
+                        <h3>nom : {{ participant.nom }}</h3>
+                        <h3>Téléphone : {{ participant.telephone }}</h3>
+                        <h3>email : {{ participant.email }}</h3>
+                        <h3>campus de rattachement : {{ participant.campus }}</h3>
+                </div>
+        </div>
+    </main>
 {% endblock %}
