@@ -6,6 +6,10 @@
 <main>
     <div class="general">
         <h1>Gérer les villes</h1>
+            {{ form_start(filterForm) }}
+            {{ form_widget(filterForm) }}
+                <button>Rechercher</button>
+            {{ form_end(filterForm) }}
         <table>
             <thead>
             <tr>

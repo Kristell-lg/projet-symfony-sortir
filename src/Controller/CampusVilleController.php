@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\PropertySearch;
 use App\Entity\Villes;
 use App\Form\CampusType;
+use App\Form\FilterResearchType;
+use App\Form\TabFilterType;
 use App\Form\VillesType;
 use App\Repository\CampusRepository;
 use App\Repository\VillesRepository;
@@ -22,7 +25,17 @@ class CampusVilleController extends AbstractController
     public function campusListe(EntityManagerInterface $entityManager, CampusRepository $campusRepository, Request $request, ?campus $pCampus): Response
     {
         $modif = false;
-        $campus = $campusRepository->findAll();
+
+        $recherche = new PropertySearch();
+        $filterForm = $this->createForm(FilterResearchType::class,$recherche);
+        $filterForm->handleRequest($request);
+
+        if($filterForm->isSubmitted()){
+            $campus= $campusRepository->findWanted($recherche);
+        } else{
+            $campus = $campusRepository->findAll();
+        }
+
         if($pCampus !== null){
             $campusNew= $pCampus;
             $modif=true;
@@ -47,6 +60,7 @@ class CampusVilleController extends AbstractController
         return $this->render('campus/campus.html.twig', [
             'campus'=>$campus,
             'campusForm'=>$campusForm->createView(),
+            'filterForm'=>$filterForm->createView(),
             'modif'=>$modif
         ]);
     }
@@ -57,7 +71,16 @@ class CampusVilleController extends AbstractController
     public function villesListe(EntityManagerInterface $entityManager, VillesRepository $villesRepository, Request $request,?Villes $ville): Response
     {
         $modif = false;
-        $villes= $villesRepository->findAll();
+
+        $recherche = new PropertySearch();
+        $filterForm = $this->createForm(FilterResearchType::class,$recherche);
+        $filterForm->handleRequest($request);
+
+        if($filterForm->isSubmitted()){
+            $villes= $villesRepository->findWanted($recherche);
+        } else{
+            $villes= $villesRepository->findAll();
+        }
         if($ville !== null){
             $villesNew= $ville;
             $modif=true;
@@ -71,7 +94,8 @@ class CampusVilleController extends AbstractController
 
         if($villesForm->isSubmitted() && $villesForm->isValid()){
             $entityManager->persist($villesNew);
-            $entityManager->flush();if($modif){
+            $entityManager->flush();
+            if($modif){
                 $this->addFlash('success', 'Ville modifé !');
             } else{
                 $this->addFlash('success', 'Ville ajouté !');
@@ -81,6 +105,7 @@ class CampusVilleController extends AbstractController
         return $this->render('campus/villes.html.twig', [
             'villes'=>$villes,
             'villesForm'=>$villesForm->createView(),
+            'filterForm'=>$filterForm->createView(),
             'modif'=>$modif
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Campus;
+use App\Entity\PropertySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,13 @@ class CampusRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findWanted(PropertySearch $pSearch)
+    {
+        $search = $pSearch->getRecherche();
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->where('p.nom LIKE :search')
+            ->setParameter('search','%'.$search.'%')->getQuery();
+        return $queryBuilder->getResult();
+    }
 }

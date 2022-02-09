@@ -2,8 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\PropertySearch;
 use App\Entity\Villes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -47,4 +50,12 @@ class VillesRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findWanted(PropertySearch $pSearch)
+    {
+        $search = $pSearch->getRecherche();
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->where('p.nom LIKE :search')
+            ->setParameter('search','%'.$search.'%')->getQuery();
+        return $queryBuilder->getResult();
+    }
 }
