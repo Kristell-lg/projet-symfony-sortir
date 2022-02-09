@@ -21,7 +21,20 @@
      <div class="col2">
          {{ form_row(sortieForm.nbInscriptionMax) }}
          {{ form_row(sortieForm.infosSortie) }}
-         {{ form_row(sortieForm.lieux) }}
+         <div class="lieu">
+            {{ form_row(sortieForm.lieux) }}
+            {{ form_row(sortieForm.lieu_btn) }}
+         </div>
+
+         {% if lieu is not empty %}
+             <div class="detail_lieu">
+                 <p>Ville : {{ lieu.villes.nom }}</p>
+                 <p>Rue : {{ lieu.rue }}</p>
+                 <p>Code Postal : {{ lieu.villes.codePostal }}</p>
+                 <p>Latitude : {{ lieu.latitude }}°</p>
+                 <p>Longitude : {{ lieu.longitude }}°</p>
+             </div>
+         {% endif %}
 
          <button>Créer une sortie</button>
          {{form_end(sortieForm)}}

@@ -96,7 +96,7 @@ main {
     justify-content: center;
     align-items: stretch;
     padding: 20px;
-    height: 50vh;
+    height: 60vh;
     border-radius: 30px;
 }
 
@@ -154,6 +154,22 @@ main {
     flex-direction: column;
 }
 
+.generalBig form div .lieu{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.generalBig form div .lieu button{
+    height: 4vh;
+    width: 5vh;
+    font-weight: bolder;
+}
+
+.generalBig .detail_lieu p{
+    margin: 0.3vh;
+    padding: 0;
+}
 
 
 
