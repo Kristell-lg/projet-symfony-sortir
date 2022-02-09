@@ -294,7 +294,7 @@ table {
     margin:auto;
     color: white;
     overflow: hidden;
-    box-shadow: 0 0 0 1px rgba(24, 29, 49, 0.75);
+    box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
 }
 
 thead, tfoot {
