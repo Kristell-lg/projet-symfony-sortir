@@ -63,4 +63,28 @@ class CampusVilleController extends AbstractController
             'villesForm'=>$villesForm->createView()
         ]);
     }
+    /**
+     * @Route("/villes/{id}", name="campusville_supprimerville")
+     */
+    public function supprimerVille(int $id,EntityManagerInterface $entityManager, VillesRepository $villesRepository): Response
+    {
+        $ville = $villesRepository->find($id);
+        $entityManager->remove($ville);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Ville supprimé !');
+        return $this->redirectToRoute('campusville_villes');
+    }
+    /**
+     * @Route("/campus/{id}", name="campusville_supprimercampus")
+     */
+    public function supprimerCampus(int $id,EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
+    {
+        $campus = $campusRepository->find($id);
+        $entityManager->remove($campus);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Campus supprimé !');
+        return $this->redirectToRoute('campusville_campus');
+    }
 }

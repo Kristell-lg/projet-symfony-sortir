@@ -19,7 +19,10 @@
             <tr>
                 <td>{{ v.nom | upper}}</td>
                 <td>{{ v.codePostal }}</td>
-                <td>TODO</td>
+                <td>
+                    <a href="{{ path('main_home') }}" title="Modifier">Modifier</a>
+                    <a href="{{ path('campusville_supprimerville',{'id': v.id })}}" title="Supprimer">Supprimer</a>
+                </td>
             </tr>
             {% endfor %}
             <tr>
