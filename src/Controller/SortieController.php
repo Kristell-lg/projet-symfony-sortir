@@ -7,6 +7,7 @@ use App\Entity\Sorties;
 use App\Entity\Villes;
 use App\Form\LieuxType;
 use App\Form\SortiesType;
+use App\Form\SortieUpdateType;
 use App\Form\VillesType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatsRepository;
@@ -140,20 +141,42 @@ class SortieController extends AbstractController
     /**
      * @Route("sortie/update/{id}", name="sortie_update")
      */
-    public function update(int $id, Request $request, SortiesRepository $sortiesRepository): Response
+    public function update(int $id, Request $request, SortiesRepository $sortiesRepository, LieuxRepository $lieuxRepository, EntityManagerInterface $entityManager): Response
     {
         $sortie = $sortiesRepository->find($id);
-        $sortieForm = $this->createForm(SortiesType::class,$sortie);
+        $sortieForm = $this->createForm(SortieUpdateType::class,$sortie);
         $sortieForm->handleRequest($request);
 
-        if($sortieForm->isSubmitted() && $sortieForm->isValid()){
-            dd($sortie);
+        //Afficher le détail du lieu quand sélectionner
+        if($sortieForm->get('lieu_btn')->isClicked()){
+            $lieu = $lieuxRepository->find($sortieForm->getData()->getLieux()->getId());
+
+            $sortieForm = $this->createForm(SortieUpdateType::class,$sortie);
+            $sortieForm->handleRequest($request);
+
+            return $this->render('/sortie/update.html.twig', [
+                'sortieForm'=>$sortieForm->createView(),
+                'lieu'=>$lieu
+            ]);
+        }
+
+        if($sortieForm->get('creer_btn')->isClicked() && $sortieForm->isSubmitted() && $sortieForm->isValid()){
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success','Sortie Modifiée !');
+
+            return $this->render('/sortie/list.html.twig',
+                [
+                    "sortie"=>$sortie,
+                ]);
         }
 
         return $this->render('/sortie/update.html.twig',
             [
                 "sortie"=>$sortie,
-                "sortieForm"=>$sortieForm->createView()
+                "sortieForm"=>$sortieForm->createView(),
+                "lieu"=>""
             ]);
     }
 
