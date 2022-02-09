@@ -42,7 +42,7 @@
                                     {% endif %}
 
                                     {% if s.etats.id == '2' and s.organisateur %}
-                                    <a href="{{ path('sortie_details', {'id':s.id}) }}">Modifier</a>
+                                    <a href="{{ path('sortie_update', {'id':s.id}) }}">Modifier</a>
                                     {% endif %}
 
                                     {% if s.etats.id == '2' and app.user %}
