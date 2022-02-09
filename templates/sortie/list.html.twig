@@ -38,7 +38,7 @@ Sorties | {{ parent() }}
                     <tbody>
                     {% for s in sortie.sortieParticipants %}
                     <tr>
-                             <td>{{ s.prenom }}</td>
+                             <td><a href="{{ path('user_details', {'id':sortie.sortieParticipants.id}) }}">{{ s.prenom }}</a></td>
                             <td>{{ s.nom }}</td>
                         </tr>
                     {% endfor %}
