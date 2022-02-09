@@ -24,12 +24,18 @@ class RegistrationFormType extends AbstractType
             ->add('prenom', TextType::class, [
                 'label' => 'Prénom'
             ])
-            ->add('telephone', TextType::class, ['label' => 'Téléphone'])
+            ->add('telephone', TextType::class, [
+                'label' => 'Téléphone',
+                'attr'=>['pattern'=>'^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$']
+                ])
             ->add('campus', EntityType::class, [
                 'class'=>Campus::class,
                 'choice_label' => 'nom'
             ])
-            ->add('email')
+            ->add('email', TextType::class, [
+                'attr'=>['pattern'=>'^\S+@\S+$']
+            ])
+
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

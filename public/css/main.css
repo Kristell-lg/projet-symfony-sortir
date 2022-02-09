@@ -243,6 +243,8 @@ nav li a:hover {
     width: 50vh;
     height: 3vh;
     margin: 15px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: medium;
 }
 
 .container h1 {
