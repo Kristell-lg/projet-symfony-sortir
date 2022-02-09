@@ -10,9 +10,33 @@
             {% if is_granted("ROLE_ADMIN") %}
                 <a href="{{ path('sortie_create') }}"> Créer une sortie</a>
             {% endif %}
+
+            <div class="sorties">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nom de la sortie</th>
+                        <th>Date de la sortie</th>
+                        <th>Date de Clôture</th>
+                        <th>Inscription/Places</th>
+                        <th>Etat</th>
+                        <th>Inscrit</th>
+                        <th>Organisateur</th>
+                        <th>Actions</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for s in sortie  %}
+                        <tr>
+                            <td>{{ s.nom }}</td>
+                            <td>TODO</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
-
-
-
 {% endblock %}
+
