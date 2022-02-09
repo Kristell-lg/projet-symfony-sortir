@@ -33,7 +33,7 @@
                             <td><p>{{ s.etats.libelle }}</p></td>
                             <td><p>{# todo boolean inscrit #}</p></td>
                             <td><p>{{ s.organisateur.nom |upper }} {{ s.organisateur.prenom}}</p></td>
-                            <td><p>{# todo action #}</p></td>
+                            <td><p><a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a></p></td>
                         </tr>
                     {% endfor %}
                     </tbody>
