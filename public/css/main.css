@@ -23,6 +23,11 @@ main {
     padding-top: 20px;
 }
 
+
+
+
+
+
 .general {
     background-color: rgba(24, 29, 49, 0.75);
     display: flex;
@@ -67,6 +72,13 @@ main {
     color: #50A1A4;
     background: white;
 }
+
+
+
+
+
+
+
 .generalBig {
     background-color: rgba(24, 29, 49, 0.75);
     display: flex;
@@ -74,14 +86,26 @@ main {
     justify-content: center;
     align-items: stretch;
     padding: 20px;
-    height: 60vh;
+    height: 50vh;
     border-radius: 30px;
 }
 
-.generalBig input {
+.generalBig form{
+    display: flex;
+
+}
+.generalBig form .col1, .col2{
+    margin: 10px;
+}
+
+.generalBig input, textarea, select{
     width: 50vh;
-    height: 3vh;
+    height: 2vh;
     margin: 15px;
+}
+
+.generalBig textarea {
+    resize: none;
 }
 
 .generalBig h1 {
@@ -112,6 +136,15 @@ main {
     background: white;
 }
 
+.generalBig form div{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+
 .logincheckbox{
     display: flex;
     flex-direction: row;
@@ -123,6 +156,13 @@ main {
 .logincheckbox input{
     width: 10%;
 }
+
+
+
+
+
+
+
 
 nav {
     display: flex;
@@ -150,9 +190,28 @@ nav li a:hover {
     text-decoration: overline #50A1A4;
 }
 
-main {
-    margin: 10px;
+
+
+
+
+.flash {
+    padding: 20px;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin: 1rem 0;
+    border-radius: 5px;
 }
+
+.flash-success {
+    background-color: lawngreen
+}
+
+
+
+
+
+
+
 
 .container{
     display: flex;
@@ -213,6 +272,12 @@ main {
 }
 
 
+
+
+
+
+
+
 table {
     border:none;
     border-radius: 30%;
@@ -245,6 +310,17 @@ td {
     border:1px solid rgba(24, 29, 49, 0.75);
     padding:5px;
     text-align:center;
+}
+
+
+footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background: rgba(24, 29, 49, 0.75);
+    display: flex;
+    justify-content: space-around;
+    color: white;
 }
 
 

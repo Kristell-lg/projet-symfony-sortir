@@ -8,12 +8,27 @@
 <main>
 
  <div class="generalBig">
-  <h1>Formulaire sortie</h1>
+  <h1>Formulaire sortie (Campus :{{ app.user.campus.nom }})</h1>
            {{ form_start(sortieForm) }}
-           {{ form_widget(sortieForm) }}
-            <p>Campus : {{ app.user.campus.nom }}</p>
-           <button>Créer une sortie</button>
+
+     <div class="col1">
+           {{ form_row(sortieForm.nom) }}
+           {{ form_row(sortieForm.dateHeureDebut) }}
+           {{ form_row(sortieForm.duree) }}
+           {{ form_row(sortieForm.dateLimiteInscription) }}
+     </div>
+
+     <div class="col2">
+         {{ form_row(sortieForm.nbInscriptionMax) }}
+         {{ form_row(sortieForm.infosSortie) }}
+         {{ form_row(sortieForm.lieux) }}
+
+         <button>Créer une sortie</button>
          {{form_end(sortieForm)}}
+
+     </div>
+
+
  </div>
 </main>
 

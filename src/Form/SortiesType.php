@@ -37,7 +37,7 @@ class SortiesType extends AbstractType
                 'widget'=>'single_text'
             ])
             ->add('nbInscriptionMax', IntegerType::class,[
-                'label'=>'Nombre d\'inscritpions maximum'
+                'label'=>'Nombre d\'inscriptions maximum'
             ])
             ->add('infosSortie', TextareaType::class,[
                 'label'=>'Informations'
