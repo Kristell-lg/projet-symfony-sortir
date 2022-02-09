@@ -7,11 +7,7 @@ Sorties | {{ parent() }}
 {% block body %}
 
         <div class="general">
-            <h1>Tournée des Bars</h1>
-
-            {% if is_granted("ROLE_ADMIN") %}
-                <a href="{{ path('sortie_create') }}"> Créer une sortie</a>
-            {% endif %}
+            <h1>{{ sortie.nom }}</h1>
 
             <div class="sorties">
                         <a>Date de la sortie : {{sortie.dateHeureDebut | date('d/m/Y')}}</a><br>
