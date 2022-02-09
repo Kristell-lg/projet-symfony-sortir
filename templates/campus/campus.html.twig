@@ -17,7 +17,10 @@
             {% for c in campus  %}
                 <tr>
                     <td>{{ c.nom | upper}}</td>
-                    <td>TODO</td>
+                    <td>
+                        <a href="{{ path('main_home') }}" title="Modifier">Modifier</a>
+                        <a href="{{ path('campusville_supprimercampus',{'id': c.id }) }}" title="Supprimer">Supprimer</a>
+                    </td>
                 </tr>
             {% endfor %}
             <tr>
