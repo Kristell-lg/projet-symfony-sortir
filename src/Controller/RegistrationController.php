@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Repository\CampusRepository;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Client\Curl\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,3 +50,4 @@ class RegistrationController extends AbstractController
         ]);
     }
 }
+

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\EditFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +25,7 @@ class UserController extends AbstractController
         $participant = $participantRepository->findAll();
         return $this->render('user/list.html.twig',
             ["participant" => $participant
-        ]);
+            ]);
     }
 
 
@@ -35,44 +36,39 @@ class UserController extends AbstractController
     {
         $participant = $participantRepository->find($id);
 
-        return $this->render('/main/profil.html.twig', ["participant"=>$participant]);
+        return $this->render('/main/profil.html.twig', ["participant" => $participant]);
     }
 
     /**
-     * @Route ("/edit" , name="edit")
+     * @Route ("/edit/{id}" , name="edit")
      */
 
-    public function edit(ParticipantRepository $participantRepository,
+    public function edit(int                    $id,
+                         ParticipantRepository  $participantRepository,
                          Request                $request,
-                         EntityManagerInterface $entityManager,
-    int $id
+                         EntityManagerInterface $entityManager
     )
     {
-       $form = $this->createForm(RegistrationFormType::class,);
-        $participant = $participantRepository->find($id);
+        $participant = $entityManager->getReference('App:Participant', $id);
+        $form = $this->createForm(EditFormType::class, $participant);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $participant = $form->getData();
-
-            $entityManager->persist();
+            $entityManager->persist($participant);
             $entityManager->flush();
-
             $this->addFlash('Success', 'Le profil à bien été modifié!');
 
-            return $this->redirectToRoute('main_home',[
-                'id'=> $participant->getId(),
+            return $this->redirectToRoute('main_home', [
+                'id' => $participant->getId(),
             ]);
 
         }
 
 
         return $this->render('user/edit.html.twig', [
-            'participantForm' => $form->createView()
-        ]);
+                'registrationForm' => $form->createView(), "participant" => $participant]
+
+        );
     }
-
-
-
 
 
 }
