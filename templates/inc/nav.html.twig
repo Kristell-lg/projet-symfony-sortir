@@ -7,7 +7,7 @@
 
         {% if app.user %}
             <li><h3><a href="{{ path('main_home') }}" title="Accueil">Accueil</a></h3></li>
-            <li><h3><a href="{{ path('main_profil') }}" title="monProfil">Mon Profil</a></h3></li>
+            <li><h3><a href="{{ path('user_profil',{'id':app.user.id})}}" title="monProfil">Mon Profil</a></h3></li>
             <li><h3><a href="{{ path('app_logout') }}" title="seDeconnecter">Se Déconnecter ({{ app.user.userIdentifier }})</a></h3></li>
         {% endif %}
 

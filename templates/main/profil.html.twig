@@ -3,5 +3,11 @@
 {% block title %} {{ parent() }} | Profil {% endblock %}
 
 {% block body %}
-Page de profil
+<h1>{{ participant.prenom }}</h1>
+
+    <h3>{{ participant.nom }}</h3>
+    <h3>{{ participant.telephone }}</h3>
+    <h3>{{ participant.email }}</h3>
+    <h3>{{ participant.campus }}</h3>
+
 {% endblock %}

@@ -27,17 +27,15 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route ("/details/{id}", name="details")
-     */
 
-    public function detail(int $id, ParticipantRepository $participantRepository): Response
+    /**
+     * @Route("/profil/{id}", name="profil")
+     */
+    public function profil(int $id, ParticipantRepository $participantRepository): Response
     {
         $participant = $participantRepository->find($id);
 
-        return $this->render('user/details.html.twig',
-            ["participant" => $participant
-            ]);
+        return $this->render('/main/profil.html.twig', ["participant"=>$participant]);
     }
 
     /**
@@ -72,6 +70,8 @@ class UserController extends AbstractController
             'participantForm' => $form->createView()
         ]);
     }
+
+
 
 
 
