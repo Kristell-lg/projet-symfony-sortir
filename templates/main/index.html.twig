@@ -26,14 +26,31 @@
                     <tbody>
                     {% for s in sortie  %}
                         <tr>
-                            <td><p><a href="{{ path('sortie_details', {'id':s.id}) }}">{{ s.nom }}</a> </p></td>
+                            <td><p>{{ s.nom }}</a> </p></td>
                             <td><p>{{ s.dateHeureDebut | date('d/m/Y')}}</p></td>
                             <td><p>{{ s.dateLimiteInscription | date('d/m/Y')}}</p></td>
                             <td><p>{{ s.nbInscriptionMax  }}</p></td>
                             <td><p>{{ s.etats.libelle }}</p></td>
                             <td><p>{# todo boolean inscrit #}</p></td>
                             <td><p>{{ s.organisateur.nom |upper }} {{ s.organisateur.prenom}}</p></td>
-                            <td><p><a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a></p></td>
+                            <td><p>
+                                    {% if s.etats.id == '2' %}
+                                    <a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a>
+                                    {% endif %}
+
+                                    {# si la sortie est publié && user = créateur = organisateur #}
+                                    {# >Modifer< #}
+
+                                    {# si la sortie est publié && pas user != inscrit #}
+                                    {# >s'inscrire< #}
+
+                                    {# si la sortie est publié &&  user = inscrit #}
+                                    {# >se désinscrire< #}
+                            </p></td>
+
+
+
+
                         </tr>
                     {% endfor %}
                     </tbody>
