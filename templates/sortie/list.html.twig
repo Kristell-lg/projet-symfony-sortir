@@ -6,5 +6,46 @@ Sorties | {{ parent() }}
 
 {% block body %}
 
+        <div class="general">
+            <h1>Tournée des Bars</h1>
 
+            {% if is_granted("ROLE_ADMIN") %}
+                <a href="{{ path('sortie_create') }}"> Créer une sortie</a>
+            {% endif %}
+
+            <div class="sorties">
+                        <a>Date de la sortie : </a><br>
+                        <a>Date de Clôture : </a><br>
+                        <a>Inscription/Places : </a><br>
+                        <a>Durée : </a><br>
+                        <a>Descritpion et infos :</a><br>
+                        <a> Campus : </a><br>
+                        <a> Lieu : </a><br>
+                        <a>Rue : </a><br>
+                        <a>Code postal : </a><br>
+                        <a>Etat : </a><br>
+
+                        <a>Organisateur : </a><br>
+
+
+                <h3>Participants Inscrit </h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {# for s in sortieParticipant  %}#}
+                    <tr>
+                           {#  <td>{{ s.prenom }}</td>
+                            <td>{{ s.nom }}</td>#}
+                        </tr>
+{# {% endfor %}#}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 {% endblock %}
