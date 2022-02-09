@@ -29,7 +29,8 @@ class SortiesType extends AbstractType
                 'widget'=>'single_text'
             ])
             ->add('duree', IntegerType::class,[
-                'label'=>'Durée (en minutes)'
+                'label'=>'Durée (en minutes)',
+                'attr'=>['min'=>0]
             ])
             ->add('dateLimiteInscription',DateType::class,[
                 'label'=>'Date limite d\'inscription',
@@ -37,7 +38,8 @@ class SortiesType extends AbstractType
                 'widget'=>'single_text'
             ])
             ->add('nbInscriptionMax', IntegerType::class,[
-                'label'=>'Nombre d\'inscriptions maximum'
+                'label'=>'Nombre d\'inscriptions maximum',
+                'attr'=>['min'=>0]
             ])
             ->add('infosSortie', TextareaType::class,[
                 'label'=>'Informations'

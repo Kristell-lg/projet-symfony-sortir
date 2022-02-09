@@ -103,9 +103,10 @@ main {
 
 .generalBig input, textarea, select{
     width: 50vh;
-    height: 2vh;
+    height: 3vh;
     margin: 15px;
     font-family: 'Source Sans Pro', sans-serif;
+    font-size: medium;
 }
 
 .generalBig textarea {
