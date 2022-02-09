@@ -41,19 +41,17 @@
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a>
                                     {% endif %}
 
-                                    {# si la sortie est publié && user = créateur = organisateur #}
-                                    {# >Modifer< #}
+                                    {% if s.etats.id == '2' and s.organisateur %}
+                                    <a href="{{ path('sortie_details', {'id':s.id}) }}">Modifier</a>
+                                    {% endif %}
 
-                                    {# si la sortie est publié && pas user != inscrit #}
-                                    {# >s'inscrire< #}
+                                    {% if s.etats.id == '2' and app.user and  %}
+                                    <a href="{{ path('sortie_details', {'id':s.id}) }}">S'inscrire</a>
+                                    {% endif %}
 
                                     {# si la sortie est publié &&  user = inscrit #}
                                     {# >se désinscrire< #}
                             </p></td>
-
-
-
-
                         </tr>
                     {% endfor %}
                     </tbody>
