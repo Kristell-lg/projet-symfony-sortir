@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{ c.nom | upper}}</td>
                     <td>
-                        <a href="{{ path('main_home') }}" title="Modifier">Modifier</a>
+                        <a href="{{ path('campusville_modifiercampus',{'id': c.id }) }}" title="Modifier">Modifier</a>
                         <a href="{{ path('campusville_supprimercampus',{'id': c.id }) }}" title="Supprimer">Supprimer</a>
                     </td>
                 </tr>
@@ -26,7 +26,14 @@
             <tr>
                 {{ form_start(campusForm) }}
                 <td>{{ form_row(campusForm.nom) }}</td>
-                <td><button>Ajouter</button></td>
+                {% if modif %}
+                    <td>
+                        <button type="submit">Enregistrer</button>
+                        <a href="{{ path('campusville_campus')}}">Annuler</a>
+                    </td>
+                {% else %}
+                    <td><button>Ajouter</button></td>
+                {% endif %}
                 {{ form_end(campusForm) }}
             </tr>
 
