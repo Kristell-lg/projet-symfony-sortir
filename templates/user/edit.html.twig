@@ -4,14 +4,22 @@
 
 {% block body %}
     <main>
-        <div class="container">
+        <div class="generalBig">
 
-            <h1 style="text-decoration: overline #50A1A4" ;>Editer son profil</h1>
+            <h1>Editer son profil</h1>
 
+            {{ form_start(registrationForm) }}
+            <div class="col1">
 
-            <div class="register">
-                {{ form_start(registrationForm) }}
-                {{ form_widget(registrationForm) }}
+                {{ form_row(registrationForm.nom) }}
+                {{ form_row(registrationForm.prenom) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.telephone) }}
+            </div>
+
+            <div class="col2">
+                {{ form_row(registrationForm.campus) }}
+                {{ form_row(registrationForm.password) }}
                 <button class="btn btn-primary btn-lg btn-block" type="submit">modifier profil</button>
                 {{ form_end(registrationForm) }}
             </div>
