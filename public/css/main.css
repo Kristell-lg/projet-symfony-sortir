@@ -85,6 +85,11 @@ main {
 
 }
 
+.general form{
+    display: flex;
+    align-items: center;
+}
+
 
 
 
@@ -350,9 +355,6 @@ table {
     color: white;
     overflow: hidden;
     box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
-    display: block;
-    overflow-y: auto;
-    max-height: 35vh;
 }
 
 thead {
@@ -361,7 +363,6 @@ thead {
 }
 
 tbody {
-
     background-color: rgba(40, 52, 75, 0.75);
     border:1px solid rgba(24, 29, 49, 0.75);
 }
@@ -370,13 +371,14 @@ th {
     border:1px dotted rgba(24, 29, 49, 0.75);
     background-color:rgba(24, 29, 49, 0.75);
     color:#50A1A4;
-    padding: 0;
+    padding: 1vh;
 }
 
 td {
     font-weight: bold;
     border:1px solid rgba(24, 29, 49, 0.75);
     text-align:center;
+    padding: 1vh;
 }
 
 td div input{
@@ -386,6 +388,56 @@ td div input{
 tr{
     width: 100vw;
 }
+
+
+
+
+.sorties table {
+    border:none;
+    border-radius: 30px;
+    border-collapse: collapse;
+    color: white;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
+    display: block;
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
+.sorties thead {
+    position: sticky;
+    background-color: rgba(24, 29, 49, 0.92);
+    border:1px solid rgba(24, 29, 49, 0.75);
+}
+
+.sorties tbody {
+    background-color: rgba(40, 52, 75, 0.75);
+    border:1px solid rgba(24, 29, 49, 0.75);
+}
+
+.sorties th {
+    border:1px dotted rgba(24, 29, 49, 0.75);
+    background-color:rgba(24, 29, 49, 0.75);
+    color:#50A1A4;
+    padding: 1vh;
+}
+
+.sorties td {
+    font-weight: bold;
+    border:1px solid rgba(24, 29, 49, 0.75);
+    text-align:center;
+    padding: 1vh;
+}
+
+.sorties td div input{
+    width: 100px;
+}
+
+.sorties tr{
+    width: 100vw;
+}
+
+
 
 
 

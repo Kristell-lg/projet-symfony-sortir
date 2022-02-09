@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <div class="generalBig">
+            {{ form_start(sortieForm) }}
+            {{ form_widget(sortieForm) }}
+            {{ form_end(sortieForm) }}
+        </div>
+    </main>
+
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Modifier la sortie
+{% endblock %}
+
