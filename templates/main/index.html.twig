@@ -6,8 +6,29 @@
     <main>
         <div class="generalBig">
             <h1>Accueil</h1>
+                {{ form_start(filterForm) }}
+                    <div class="column">
+                        <div class="col-1">
+                            {{ form_row(filterForm.campus) }}
+                            {{ form_row(filterForm.recherche) }}
+                            <div>
+                                {{ form_row(filterForm.apresLe) }}
+                                {{ form_row(filterForm.avantLe) }}
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            {{ form_row(filterForm.organisateur) }}
+                            {{ form_row(filterForm.inscrit) }}
+                            {{ form_row(filterForm.noInscrit) }}
+                            {{ form_row(filterForm.passees) }}
+                        </div>
+                        <div class="col-3">
+                            {{ form_widget(filterForm) }}
+                            <button>Rechercher</button>
+                        </div>
+                    </div>
 
-
+                {{ form_end(filterForm) }}
             <div class="sorties">
 
                 <table>

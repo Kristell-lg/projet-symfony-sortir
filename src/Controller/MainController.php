@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
+use App\Entity\SortieSearch;
+use App\Form\SortieResearchType;
+use App\Repository\CampusRepository;
 use App\Repository\EtatsRepository;
 use App\Repository\SortiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,9 +19,13 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_home")
      */
-    public function home(SortiesRepository $sortiesRepository, EtatsRepository $etatsRepository, EntityManagerInterface $entityManager): Response
+    public function home(CampusRepository  $campusRepository,SortiesRepository $sortiesRepository, EtatsRepository $etatsRepository, Request $request,EntityManagerInterface $entityManager): Response
     {
         $participe = false;
+
+        $recherche= new  SortieSearch();
+        $filterForm = $this->createForm(SortieResearchType::class,$recherche);
+        $filterForm->handleRequest($request);
         $sortie = $sortiesRepository->findAll();
 
         $change = false;
@@ -51,7 +60,11 @@ class MainController extends AbstractController
 
 
         }
-        return $this->render('main/index.html.twig', ["sortie" => $sortie, 'participe' => $participe]);
+        return $this->render('main/index.html.twig', [
+            "sortie" => $sortie,
+            'participe' => $participe,
+            'filterForm'=>$filterForm->createView()
+            ]);
     }
 
 }
