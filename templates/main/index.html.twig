@@ -37,19 +37,29 @@
                             <td><p>{# todo boolean inscrit #}</p></td>
                             <td><p>{{ s.organisateur.nom |upper }} {{ s.organisateur.prenom}}</p></td>
                             <td><p>
-                                    {% if s.etats.id == '2' %}
+
+                                    {# Cherche si la personne connectée est dans les participants #}
+                                    {% for p in s.sortieParticipants %}
+                                        {% if p.id == app.user.id %}
+                                            {%  set participe = 1 %}
+                                        {% endif %}
+                                    {% endfor %}
+
+
+                                    {% if s.etats.id == '2' or s.etats.id == '1'%}
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a>
                                     {% endif %}
 
-                                    {% if s.etats.id == '2' and s.organisateur %}
+                                    {% if s.etats.id == '2' and s.organisateur.id == app.user.id %}
+
                                     <a href="{{ path('sortie_update', {'id':s.id}) }}">Modifier</a>
                                     {% endif %}
 
-                                    {% if s.etats.id == '2' and s.organisateur %}
+                                    {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 0 %}
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">S'inscrire</a>
                                     {% endif %}
 
-                                    {% if s.etats.id == '2' and not s.organisateur and not s.sortieParticipants  %}
+                                    {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 1  %}
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Se désinscrire</a>
                                     {% endif %}
                             </p></td>

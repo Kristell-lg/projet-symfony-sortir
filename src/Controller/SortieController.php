@@ -27,10 +27,9 @@ class SortieController extends AbstractController
      */
     public function list(SortiesRepository $sortiesRepository): Response
     {
-
         $sortie = $sortiesRepository->findAll();
         return $this->render('sortie/list.html.twig', [
-            'sortie'=>$sortie
+            'sortie'=>$sortie,
         ]);
     }
 
@@ -141,7 +140,7 @@ class SortieController extends AbstractController
     /**
      * @Route("sortie/update/{id}", name="sortie_update")
      */
-    public function update(int $id, Request $request, SortiesRepository $sortiesRepository, LieuxRepository $lieuxRepository, EntityManagerInterface $entityManager): Response
+    public function update(int $id, Request $request, EtatsRepository $etatsRepository, SortiesRepository $sortiesRepository, LieuxRepository $lieuxRepository, EntityManagerInterface $entityManager): Response
     {
         $sortie = $sortiesRepository->find($id);
         $sortieForm = $this->createForm(SortieUpdateType::class,$sortie);
@@ -160,7 +159,25 @@ class SortieController extends AbstractController
             ]);
         }
 
+        //Enregistrer la sortie si modifier (ne change pas l'état dans la BDD)
         if($sortieForm->get('creer_btn')->isClicked() && $sortieForm->isSubmitted() && $sortieForm->isValid()){
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success','Sortie Modifiée !');
+
+            return $this->render('/sortie/list.html.twig',
+                [
+                    "sortie"=>$sortie,
+                ]);
+        }
+
+        //Publier la sortie (change l'état en 2)
+        if($sortieForm->get('publier_btn')->isClicked() && $sortieForm->isSubmitted() && $sortieForm->isValid()){
+
+            $sortie->setEtats($etatsRepository->find(2));
+
             $entityManager->persist($sortie);
             $entityManager->flush();
 
