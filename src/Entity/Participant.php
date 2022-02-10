@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
- * @Vich\Uploadable
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
@@ -82,16 +81,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /*/**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-
-
-    /**
-     * @ORM\Column(type="string",length=255)
-     * @Assert\NotBlank(message="Please upload image")
-     * @Assert\File(mimeTypes={"image/jpeg"})
-     *
-     * @var File
-     */
-    private $image;
 
 
 
@@ -307,38 +296,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
 
-    /*public function getFile(): ?string
-    {
-        return $this->file;
-    }
-
-   /* public function setFile(?string $file): self
-    {
-        $this->file = $file;
-
-        return $this;
-    }*/
-
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-    public function setImage($image): self
-    {
-
-        return $this;
-    }
-
-    /**
-     * toString
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getLibelle();
-    }
 
 
 
