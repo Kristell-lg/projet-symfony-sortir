@@ -232,4 +232,15 @@ class SortieController extends AbstractController
                 "motifForm"=>$motifForm->createView()
             ]);
     }
+
+
+    /**
+     * @Route("sortie/register/{idSortie}/{idUser}", name="sortie_register")
+     */
+    public function register(int $idSortie, int $idUser, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        //Verif qu'on récupère bien les id sortie et user
+        $id = "id sortie ".$idSortie." id user ".$idUser;
+        dd($id);
+    }
 }
