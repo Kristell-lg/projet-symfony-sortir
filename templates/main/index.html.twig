@@ -28,23 +28,30 @@
 
                     <tbody>
                     {% for s in sortie  %}
+
+                        {# Cherche si la personne connectée est dans les participants #}
+                        {% set participe = 0 %}
+
+                        {% for p in s.sortieParticipants %}
+                            {% if p.id == app.user.id %}
+                                {%  set participe = 1 %}
+                            {% endif %}
+                        {% endfor %}
+
+
                         <tr>
                             <td><p>{{ s.nom }} </p></td>
                             <td><p>{{ s.dateHeureDebut | date('d/m/Y')}}</p></td>
                             <td><p>{{ s.dateLimiteInscription | date('d/m/Y')}}</p></td>
                             <td><p> {{ s.sortieParticipants |length }} / {{ s.nbInscriptionMax  }}</p></td>
                             <td><p>{{ s.etats.libelle }}</p></td>
-                            <td><p>{# todo boolean inscrit #}</p></td>
+                            <td>
+                                {% if participe %}
+                                    <p>X</p>
+                                {% endif %}
+                            </td>
                             <td><p>{{ s.organisateur.nom |upper }} {{ s.organisateur.prenom}}</p></td>
                             <td><p>
-
-                                    {# Cherche si la personne connectée est dans les participants #}
-                                    {% for p in s.sortieParticipants %}
-                                        {% if p.id == app.user.id %}
-                                            {%  set participe = 1 %}
-                                        {% endif %}
-                                    {% endfor %}
-
 
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a>
 
@@ -61,7 +68,7 @@
                                     {% endif %}
 
                                     {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 1  %}
-                                    <a href="{{ path('sortie_details', {'id':s.id}) }}">Se désinscrire</a>
+                                    <a href="{{ path('sortie_unsubscribe', {'idSortie':s.id, 'idUser':app.user.id }) }}">Se désinscrire</a>
                                     {% endif %}
 
                             </p></td>

@@ -211,12 +211,15 @@ class Sorties
         return $this;
     }
 
+
     public function removeSortie(Participant $sortie): self
     {
         $this->sortieParticipants->removeElement($sortie);
 
         return $this;
     }
+
+
 
     public function getOrganisateur(): ?Participant
     {

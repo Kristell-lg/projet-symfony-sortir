@@ -237,10 +237,35 @@ class SortieController extends AbstractController
     /**
      * @Route("sortie/register/{idSortie}/{idUser}", name="sortie_register")
      */
-    public function register(int $idSortie, int $idUser, EntityManagerInterface $entityManager, Request $request): Response
+    public function register(int $idSortie, int $idUser, ParticipantRepository $participantRepository, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
-        //Verif qu'on récupère bien les id sortie et user
-        $id = "id sortie ".$idSortie." id user ".$idUser;
-        dd($id);
+        $sortie = $sortiesRepository->find($idSortie);
+        $participant = $participantRepository->find($idUser);
+
+        $sortie->addSortieParticipants($participant);
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        $this->addFlash('success','Inscription réussie !');
+        return $this->redirectToRoute('main_home');
+    }
+
+
+    /**
+     * @Route("sortie/unsubscribe/{idSortie}/{idUser}", name="sortie_unsubscribe")
+     */
+    public function unsubscribe(int $idSortie, int $idUser, ParticipantRepository $participantRepository, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $sortie = $sortiesRepository->find($idSortie);
+        $participant = $participantRepository->find($idUser);
+
+        $sortie->removeSortie($participant);
+
+        $entityManager->persist($sortie);
+        $entityManager->flush();
+
+        $this->addFlash('success','Désinscription réussie !');
+        return $this->redirectToRoute('main_home');
     }
 }
