@@ -50,7 +50,7 @@
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a>
                                     {% endif %}
 
-                                    {% if s.etats.id == '2' and s.organisateur.id == app.user.id %}
+                                    {% if s.etats.id == '1' and s.organisateur.id == app.user.id %}
 
                                     <a href="{{ path('sortie_update', {'id':s.id}) }}">Modifier</a>
                                     {% endif %}
