@@ -1,0 +1,4 @@
+vich_uploader:
+    db_driver: orm
+
+
