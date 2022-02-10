@@ -17,7 +17,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * @Route("/user", name="user_")
@@ -134,4 +133,13 @@ class UserController extends AbstractController
         ];
     }*/
 
+    /**
+     * @Route ("/gestion" , name="gestion")
+     */
+    public function gestion()
+    {
+        return $this->render('user/gestionUser.html.twig', [
+
+        ]);
+    }
 }
