@@ -38,7 +38,8 @@
                             {% endif %}
                         {% endfor %}
 
-
+                        {# N'affiche que si c'est publié ou si l'on en est le owner #}
+                        {% if s.etats.id != '1' or s.organisateur.id == app.user.id %}
                         <tr>
                             <td><p>{{ s.nom }} </p></td>
                             <td><p>{{ s.dateHeureDebut | date('d/m/Y')}}</p></td>
@@ -63,7 +64,9 @@
                                         <a href="{{ path('sortie_cancel', {'id':s.id}) }}">Annuler</a>
                                     {% endif %}
 
-                                    {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 0 %}
+                                    {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 0
+                                        and s.dateLimiteInscription | date('d/m/Y') < "now" | date('d/m/Y')
+                                        and s.nbInscriptionMax > s.sortieParticipants | length %}
                                     <a href="{{ path('sortie_register', {'idSortie':s.id, 'idUser':app.user.id }) }}">S'inscrire</a>
                                     {% endif %}
 
@@ -73,6 +76,7 @@
 
                             </p></td>
                         </tr>
+                        {% endif %}
                     {% endfor %}
                     </tbody>
 

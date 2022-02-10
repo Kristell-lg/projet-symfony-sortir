@@ -13,11 +13,13 @@ use App\Repository\EtatsRepository;
 use App\Repository\LieuxRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortiesRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 
 class SortieController extends AbstractController
 {
@@ -237,35 +239,49 @@ class SortieController extends AbstractController
     /**
      * @Route("sortie/register/{idSortie}/{idUser}", name="sortie_register")
      */
-    public function register(int $idSortie, int $idUser, ParticipantRepository $participantRepository, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, Request $request): Response
+    public function register(int $idSortie, int $idUser, ParticipantRepository $participantRepository, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, Request $request)
     {
         $sortie = $sortiesRepository->find($idSortie);
         $participant = $participantRepository->find($idUser);
 
-        $sortie->addSortieParticipants($participant);
+        if($sortie->getNbInscriptionMax() > count($sortie->getSortieParticipants()) &&  $sortie->getDateLimiteInscription() > new DateTime('NOW'))
+        {
+            $sortie->addSortieParticipants($participant);
 
-        $entityManager->persist($sortie);
-        $entityManager->flush();
+            $entityManager->persist($sortie);
+            $entityManager->flush();
 
-        $this->addFlash('success','Inscription réussie !');
-        return $this->redirectToRoute('main_home');
+            $this->addFlash('success','Inscription réussie !');
+            return $this->redirectToRoute('main_home');
+        }
+        else{
+            $this->addFlash('fail','L\'inscription a échoué car le nombre de place est déjà rempli ou la date de clôture est dépassée !');
+            return $this->redirectToRoute('main_home');
+        }
     }
 
 
     /**
      * @Route("sortie/unsubscribe/{idSortie}/{idUser}", name="sortie_unsubscribe")
      */
-    public function unsubscribe(int $idSortie, int $idUser, ParticipantRepository $participantRepository, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, Request $request): Response
+    public function unsubscribe(int $idSortie, int $idUser, ParticipantRepository $participantRepository, SortiesRepository $sortiesRepository, EntityManagerInterface $entityManager, Request $request)
     {
         $sortie = $sortiesRepository->find($idSortie);
         $participant = $participantRepository->find($idUser);
 
-        $sortie->removeSortie($participant);
+        if($sortie->getDateLimiteInscription() > new DateTime('NOW'))
+        {
+            $sortie->removeSortie($participant);
 
-        $entityManager->persist($sortie);
-        $entityManager->flush();
+            $entityManager->persist($sortie);
+            $entityManager->flush();
 
-        $this->addFlash('success','Désinscription réussie !');
-        return $this->redirectToRoute('main_home');
+            $this->addFlash('success','Désinscription réussie !');
+            return $this->redirectToRoute('main_home');
+        }
+        else{
+            $this->addFlash('fail','Vous ne pouvez vous désincrire après la fin des inscriptions !');
+            return $this->redirectToRoute('main_home');
+        }
     }
 }
