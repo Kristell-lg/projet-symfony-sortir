@@ -95,6 +95,16 @@ main {
     justify-content: space-evenly;
 }
 
+.general form .btn_valider{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+}
+
+.general form .btn_valider button{
+    width: 15vw;
+}
+
 
 
 

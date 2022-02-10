@@ -14,7 +14,7 @@ class MotifAnnulationType extends AbstractType
     {
         $builder
             ->add('motif', TextType::class,[
-                'label'=>'Motif'
+                'label'=>'Motif : '
             ])
             ->add('enregistrer_btn', SubmitType::class, array(
                 'label' => 'Enregistrer'
