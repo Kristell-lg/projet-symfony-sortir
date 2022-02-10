@@ -280,6 +280,7 @@ nav li a:hover {
 }
 
 .flash--success {
+    position: absolute;
     background-color: rgba(67, 94, 52, 0.75);
     color:white;
 }
@@ -458,7 +459,7 @@ tr{
 
 
 footer{
-    position: relative;
+    position: absolute;
     bottom:0;
     width:100%;
     background: rgba(24, 29, 49, 0.75);
