@@ -46,6 +46,8 @@ class RegistrationController extends AbstractController
                 $imageFileName = $fileUploader->upload($imageFile);
                 $user->setImageFilename($imageFileName);} */
 
+            $user->setActif(true);
+
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email

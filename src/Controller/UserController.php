@@ -136,10 +136,87 @@ class UserController extends AbstractController
     /**
      * @Route ("/gestion" , name="gestion")
      */
-    public function gestion()
+    public function gestion(ParticipantRepository $participantRepository)
     {
+        $participantsList = $participantRepository->findAll();
+        $isAdmin=false;
         return $this->render('user/gestionUser.html.twig', [
-
+            'participantsList'=>$participantsList,
+            'isAdmin'=>$isAdmin
         ]);
+    }
+
+    /**
+     * @Route ("/gestion/desactiver/{id}" , name="gestion_desactivate")
+     */
+    public function gestionDesactivate(int $id, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager)
+    {
+        $participant = $participantRepository->find($id);
+        $participant->setActif(false);
+
+        $entityManager->persist($participant);
+        $entityManager->flush();
+
+
+        $this->addFlash("success","Désactivation réussie !");
+        return $this->redirectToRoute('user_gestion');
+    }
+
+    /**
+     * @Route ("/gestion/reactivate/{id}" , name="gestion_reactivate")
+     */
+    public function gestionReactivate(int $id, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager)
+    {
+        $participant = $participantRepository->find($id);
+        $participant->setActif(true);
+
+        $entityManager->persist($participant);
+        $entityManager->flush();
+
+
+        $this->addFlash("success","Réactivation réussie !");
+        return $this->redirectToRoute('user_gestion');
+    }
+
+
+    /**
+     * @Route ("/gestion/supprimer/{id}" , name="gestion_delete")
+     */
+    public function gestionDelete(int $id, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager)
+    {
+        $participant = $participantRepository->find($id);
+        $entityManager->remove($participant);
+        $entityManager->flush();
+
+        $this->addFlash("success","Suppression réussie !");
+        return $this->redirectToRoute('user_gestion');
+    }
+
+    /**
+     * @Route ("/gestion/grantAdmin/{id}" , name="gestion_grantAdmin")
+     */
+    public function grantAdmin(int $id, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager)
+    {
+        $participant = $participantRepository->find($id);
+        $participant->setRoles(["ROLE_USER","ROLE_ADMIN"]);
+
+        $entityManager->persist($participant);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('user_gestion');
+    }
+
+    /**
+     * @Route ("/gestion/stripAdmin/{id}" , name="gestion_stripAdmin")
+     */
+    public function stripAdmin(int $id, ParticipantRepository $participantRepository, EntityManagerInterface $entityManager)
+    {
+        $participant = $participantRepository->find($id);
+        $participant->setRoles(["ROLE_USER"]);
+
+        $entityManager->persist($participant);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('user_gestion');
     }
 }

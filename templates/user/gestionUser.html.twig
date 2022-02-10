@@ -3,5 +3,77 @@
 {% block title %}{{ parent() }} | détails {% endblock %}
 
 {% block body %}
-<p>lol</p>
+    <main>
+        <div class="generalBig">
+            <h1>Accueil</h1>
+
+            <div class="sorties">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th><p>Nom</p></th>
+                            <th><p>Prénom</p></th>
+                            <th><p>Téléphone</p></th>
+                            <th><p>Email</p></th>
+                            <th><p>Role</p></th>
+                            <th><p>Campus</p></th>
+                            <th><p>Actions</p></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for p in participantsList  %}
+
+                            <tr>
+                                <td><p>{{ p.nom }} </p></td>
+                                <td><p>{{ p.prenom }}</p></td>
+                                <td><p>{{ p.telephone}}</p></td>
+                                <td><p> {{ p.email }}</p></td>
+                                <td>
+                                    {% for r in p.roles  %}
+                                    <p>{{r}}</p>
+
+                                        {% if r == "ROLE_ADMIN" %}
+                                            {% set isAdmin = 1 %}
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </td>
+                                <td><p> {{ p.campus.nom }}</p></td>
+
+                                <td>
+
+                                    {% if p.actif %}
+                                        <a href="{{ path('user_gestion_desactivate', {'id': p.id }) }}">Désactiver</a>&emsp;
+                                    {% else %}
+                                        <a href="{{ path('user_gestion_reactivate', {'id': p.id }) }}">Réactiver</a>&emsp;
+                                    {% endif %}
+
+
+                                    {% if isAdmin %}
+                                        <a href="{{ path('user_gestion_stripAdmin', {'id': p.id }) }}">Retirer droits "admin"</a>&emsp;
+                                        {% set isAdmin = 0 %}
+                                    {% else %}
+                                        <a href="{{ path('user_gestion_grantAdmin', {'id': p.id }) }}">Donner droits "admin"</a>&emsp;
+                                    {% endif %}
+
+                                    <a href="{{ path('user_gestion_delete', {'id': p.id }) }}">Supprimer</a>&emsp;
+                                </td>
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+
+            {% if is_granted("ROLE_ADMIN") %}
+                <div class="creation_sortie">
+                    <button><a href=""> Créer un participant</a></button>
+                </div>
+            {% endif %}
+
+        </div>
+    </main>
 {% endblock %}
