@@ -11,11 +11,13 @@
                 <h3>Téléphone : {{ participant.telephone }}</h3>
                 <h3>Email : {{ participant.email }}</h3>
                 <h3>Campus de rattachement : {{ participant.campus.nom }}</h3>
-
             </div>
-            <button class="btn btn-lg btn-primary" type="submit">
-                <a href="{{ path('user_validation') }}">Modifier le profil !</a>
-            </button>
+
+            {% if app.user.id == participant.id %}
+                <button class="btn btn-lg btn-primary" type="submit">
+                    <a href="{{ path('user_validation') }}">Modifier le profil !</a>
+                </button>
+            {% endif %}
         </div>
     </main>
 {% endblock %}
