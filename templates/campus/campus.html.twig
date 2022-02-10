@@ -19,13 +19,16 @@
             </thead>
             <tbody>
             {% for c in campus  %}
-                <tr>
-                    <td>{{ c.nom | upper}}</td>
-                    <td>
-                        <a href="{{ path('campusville_modifiercampus',{'id': c.id }) }}" title="Modifier">Modifier</a>
-                        <a href="{{ path('campusville_supprimercampus',{'id': c.id }) }}" title="Supprimer">Supprimer</a>
-                    </td>
-                </tr>
+                {% if c != pCampus %}
+                    <tr>
+                        <td>{{ c.nom | upper}}</td>
+                        <td>
+                            <a href="{{ path('campusville_modifiercampus',{'id': c.id }) }}" title="Modifier">Modifier</a>
+                            <a href="{{ path('campusville_supprimercampus',{'id': c.id }) }}" title="Supprimer"
+                               onclick ='return confirm("Etes vous sûr de vouloir supprimer la sortie?")'>Supprimer</a>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
             <tr>
                 {{ form_start(campusForm) }}
@@ -34,6 +37,8 @@
                     <td>
                         <button type="submit">Enregistrer</button>
                         <a href="{{ path('campusville_campus')}}">Annuler</a>
+                        <a href="{{ path('campusville_supprimercampus',{'id': pCampus.id }) }}" title="Supprimer"
+                           onclick ='return confirm("Etes vous sûr de vouloir supprimer la sortie?")'>Supprimer</a>
                     </td>
                 {% else %}
                     <td><button>Ajouter</button></td>

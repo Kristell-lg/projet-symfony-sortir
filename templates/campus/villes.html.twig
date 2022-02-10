@@ -20,14 +20,17 @@
             </thead>
             <tbody>
             {% for v in villes  %}
-            <tr>
-                <td>{{ v.nom | upper}}</td>
-                <td>{{ v.codePostal }}</td>
-                <td>
-                    <a href="{{ path('campusville_modifierville',{'id': v.id }) }}" title="Modifier">Modifier</a>
-                    <a href="{{ path('campusville_supprimerville',{'id': v.id })}}" title="Supprimer">Supprimer</a>
-                </td>
-            </tr>
+                {% if v != ville %}
+                    <tr>
+                        <td>{{ v.nom | upper}}</td>
+                        <td>{{ v.codePostal }}</td>
+                        <td>
+                            <a href="{{ path('campusville_modifierville',{'id': v.id }) }}" title="Modifier">Modifier</a>
+                            <a href="{{ path('campusville_supprimerville',{'id': v.id })}}" title="Supprimer"
+                               onclick ='return confirm("Etes vous sûr de vouloir supprimer la sortie?")'>Supprimer</a>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
             <tr>
                 {{ form_start(villesForm) }}
@@ -37,6 +40,8 @@
                     <td>
                         <button type="submit">Enregistrer</button>
                         <a href="{{ path('campusville_villes')}}">Annuler</a>
+                        <a href="{{ path('campusville_supprimerville',{'id': ville.id })}}" title="Supprimer"
+                        onclick ='return confirm("Etes vous sûr de vouloir supprimer la sortie?")'>Supprimer</a>
                     </td>
                 {% else %}
                     <td><button>Ajouter</button></td>

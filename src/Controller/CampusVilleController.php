@@ -59,6 +59,7 @@ class CampusVilleController extends AbstractController
 
         return $this->render('campus/campus.html.twig', [
             'campus'=>$campus,
+            'pCampus'=>$pCampus,
             'campusForm'=>$campusForm->createView(),
             'filterForm'=>$filterForm->createView(),
             'modif'=>$modif
@@ -104,6 +105,7 @@ class CampusVilleController extends AbstractController
         }
         return $this->render('campus/villes.html.twig', [
             'villes'=>$villes,
+            'ville'=>$ville,
             'villesForm'=>$villesForm->createView(),
             'filterForm'=>$filterForm->createView(),
             'modif'=>$modif
