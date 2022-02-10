@@ -22,16 +22,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SortieController extends AbstractController
 {
-    /**
-     * @Route("/sortie/", name="sortie_list")
-     */
-    public function list(SortiesRepository $sortiesRepository): Response
-    {
-        $sortie = $sortiesRepository->findAll();
-        return $this->render('sortie/list.html.twig', [
-            'sortie'=>$sortie,
-        ]);
-    }
 
     /**
      * @Route("/sortie/create", name="sortie_create")
@@ -127,14 +117,13 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("sortie/list/{id}", name="sortie_details")
+     * @Route("sortie/detail/{id}", name="sortie_details")
      */
     public function details(int $id, SortiesRepository $sortiesRepository): Response
     {
         $sortie = $sortiesRepository->find($id);
 
-
-        return $this->render('/sortie/list.html.twig', ["sortie"=>$sortie]);
+        return $this->render('sortie/detail.html.twig', ["sortie"=>$sortie]);
     }
 
     /**
@@ -167,7 +156,7 @@ class SortieController extends AbstractController
 
             $this->addFlash('success','Sortie Modifiée !');
 
-            return $this->render('/sortie/list.html.twig',
+            return $this->render('sortie/detail.html.twig',
                 [
                     "sortie"=>$sortie,
                 ]);
@@ -183,7 +172,7 @@ class SortieController extends AbstractController
 
             $this->addFlash('success','Sortie Modifiée !');
 
-            return $this->render('/sortie/list.html.twig',
+            return $this->render('sortie/detail.html.twig',
                 [
                     "sortie"=>$sortie,
                 ]);

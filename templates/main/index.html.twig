@@ -32,7 +32,7 @@
                             <td><p>{{ s.nom }} </p></td>
                             <td><p>{{ s.dateHeureDebut | date('d/m/Y')}}</p></td>
                             <td><p>{{ s.dateLimiteInscription | date('d/m/Y')}}</p></td>
-                            <td><p>{{ s.nbInscriptionMax  }}</p></td>
+                            <td><p> {{ s.sortieParticipants |length }} / {{ s.nbInscriptionMax  }}</p></td>
                             <td><p>{{ s.etats.libelle }}</p></td>
                             <td><p>{# todo boolean inscrit #}</p></td>
                             <td><p>{{ s.organisateur.nom |upper }} {{ s.organisateur.prenom}}</p></td>
