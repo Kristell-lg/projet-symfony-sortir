@@ -458,7 +458,7 @@ tr{
 
 
 footer{
-    position: fixed;
+    position: relative;
     bottom:0;
     width:100%;
     background: rgba(24, 29, 49, 0.75);
