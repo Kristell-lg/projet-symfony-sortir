@@ -9,19 +9,21 @@
             <h1>Editer son profil</h1>
 
             {{ form_start(registrationForm) }}
-            <div class="col1">
+            <div class="column">
+                <div class="col1">
 
-                {{ form_row(registrationForm.nom) }}
-                {{ form_row(registrationForm.prenom) }}
-                {{ form_row(registrationForm.email) }}
-                {{ form_row(registrationForm.telephone) }}
-            </div>
+                    {{ form_row(registrationForm.nom) }}
+                    {{ form_row(registrationForm.prenom) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.telephone) }}
+                </div>
 
-            <div class="col2">
-                {{ form_row(registrationForm.campus) }}
-                {{ form_row(registrationForm.password) }}
-                <button class="btn btn-primary btn-lg btn-block" type="submit">modifier profil</button>
-                {{ form_end(registrationForm) }}
+                <div class="col2">
+                    {{ form_row(registrationForm.campus) }}
+                    {{ form_row(registrationForm.password) }}
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">modifier profil</button>
+                    {{ form_end(registrationForm) }}
+                </div>
             </div>
         </div>
     </main>
