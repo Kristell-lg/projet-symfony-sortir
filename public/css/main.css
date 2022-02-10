@@ -37,6 +37,7 @@ main {
     padding: 20px;
     height: 50vh;
     border-radius: 30px;
+    min-width: 60vh;
 }
 
 .general input {
@@ -49,6 +50,9 @@ main {
 
 .general h1 {
     text-decoration: overline #50A1A4;
+}
+.general p {
+    margin: 0;
 }
 
 .general a {
@@ -88,6 +92,7 @@ main {
 .general form{
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 
