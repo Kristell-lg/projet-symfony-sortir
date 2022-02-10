@@ -390,6 +390,16 @@ td {
     padding: 1vh;
 }
 
+.general td a{
+    text-decoration: underline;
+    color: #99c7c7;
+}
+
+.generalBig td a{
+    text-decoration: underline;
+    color: #99c7c7;
+}
+
 td div input{
     width: 100px;
 }
@@ -452,10 +462,9 @@ tr{
 
 
 footer{
-    position: relative;
+    position: absolute;
     bottom:0;
     width:100%;
-    padding-bottom: 2.5rem;
     background: rgba(24, 29, 49, 0.75);
     display: flex;
     justify-content: space-around;

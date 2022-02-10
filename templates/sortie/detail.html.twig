@@ -22,25 +22,30 @@ Sorties | {{ parent() }}
                         <p>Etat : {{sortie.etats.libelle}} </p>
                         <p>Organisateur : {{sortie.organisateur.nom}} </p>
 
+            </div>
 
-                <h3>Participants Inscrit </h3>
+                <h3>Participants Inscrits </h3>
+
                 <table>
+
                     <thead>
-                    <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                    </tr>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                        </tr>
                     </thead>
+
                     <tbody>
                     {% for s in sortie.sortieParticipants %}
-                    <tr>
-                             <td><a href="{{ path('user_profil', {'id':s.id}) }}">{{ s.prenom }}</a></td>
-                            <td>{{ s.nom }}</td>
+                        <tr>
+                            <td><a href="{{ path('user_profil', {'id':s.id}) }}">{{ s.prenom }}</a></td>
+                            <td><a href="{{ path('user_profil', {'id':s.id}) }}">{{ s.nom }}</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
+
                 </table>
-            </div>
+
         </div>
     </main>
 {% endblock %}

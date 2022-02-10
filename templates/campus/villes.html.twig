@@ -26,8 +26,9 @@
                         <td>{{ v.codePostal }}</td>
                         <td>
                             <a href="{{ path('campusville_modifierville',{'id': v.id }) }}" title="Modifier">Modifier</a>
+                            &emsp;
                             <a href="{{ path('campusville_supprimerville',{'id': v.id })}}" title="Supprimer"
-                               onclick ='return confirm("Etes vous sûr de vouloir supprimer la sortie?")'>Supprimer</a>
+                               onclick ='return confirm("Etes vous sûr de vouloir supprimer la sortie?")'> Supprimer</a>
                         </td>
                     </tr>
                 {% endif %}
