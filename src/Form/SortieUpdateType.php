@@ -62,7 +62,8 @@ class SortieUpdateType extends AbstractType
                 ))
 
                 ->add('supprimer_btn', SubmitType::class, array(
-                    'label' => 'Supprimer la sortie'
+                    'label' => 'Supprimer la sortie',
+                    'attr'=>['onclick'=>'return confirm("Etes vous sûr de vouloir supprimer la sortie?")']
                 ))
 
                 ->add('annuler_btn', SubmitType::class, array(

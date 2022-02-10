@@ -46,13 +46,14 @@
                                     {% endfor %}
 
 
-                                    {% if s.etats.id == '2' or s.etats.id == '1'%}
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a>
-                                    {% endif %}
 
                                     {% if s.etats.id == '1' and s.organisateur.id == app.user.id %}
-
                                     <a href="{{ path('sortie_update', {'id':s.id}) }}">Modifier</a>
+                                    {% endif %}
+
+                                    {% if s.etats.id == '2' and s.organisateur.id == app.user.id %}
+                                        <a href="{{ path('sortie_cancel', {'id':s.id}) }}">Annuler</a>
                                     {% endif %}
 
                                     {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 0 %}
@@ -62,6 +63,7 @@
                                     {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 1  %}
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Se désinscrire</a>
                                     {% endif %}
+
                             </p></td>
                         </tr>
                     {% endfor %}

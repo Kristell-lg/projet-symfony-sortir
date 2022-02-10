@@ -4,11 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Lieux;
 use App\Entity\Sorties;
-use App\Entity\Villes;
 use App\Form\LieuxType;
+use App\Form\MotifAnnulationType;
 use App\Form\SortiesType;
 use App\Form\SortieUpdateType;
-use App\Form\VillesType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatsRepository;
 use App\Repository\LieuxRepository;
@@ -156,10 +155,7 @@ class SortieController extends AbstractController
 
             $this->addFlash('success','Sortie Modifiée !');
 
-            return $this->render('sortie/detail.html.twig',
-                [
-                    "sortie"=>$sortie,
-                ]);
+            return $this->redirectToRoute('main_home');
         }
 
         //Publier la sortie (change l'état en 2)
@@ -172,10 +168,23 @@ class SortieController extends AbstractController
 
             $this->addFlash('success','Sortie Modifiée !');
 
-            return $this->render('sortie/detail.html.twig',
-                [
-                    "sortie"=>$sortie,
-                ]);
+            return $this->redirectToRoute('main_home');
+        }
+
+        //Publier la sortie (change l'état en 2)
+        if($sortieForm->get('supprimer_btn')->isClicked()){
+
+            $entityManager->remove($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Sortie supprimée !');
+            return $this->redirectToRoute('main_home');
+        }
+
+
+        //Annuler et revenir à l'accueil
+        if($sortieForm->get('annuler_btn')->isClicked()){
+            return $this->redirectToRoute('main_home');
         }
 
         return $this->render('/sortie/update.html.twig',
@@ -187,5 +196,40 @@ class SortieController extends AbstractController
     }
 
 
+    /**
+     * @Route("sortie/cancel/{id}", name="sortie_cancel")
+     */
+    public function cancel(int $id, EntityManagerInterface $entityManager, Request $request, EtatsRepository $etatsRepository, SortiesRepository  $sortiesRepository): Response
+    {
+        $sortie = $sortiesRepository->find($id);
+        $motifForm = $this->createForm(MotifAnnulationType::class);
 
+        $motifForm->handleRequest($request);
+
+        if($motifForm->get('enregistrer_btn')->isClicked() && $motifForm->isSubmitted() && $motifForm->isValid()){
+
+            //récupérer et stocker la raison d'annulation dans la BDD
+            $motifTab = $motifForm->getData();
+            $motifFinal = $sortie->getInfosSortie()."- Raison d'annulation : ".$motifTab["motif"];
+
+            $sortie->setInfosSortie($motifFinal);
+
+            //changer l'état à annuler
+            $sortie->setEtats($etatsRepository->find(6));
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('success','Sortie Annulée !');
+
+            return $this->redirectToRoute('main_home');
+
+        }
+
+            return $this->render('sortie/cancel.html.twig',
+            [
+                "sortie"=>$sortie,
+                "motifForm"=>$motifForm->createView()
+            ]);
+    }
 }
