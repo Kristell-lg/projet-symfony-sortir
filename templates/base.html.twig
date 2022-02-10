@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <title>{% block title %} Sortir.com {% endblock %}</title>
         <link rel="icon" href="{{ asset('img/icon2.png') }}">
-        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" media="screen and (min-width: 1024px)" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" media="screen and (min-width: 600px) and (max-width: 1024px)" href="{{ asset('css/tablette.css') }}">
+        <link rel="stylesheet" media="screen and (min-width: 320px) and (max-width: 600px)" href="{{ asset('css/smartphone.css') }}">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,11 +29,8 @@
 
 
         {% block body %}{% endblock %}
-
         <footer>
             <p>&copy ENI {{ "now"|date('Y') }} | Sortir </p>
         </footer>
     </body>
-
-
 </html>
