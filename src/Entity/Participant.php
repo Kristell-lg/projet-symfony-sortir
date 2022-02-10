@@ -7,11 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
+ * @Vich\Uploadable
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
@@ -54,6 +58,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $telephone;
 
+
+
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
@@ -73,6 +79,22 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="participants")
      */
     private $campus;
+
+    /*/**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+
+
+    /**
+     * @ORM\Column(type="string",length=255)
+     * @Assert\NotBlank(message="Please upload image")
+     * @Assert\File(mimeTypes={"image/jpeg"})
+     *
+     * @var File
+     */
+    private $image;
+
+
 
     public function __construct()
     {
@@ -286,4 +308,39 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /*public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+   /* public function setFile(?string $file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }*/
+
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+    public function setImage($image): self
+    {
+
+        return $this;
+    }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getLibelle();
+    }
+
+
+
 }

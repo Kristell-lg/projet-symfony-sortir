@@ -8,14 +8,16 @@ use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Client\Curl\User;
 use phpDocumentor\Reflection\Types\String_;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use function Sodium\add;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * @Route("/user", name="user_")
@@ -55,14 +57,27 @@ class UserController extends AbstractController
     )
     {
         $participant = $entityManager->getReference('App:Participant', $id);
-       // $participant->password_verify('mon mot de passe', $participant->password);;
+        // $participant->password_verify('mon mot de passe', $participant->password);;
 
         $form = $this->createForm(EditFormType::class, $participant);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())   {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $participant->getImage();
+            $fileName = md5(uniqid()) .'.'. $file->guessExtension();
+           try {
+                $file->move(
+                    $this->getParameter('images_directory'),
+                    $fileName
+                );
+            } catch (FileException $e) {}
+
+            $participant->setImage($fileName);
+            //$entityManager = $this->file($fileName);
             $entityManager->persist($participant);
             $entityManager->flush();
+
             $this->addFlash('Success', 'Le profil à bien été modifié!');
+
             return $this->redirectToRoute('main_home', [
                 'id' => $participant->getId(),
             ]);
@@ -75,20 +90,22 @@ class UserController extends AbstractController
 
         );
     }
+
     /**
      * @Route ("/validation" , name="validation")
      */
-    public function validation(AuthenticationUtils $authenticationUtils,UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator): Response{
+    public function validation(AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator): Response
+    {
 
-          //  return $this->redirectToRoute('user_validation');
+        //  return $this->redirectToRoute('user_validation');
         //}
 
 
-       /* if (password_verify('participant.password', 'hash')) {
-            echo 'Le mot de passe est valide !';
-        } else {
-            echo 'Le mot de passe est invalide.';
-        }*/
+        /* if (password_verify('participant.password', 'hash')) {
+             echo 'Le mot de passe est valide !';
+         } else {
+             echo 'Le mot de passe est invalide.';
+         }*/
 
 
         // get the login error if there is one
@@ -101,5 +118,20 @@ class UserController extends AbstractController
 
     }
 
+
+    /*public function configureFields(string $pageName): iterable
+    {
+        return [
+          TextField::new('nom'),
+          TextField::new('prénom'),
+          TextField::new('email'),
+          NumberField::new('téléphone'),
+          TextField::new('campus'),
+          TextField::new('password'),
+          TextField::new('imageFile')->setFormType(VichImageType::class)->onlywhenCreating,
+          ImageField::new('file')->setBasePath('uploads/user/')->onlyonIndex(),
+          SlugField::new('slug')->setTargetFieldName('nom')->hidenOnIndex(),
+        ];
+    }*/
 
 }
