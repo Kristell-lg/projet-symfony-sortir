@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Images;
 use App\Entity\Participant;
 use App\Form\EditFormType;
 use App\Form\RegistrationFormType;
+use App\Repository\ImagesRepository;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use http\Client\Curl\User;
@@ -43,7 +45,7 @@ class UserController extends AbstractController
     {
         $participant = $participantRepository->find($id);
 
-        return $this->render('/main/profil.html.twig', ["participant" => $participant]);
+        return $this->render('user/profil.html.twig', ["participant" => $participant]);
     }
 
     /**
@@ -57,29 +59,52 @@ class UserController extends AbstractController
     )
     {
         $participant = $entityManager->getReference('App:Participant', $id);
-        // $participant->password_verify('mon mot de passe', $participant->password);;
+
+        //conserver le nom de la photo afin de la supprimer du disque si elle a changé
+        if(!empty($participant->getImages())){
+            $participantImgNom = $participant->getImages()->getName();
+        }
 
         $form = $this->createForm(EditFormType::class, $participant);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $participant->getImage();
-            $fileName = md5(uniqid()) .'.'. $file->guessExtension();
-           try {
-                $file->move(
-                    $this->getParameter('images_directory'),
-                    $fileName
-                );
-            } catch (FileException $e) {}
 
-            $participant->setImage($fileName);
-            //$entityManager = $this->file($fileName);
+            //Récupération des images transmises
+            $image = $form->get('image')->getData();
+            //Générer nom de fichier
+            $fichier = md5(uniqid()).'.'.$image->guessExtension();
+
+            if(!empty($image) && filesize($image)<500000) {
+
+                //On copie le fichier dans le dossier uploads
+                $image->move(
+                    'uploads/',
+                    $fichier
+                );
+
+                //supprimer l'ancienne photo s'il y en a une
+                if(!empty($participantImgNom)) {
+                    unlink('uploads' . '/' . $participantImgNom);
+                    $img = $participant->getImages();
+                    //On stocke image en BDD(son nom)
+                    $img->setName($fichier);
+
+                }
+                else{
+                    $img = new Images();
+                    $img->setName($fichier);
+                    $participant->setImages($img);
+                }
+
+            }
+
             $entityManager->persist($participant);
             $entityManager->flush();
 
             $this->addFlash('Success', 'Le profil à bien été modifié!');
 
-            return $this->redirectToRoute('main_home', [
+            return $this->redirectToRoute('user_profil', [
                 'id' => $participant->getId(),
             ]);
 
@@ -98,17 +123,6 @@ class UserController extends AbstractController
     public function validation(AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator): Response
     {
 
-        //  return $this->redirectToRoute('user_validation');
-        //}
-
-
-        /* if (password_verify('participant.password', 'hash')) {
-             echo 'Le mot de passe est valide !';
-         } else {
-             echo 'Le mot de passe est invalide.';
-         }*/
-
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -119,21 +133,6 @@ class UserController extends AbstractController
 
     }
 
-
-    /*public function configureFields(string $pageName): iterable
-    {
-        return [
-          TextField::new('nom'),
-          TextField::new('prénom'),
-          TextField::new('email'),
-          NumberField::new('téléphone'),
-          TextField::new('campus'),
-          TextField::new('password'),
-          TextField::new('imageFile')->setFormType(VichImageType::class)->onlywhenCreating,
-          ImageField::new('file')->setBasePath('uploads/user/')->onlyonIndex(),
-          SlugField::new('slug')->setTargetFieldName('nom')->hidenOnIndex(),
-        ];
-    }*/
 
     /**
      * @Route ("/gestion" , name="gestion")
@@ -222,4 +221,23 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_gestion');
     }
 
+
+
+    /**
+     * @Route ("/supprime/image/{id}" , name="gestion_image")
+     */
+    public function deleteImage(int $id, ImagesRepository $imagesRepository, EntityManagerInterface $entityManager)
+    {
+        $image = $imagesRepository->find($id);
+
+        $id = $image->getParticipant()->getId();
+        $nom = $image->getName();
+
+        $entityManager->remove($image);
+        $entityManager->flush();
+
+        unlink('uploads'.'/'.$nom);
+
+        return $this->redirectToRoute('user_edit',['id'=>$id]);
+    }
 }

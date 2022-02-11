@@ -21,8 +21,17 @@
                 <div class="col2">
                     {{ form_row(registrationForm.campus) }}
                     {{ form_row(registrationForm.password) }}
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">modifier profil</button>
+
+                    {% if participant.images is not empty %}
+                        <p>Photo de profil actuelle :</p>
+                        <img  class="pp" src="{{ asset('uploads/'~participant.images.name) }}" alt="photo {{ participant.nom }}">
+                        <a href="{{ path('user_gestion_image', {'id':participant.images.id}) }}">Supprimer la photo de profil</a>
+                    {% endif %}
+
+                    {{ form_row(registrationForm.image) }}
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Modifier le profil</button>
                     {{ form_end(registrationForm) }}
+
                 </div>
             </div>
         </div>

@@ -7,6 +7,11 @@
         <div class="general">
             <div>
                 <h1>Bienvenue {{ participant.prenom }} !</h1>
+
+                {% if participant.images is not empty %}
+                <img  class="pp" src="{{ asset('uploads/'~participant.images.name) }}" alt="photo {{ participant.nom }}">
+                {% endif %}
+
                 <h3>Nom : {{ participant.nom }}</h3>
                 <h3>Téléphone : {{ participant.telephone }}</h3>
                 <h3>Email : {{ participant.email }}</h3>

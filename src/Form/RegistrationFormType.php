@@ -56,7 +56,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
 
-            ]);
+            ])
+            ->add('images',FileType::class,[
+                'label'=>'Parcourir',
+                'mapped'=>false
+            ])
+        ;
 
     }
 

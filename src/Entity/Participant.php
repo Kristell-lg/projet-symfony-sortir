@@ -78,6 +78,11 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $campus;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Images::class, mappedBy="participant", cascade={"persist", "remove"})
+     */
+    private $images;
+
     /*/**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -293,6 +298,28 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getImages(): ?Images
+    {
+        return $this->images;
+    }
+
+    public function setImages(?Images $images): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($images === null && $this->images !== null) {
+            $this->images->setParticipant(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($images !== null && $images->getParticipant() !== $this) {
+            $images->setParticipant($this);
+        }
+
+        $this->images = $images;
 
         return $this;
     }

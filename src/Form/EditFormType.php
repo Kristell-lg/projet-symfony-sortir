@@ -21,8 +21,6 @@ class EditFormType extends AbstractType
         $builder
             ->add('image',FileType::class,[
                 'label' => 'Photo de profil'
-
-
             ])
             ->add('nom')
             ->add('prenom', TextType::class, [
@@ -42,7 +40,10 @@ class EditFormType extends AbstractType
                 'first_options'  => ['label' => 'Nouveau Mot de Passe'],
                 'second_options' => ['label' => 'Répéter le Mot de Passe'],
             ])
-
+            ->add('image',FileType::class,[
+                'label'=>'Parcourir',
+                'mapped'=>false
+            ])
         ;
     }
 
