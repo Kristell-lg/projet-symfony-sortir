@@ -76,27 +76,28 @@
                             <td><p>
 
                                     <a href="{{ path('sortie_details', {'id':s.id}) }}">Afficher</a>
-
+                                    &emsp;
                                     {% if s.etats.id == '1' and s.organisateur.id == app.user.id %}
-                                        &emsp;
-                                    <a href="{{ path('sortie_update', {'id':s.id}) }}">Modifier</a>
+                                        <a href="{{ path('sortie_update', {'id':s.id}) }}">Modifier</a>
                                     {% endif %}
 
-                                    {% if s.etats.id == '2' and s.organisateur.id == app.user.id %}
-                                        &emsp;
+                                    &emsp;
+                                    {% if s.etats.id == '2' and is_granted("ROLE_ADMIN") %}
                                         <a href="{{ path('sortie_cancel', {'id':s.id}) }}">Annuler</a>
                                     {% endif %}
 
+                                    &emsp;
                                     {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 0
                                         and s.dateLimiteInscription | date('d/m/Y') < "now" | date('d/m/Y')
                                         and s.nbInscriptionMax > s.sortieParticipants | length %}
-                                        &emsp;
-                                    <a href="{{ path('sortie_register', {'idSortie':s.id, 'idUser':app.user.id }) }}">S'inscrire</a>
+                                        <a href="{{ path('sortie_register', {'idSortie':s.id, 'idUser':app.user.id }) }}"
+                                           onclick="return confirm('Etes-vous sûr de vouloir vous inscrire à cette sortie?')">S'inscrire</a>
                                     {% endif %}
 
+                                    &emsp;
                                     {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 1  %}
-                                        &emsp;
-                                    <a href="{{ path('sortie_unsubscribe', {'idSortie':s.id, 'idUser':app.user.id }) }}">Se désinscrire</a>
+                                        <a href="{{ path('sortie_unsubscribe', {'idSortie':s.id, 'idUser':app.user.id }) }}"
+                                           onclick="return confirm('Etes-vous sûr de vouloir vous désinscrire à cette sortie?')">Se désinscrire</a>
                                     {% endif %}
 
                             </p></td>

@@ -17,7 +17,8 @@ class MotifAnnulationType extends AbstractType
                 'label'=>'Motif : '
             ])
             ->add('enregistrer_btn', SubmitType::class, array(
-                'label' => 'Enregistrer'
+                'label' => 'Enregistrer',
+                'attr'=>['onclick'=>'return confirm("Etes vous sûr de vouloir annuler la sortie?")']
             ))
             ->add('annuler_btn', SubmitType::class, array(
                 'label' => 'Annuler'
