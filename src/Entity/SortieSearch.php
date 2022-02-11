@@ -3,8 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Campus;
+use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints\Date;
 
 class SortieSearch
@@ -20,32 +20,32 @@ class SortieSearch
     private $recherche;
 
     /**
-     * @var Date
+     * @var DateTimeInterface
      */
     private $apresLe;
 
     /**
-     * @var Date
+     * @var DateTimeInterface
      */
     private $avantLe;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     private $organisateur;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     private $inscrit;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     private $noInscrit;
 
     /**
-     * @var Boolean
+     * @var bool
      */
     private $passees;
 
@@ -94,67 +94,67 @@ class SortieSearch
         return $this;
     }
 
-    public function getApresLe(): ?Date
+    public function getApresLe(): ?DateTimeInterface
     {
         return $this->apresLe;
     }
 
-    public function setApresLe(?Date $apresLe): self
+    public function setApresLe(?DateTimeInterface $apresLe): self
     {
         $this->apresLe = $apresLe;
         return $this;
     }
 
-    public function getAvantLe(): ?Date
+    public function getAvantLe(): ?DateTimeInterface
     {
         return $this->avantLe;
     }
 
-    public function setAvantLe(?Date $avantLe): self
+    public function setAvantLe(?DateTimeInterface $avantLe): self
     {
         $this->avantLe = $avantLe;
         return $this;
     }
 
-    public function getOrganisateur(): ?Boolean
+    public function getOrganisateur(): ?bool
     {
         return $this->organisateur;
     }
 
-    public function setOrganisateur(?Boolean $organisateur): self
+    public function setOrganisateur(?bool $organisateur): self
     {
         $this->organisateur = $organisateur;
         return $this;
     }
 
-    public function getInscrit(): ?Boolean
+    public function getInscrit(): ?bool
     {
         return $this->inscrit;
     }
 
-    public function setInscrit(?Boolean $inscrit): self
+    public function setInscrit(?bool $inscrit): self
     {
         $this->inscrit = $inscrit;
         return $this;
     }
 
-    public function getNoInscrit(): ?Boolean
+    public function getNoInscrit(): ?bool
     {
         return $this->noInscrit;
     }
 
-    public function setNoInscrit(?Boolean $noInscrit): self
+    public function setNoInscrit(?bool $noInscrit): self
     {
         $this->noInscrit = $noInscrit;
         return $this;
     }
 
-    public function getPassees(): ?Boolean
+    public function getPassees(): ?bool
     {
         return $this->passees;
     }
 
-    public function setPassees(?Boolean $passees): self
+    public function setPassees(?bool $passees): self
     {
         $this->passees = $passees;
         return $this;

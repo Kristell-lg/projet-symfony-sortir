@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Sorties;
+use App\Entity\SortieSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,32 @@ class SortiesRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findWanted(SortieSearch $pSearch)
+    {
+        $queryBuilder = $this->createQueryBuilder('s');
+
+        $campus = $pSearch->getCampus()->getId();
+
+        $queryBuilder->andWhere('s.campus = :campus')
+        ->setParameter('campus', $campus );
+
+        if ($pSearch->getRecherche() !=null ) {
+            $search = $pSearch->getRecherche();
+            $queryBuilder->andWhere('s.nom LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+        if($pSearch->getApresLe()!=null){
+            $apresLe = $pSearch->getApresLe();
+            $queryBuilder->andWhere('s.dateHeureDebut >= :apresLe')
+                ->setParameter('apresLe',$apresLe);
+        }
+        if($pSearch->getAvantLe()!=null){
+            $avantLe = $pSearch->getAvantLe();
+            $queryBuilder->andWhere('s.dateHeureDebut <= :avantLe')
+                ->setParameter('avantLe',$avantLe);
+        }
+
+        $query = $queryBuilder->getQuery();
+        return $query->getResult();
+    }
 }
