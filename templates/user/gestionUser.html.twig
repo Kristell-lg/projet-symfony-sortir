@@ -71,7 +71,7 @@
 
             {% if is_granted("ROLE_ADMIN") %}
                 <div class="creation_sortie">
-                    <button><a href=""> Créer un participant</a></button>
+                    <button><a href="{{ path('gestion_registerAdmin') }}"> Créer un participant manuellement</a></button>
                 </div>
             {% endif %}
 

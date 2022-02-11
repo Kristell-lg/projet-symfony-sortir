@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Form\EditFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\ParticipantRepository;
@@ -60,6 +61,7 @@ class UserController extends AbstractController
 
         $form = $this->createForm(EditFormType::class, $participant);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $participant->getImage();
             $fileName = md5(uniqid()) .'.'. $file->guessExtension();
@@ -219,4 +221,5 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_gestion');
     }
+
 }
