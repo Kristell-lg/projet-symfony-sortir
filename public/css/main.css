@@ -94,10 +94,10 @@ main {
 .general form .btn_valider button{
     width: 15vw;
 }
+label{
 
-
-
-
+    display: block;
+}
 
 .generalBig {
     background-color: rgba(24, 29, 49, 0.75);
@@ -118,7 +118,6 @@ main {
 .generalBig input, textarea, select{
     width: 50vh;
     height: 3vh;
-    margin: 15px;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: medium;
 }
