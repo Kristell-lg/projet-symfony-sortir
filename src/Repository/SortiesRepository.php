@@ -2,8 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Participant;
 use App\Entity\Sorties;
 use App\Entity\SortieSearch;
+use DateInterval;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -48,10 +51,45 @@ class SortiesRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findWanted(SortieSearch $pSearch)
+    public function findWanted(SortieSearch $pSearch,Participant $pParticipant)
     {
+        $date = new DateTime('now');
         $queryBuilder = $this->createQueryBuilder('s');
+        $queryBuilder->leftJoin('s.sortieParticipants','ps');
 
+        if ($pSearch->getOrganisateur()){
+            $organisateur = $pParticipant->getId();
+            $queryBuilder->andWhere('s.organisateur = :organisateur')
+                ->setParameter('organisateur',$organisateur);
+        }
+        if ($pSearch->getInscrit()){
+            $participant = $pParticipant->getId();
+            if($pSearch->getOrganisateur()||$pSearch->getNoInscrit()||$pSearch->getPassees()){
+                $queryBuilder->orWhere('ps.id = :participant');
+            }else{
+                $queryBuilder->andWhere('ps.id = :participant');
+            }
+            $queryBuilder->setParameter('participant',$participant);
+        }
+        if ($pSearch->getNoInscrit()){
+            $participant = $pParticipant->getId();
+
+            if($pSearch->getOrganisateur()||$pSearch->getInscrit()||$pSearch->getPassees()){
+                $queryBuilder->orWhere('ps.id != (:participant) OR ps.id is null');
+            }else{
+                $queryBuilder->andWhere('ps.id != (:participant) OR ps.id is null');
+            }
+            $queryBuilder->setParameter('participant',$participant);
+        }
+
+        if ($pSearch->getPassees()){
+            if($pSearch->getOrganisateur()||$pSearch->getInscrit()||$pSearch->getNoInscrit()){
+                $queryBuilder->orWhere('s.dateHeureDebut < :date');
+            }else{
+                $queryBuilder->andWhere('s.dateHeureDebut <:date');
+            }
+            $queryBuilder->setParameter('date',$date);
+        }
         if($pSearch->getCampus()!=null) {
             $campus = $pSearch->getCampus()->getId();
             $queryBuilder->andWhere('s.campus = :campus')
@@ -72,9 +110,11 @@ class SortiesRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('s.dateHeureDebut <= :avantLe')
                 ->setParameter('avantLe',$avantLe);
         }
-        if ($pSearch->getOrganisateur()){
+        $queryBuilder->andWhere('s.dateHeureDebut >:date');
+        $dateM = $date;
+        $dateM->sub(new DateInterval('P1M'));
+        $queryBuilder->setParameter('date',$dateM);
 
-        }
         $query = $queryBuilder->getQuery();
         return $query->getResult();
     }

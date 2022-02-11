@@ -7,6 +7,7 @@ use App\Entity\SortieSearch;
 use App\Form\SortieResearchType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatsRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortiesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,15 +20,23 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_home")
      */
-    public function home(CampusRepository  $campusRepository,SortiesRepository $sortiesRepository, EtatsRepository $etatsRepository, Request $request,EntityManagerInterface $entityManager): Response
+    public function home(CampusRepository  $campusRepository,SortiesRepository $sortiesRepository, EtatsRepository $etatsRepository,ParticipantRepository $participantRepository, Request $request,EntityManagerInterface $entityManager): Response
     {
         $participe = false;
+        $organisateur= null;
 
         $recherche= new  SortieSearch();
         $filterForm = $this->createForm(SortieResearchType::class,$recherche);
         $filterForm->handleRequest($request);
 
-        $sortie = $sortiesRepository->findWanted($recherche);
+        $participantList = $participantRepository->findAll();
+        foreach ($participantList as $p){
+            if ($p->getEmail()===$this->getUser()->getUserIdentifier()){
+                $organisateur =$p;
+            }
+        }
+
+        $sortie = $sortiesRepository->findWanted($recherche,$organisateur);
 
 
         $change = false;
