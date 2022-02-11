@@ -52,11 +52,11 @@ class SortiesRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->createQueryBuilder('s');
 
-        $campus = $pSearch->getCampus()->getId();
-
-        $queryBuilder->andWhere('s.campus = :campus')
-        ->setParameter('campus', $campus );
-
+        if($pSearch->getCampus()!=null) {
+            $campus = $pSearch->getCampus()->getId();
+            $queryBuilder->andWhere('s.campus = :campus')
+                ->setParameter('campus', $campus);
+        }
         if ($pSearch->getRecherche() !=null ) {
             $search = $pSearch->getRecherche();
             $queryBuilder->andWhere('s.nom LIKE :search')
@@ -72,7 +72,9 @@ class SortiesRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('s.dateHeureDebut <= :avantLe')
                 ->setParameter('avantLe',$avantLe);
         }
+        if ($pSearch->getOrganisateur()){
 
+        }
         $query = $queryBuilder->getQuery();
         return $query->getResult();
     }
