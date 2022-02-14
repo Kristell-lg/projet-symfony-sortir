@@ -72,6 +72,7 @@
             {% if is_granted("ROLE_ADMIN") %}
                 <div class="creation_sortie">
                     <button><a href="{{ path('gestion_registerAdmin') }}"> Créer un participant manuellement</a></button>
+                    <button><a href="{{ path('gestion_registerAdminCSV') }}"> Créer un participant à partir d'un fichier CSV</a></button>
                 </div>
             {% endif %}
 

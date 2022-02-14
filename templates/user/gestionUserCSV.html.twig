@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | détails {% endblock %}
+
+{% block body %}
+    <main>
+        <div class="generalBig">
+            <h1>Créer des utilisateurs à partir d'un fichier CSV</h1>
+            <p>Le CSV doit être comme suivant : </p>
+            <p>"nom","prenom","telephone","password","email","campus"</p>
+            <p>"Shigeru","Miyamoto","0123456789","","papa-de-zelda@nintendo.jp","Nantes"</p>
+                {{ form_start(formCSV) }}
+                {{ form_widget(formCSV) }}
+                {{ form_end(formCSV) }}
+
+        </div>
+    </main>
+{% endblock %}

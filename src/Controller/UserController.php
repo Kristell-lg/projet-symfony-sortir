@@ -51,7 +51,8 @@ class UserController extends AbstractController
     public function edit(int                    $id,
                          ParticipantRepository  $participantRepository,
                          Request                $request,
-                         EntityManagerInterface $entityManager
+                         EntityManagerInterface $entityManager,
+                         UserPasswordHasherInterface $userPasswordHasher
     )
     {
         $participant = $entityManager->getReference('App:Participant', $id);
@@ -73,9 +74,22 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-                //si le mot de passe n'est pas changé
+                //si le mot de passe n'est pas changé et s'il a changé on le hash avant d'envoyer en BDD
                 if(empty($form->get('password')->getData())){
-                    $participant->setPassword($currentPassword);
+                    $participant->setPassword(
+                        $userPasswordHasher->hashPassword(
+                            $participant,
+                            $currentPassword
+                        )
+                    );
+                }
+                else{
+                    $participant->setPassword(
+                        $userPasswordHasher->hashPassword(
+                            $participant,
+                            $form->get('password')->getData()
+                        )
+                    );
                 }
 
 
@@ -142,9 +156,15 @@ class UserController extends AbstractController
         if($confirmPasswordForm->isSubmitted()){
 
             $currentPassword = $user->getPassword();
-            $typedInPassword =  $confirmPasswordForm->get('plainPassword')->getData();
+            dump($currentPassword);
 
-            if(!empty($typedInPassword) && $currentPassword === $typedInPassword){
+            $typedInPassword = $confirmPasswordForm->get('plainPassword')->getData();
+            dump($typedInPassword);
+
+            dd($this->encoder->isPasswordValid($user,$typedInPassword ));
+
+
+            if(!empty($typedInPassword) && hash_equals($typedInPassword,$currentPassword)){
                 return $this->redirectToRoute('user_edit',['id'=>$user->getId()]);
             }
             else{
