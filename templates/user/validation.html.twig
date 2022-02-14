@@ -7,7 +7,7 @@
         <div class="general">
 
             <h1>Veuillez confirmer votre mot de passe </h1>
-            <p>Connecté en tant que : {{ last_username }}</p>
+            <p class="password">Connecté en tant que : {{ last_username }}</p>
 
             {%  if error is not empty %}
                 <p>{{ error }}</p>
@@ -16,6 +16,7 @@
             {{ form_start(confirmPasswordForm)}}
             {{ form_widget(confirmPasswordForm)}}
             {{ form_end(confirmPasswordForm)}}
+
         </div>
     </main>
 

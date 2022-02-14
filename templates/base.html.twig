@@ -19,7 +19,7 @@
             {%  include 'inc/nav.html.twig' %}
         </header>
 
-
+        {% block body %}{% endblock %}
 
         {% for label, messages in app.flashes %}
             {% for message in messages  %}
@@ -30,7 +30,7 @@
         {% endfor %}
 
 
-        {% block body %}{% endblock %}
+
 
         <footer>
             <p>&copy ENI {{ "now"|date('Y') }} | Sortir </p>
