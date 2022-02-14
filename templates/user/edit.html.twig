@@ -19,7 +19,6 @@
                 </div>
 
                 <div class="col2">
-                    {{ form_row(registrationForm.campus) }}
                     {{ form_row(registrationForm.password) }}
 
                     {% if participant.images is not empty %}
@@ -29,7 +28,6 @@
                     {% endif %}
 
                     {{ form_row(registrationForm.image) }}
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Modifier le profil</button>
                     {{ form_end(registrationForm) }}
 
                 </div>

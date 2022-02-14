@@ -7,6 +7,7 @@ use App\Entity\Participant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,10 +29,6 @@ class EditFormType extends AbstractType
             ])
             ->add('email')
             ->add('telephone', TextType::class, ['label' => 'Téléphone'])
-            ->add('campus', EntityType::class, [
-                'class'=>Campus::class,
-                'choice_label' => 'nom'
-            ])
             ->add('password', RepeatedType::class, [
                 'mapped'=>false,
                 'type' => PasswordType::class,
@@ -46,6 +43,9 @@ class EditFormType extends AbstractType
                 'mapped'=>false,
                 'required'=>false
             ])
+            ->add('creer_btn', SubmitType::class, array(
+                'label' => 'Modifier le profil'
+            ))
         ;
     }
 
