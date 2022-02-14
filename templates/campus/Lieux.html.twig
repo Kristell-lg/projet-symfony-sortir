@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ parent() }} | Campus {% endblock %}
+
+{% block body %}
+    {{ form_start(lieuxForm) }}
+
+    {{ form_widget(lieuxForm) }}
+        <button type="submit">Enregistrer</button>
+        <a href="{{ path('sortie_create')}}" >Annuler</a>
+    {{ form_end(lieuxForm) }}
+{% endblock %}

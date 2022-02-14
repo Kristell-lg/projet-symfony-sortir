@@ -21,7 +21,8 @@ class LieuxType extends AbstractType
             ->add('latitude')
             ->add('longitude')
             ->add('villes',EntityType::class,[
-                'class'=>Villes::class
+                'class'=>Villes::class,
+                'choice_label' => 'nom'
             ])
         ;
     }

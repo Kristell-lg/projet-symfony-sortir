@@ -19,7 +19,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
 
 class SortieController extends AbstractController
 {
@@ -27,8 +26,16 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie/create", name="sortie_create")
      */
-    public function create(Request $request, LieuxRepository $lieuxRepository, CampusRepository $campusRepository, EtatsRepository $etatsRepository,ParticipantRepository $participantRepository, EntityManagerInterface $entityManager): Response
-    {
+    public function create(
+        EntityManagerInterface $entityManager,
+        LieuxRepository $lieuxRepository,
+        CampusRepository $campusRepository,
+        EtatsRepository $etatsRepository,
+        ParticipantRepository $participantRepository,
+        Request $request
+
+    ): Response {
+
         $sortie = new Sorties();
         $sortieForm = $this->createForm(SortiesType::class,$sortie);
         $sortieForm->handleRequest($request);
@@ -44,10 +51,11 @@ class SortieController extends AbstractController
             $sortieForm = $this->createForm(SortiesType::class,$sortie);
             $sortieForm->handleRequest($request);
 
-            return $this->render('/sortie/create.html.twig', [
+            return $this->redirectToRoute('lieux_create');
+            /*return $this->render('/sortie/create.html.twig', [
                 'sortieForm'=>$sortieForm->createView(),
                 'lieu'=>$lieu
-            ]);
+            ]);*/
         }
 
 
