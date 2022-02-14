@@ -3,17 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Images;
-use App\Entity\Participant;
 use App\Form\EditFormType;
-use App\Form\RegistrationFormType;
 use App\Repository\ImagesRepository;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Client\Curl\User;
-use phpDocumentor\Reflection\Types\String_;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -72,10 +66,11 @@ class UserController extends AbstractController
 
             //Récupération des images transmises
             $image = $form->get('image')->getData();
-            //Générer nom de fichier
-            $fichier = md5(uniqid()).'.'.$image->guessExtension();
+
 
             if(!empty($image) && filesize($image)<500000) {
+                //Générer nom de fichier
+                $fichier = md5(uniqid()).'.'.$image->guessExtension();
 
                 //On copie le fichier dans le dossier uploads
                 $image->move(
@@ -102,14 +97,13 @@ class UserController extends AbstractController
             $entityManager->persist($participant);
             $entityManager->flush();
 
-            $this->addFlash('Success', 'Le profil à bien été modifié!');
+            $this->addFlash('success', 'Le profil à bien été modifié!');
 
             return $this->redirectToRoute('user_profil', [
                 'id' => $participant->getId(),
             ]);
 
         }
-
 
         return $this->render('user/edit.html.twig', [
                 'registrationForm' => $form->createView(), "participant" => $participant]
@@ -204,6 +198,7 @@ class UserController extends AbstractController
         $entityManager->persist($participant);
         $entityManager->flush();
 
+        $this->addFlash("success","Modification des droits réussie !");
         return $this->redirectToRoute('user_gestion');
     }
 
@@ -218,6 +213,7 @@ class UserController extends AbstractController
         $entityManager->persist($participant);
         $entityManager->flush();
 
+        $this->addFlash("success","Modification des droits réussie !");
         return $this->redirectToRoute('user_gestion');
     }
 

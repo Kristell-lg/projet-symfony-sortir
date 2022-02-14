@@ -19,6 +19,8 @@
             {%  include 'inc/nav.html.twig' %}
         </header>
 
+
+
         {% for label, messages in app.flashes %}
             {% for message in messages  %}
                 <div class="flash flash--{{ label }}">
@@ -29,6 +31,7 @@
 
 
         {% block body %}{% endblock %}
+
         <footer>
             <p>&copy ENI {{ "now"|date('Y') }} | Sortir </p>
         </footer>

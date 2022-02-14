@@ -5,6 +5,7 @@
 {% block body  %}
     <main>
 <form  class="general" method="post">
+
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -31,8 +32,6 @@
         <label> Se souvenir de moi</label>
 
     </div>
-
-    <a href="{{ path('app_register') }}">Pas encore de compte ? Cliquez ici pour s'inscrire !</a>
 
     <button class="btn btn-lg btn-primary" type="submit">Connexion</button>
 

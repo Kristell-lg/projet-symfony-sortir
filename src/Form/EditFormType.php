@@ -42,7 +42,8 @@ class EditFormType extends AbstractType
             ])
             ->add('image',FileType::class,[
                 'label'=>'Parcourir',
-                'mapped'=>false
+                'mapped'=>false,
+                'required'=>false
             ])
         ;
     }

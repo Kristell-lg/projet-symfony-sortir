@@ -29,13 +29,12 @@ main {
     justify-content: center;
     align-items: stretch;
     padding: 20px;
-    height: 50vh;
+    height: 60vh;
     border-radius: 30px;
     min-width: 60vh;
 }
 
 .general input {
-    width: 70vh;
     height: 3vh;
     margin: 15px;
     font-family: 'Source Sans Pro', sans-serif;
@@ -106,7 +105,7 @@ label{
     justify-content: center;
     align-items: stretch;
     padding: 20px;
-    height: 60vh;
+    height: 70vh;
     border-radius: 30px;
 }
 
@@ -128,6 +127,8 @@ label{
 
 .generalBig h1 {
     text-decoration: overline #50A1A4;
+    padding: 0;
+    margin-bottom: 0;
 }
 
 .generalBig a {
@@ -194,8 +195,7 @@ label{
 }
 
 .generalBig .creation_sortie{
-    margin: 1vh;
-    padding: 0;
+    padding: 1vh;
 }
 
 .generalBig .btn_sortie{
@@ -207,6 +207,55 @@ label{
 .generalBig .btn_sortie button{
     width: 30vh;
 }
+
+.generalBig .filtre {
+    margin-bottom: 2vh;
+}
+
+.generalBig .filtre .col-1 input{
+    height: 2vh;
+    font-size: smaller;
+}
+
+.generalBig .filtre .col-1 label{
+    font-size: smaller;
+}
+
+.generalBig .filtre .col-1 select{
+    height: 2.3vh;
+    font-size: smaller;
+    width: available;
+}
+
+.generalBig .col-2 {
+    display: flex;
+    align-items: center;
+    margin: 2vh;
+}
+
+.generalBig .col-2 div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.generalBig .filtre .col-2 input{
+    height: 2vh;
+    font-size: smaller;
+    width: 5vh;
+}
+
+.generalBig .filtre .col-2 label{
+    font-size: smaller;
+    width: 20vw;
+}
+
+.generalBig .col-3 {
+    display: flex;
+    align-items: center;
+    margin: 2vh;
+}
+
 
 
 
@@ -262,21 +311,22 @@ nav li a:hover {
 
 .flash {
     position: absolute;
-    padding: 20px;
     font-weight: bold;
-    font-size: 1.4rem;
-    margin: 1rem 0;
+    font-size: medium;
     border-radius: 5px;
-    left: 50%;
-    width: auto;
-    height: 40px;
-    margin-top: 10px;
-    margin-left: -200px;
+    left: 45%;
+    width: 10vw;
+    height: 3vh;
+    text-align: center;
 }
 
 .flash--success {
-    position: center;
     background-color: rgba(67, 94, 52, 0.75);
+    color:white;
+}
+
+.flash--fail {
+    background-color: rgba(213, 71, 94, 0.75);
     color:white;
 }
 
@@ -408,6 +458,9 @@ tr{
     width: 100vw;
 }
 
+
+
+
 .pp{
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -437,7 +490,7 @@ tr{
     overflow: hidden;
     box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
     display: block;
-    max-height: 40vh;
+    max-height: 30vh;
     overflow-y: scroll;
 }
 
@@ -456,14 +509,14 @@ tr{
     border:1px dotted rgba(24, 29, 49, 0.75);
     background-color:rgba(24, 29, 49, 0.75);
     color:#50A1A4;
-    padding: 1vh;
+    padding: 0.1vh;
 }
 
 .sorties td {
     font-weight: bold;
     border:1px solid rgba(24, 29, 49, 0.75);
     text-align:center;
-    padding: 1vh;
+    padding: 0.2vh;
 }
 
 .sorties td div input{
