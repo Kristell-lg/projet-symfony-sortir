@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Images;
+use App\Entity\Participant;
+use App\Form\ConfirmPasswordType;
 use App\Form\EditFormType;
 use App\Repository\ImagesRepository;
 use App\Repository\ParticipantRepository;
@@ -53,56 +55,69 @@ class UserController extends AbstractController
     )
     {
         $participant = $entityManager->getReference('App:Participant', $id);
+        //comparer si le mot de passe à changer
+        $currentPassword = $participant->getPassword();
+        //comparer si le participant à changer pour éviter les messages flash
+        $currentParticipant = $participant;
 
         //conserver le nom de la photo afin de la supprimer du disque si elle a changé
         if(!empty($participant->getImages())){
             $participantImgNom = $participant->getImages()->getName();
         }
 
-        $form = $this->createForm(EditFormType::class, $participant);
+        $form = $this->createForm(EditFormType::class,$participant);
         $form->handleRequest($request);
+
+
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //Récupération des images transmises
-            $image = $form->get('image')->getData();
-
-
-            if(!empty($image) && filesize($image)<500000) {
-                //Générer nom de fichier
-                $fichier = md5(uniqid()).'.'.$image->guessExtension();
-
-                //On copie le fichier dans le dossier uploads
-                $image->move(
-                    'uploads/',
-                    $fichier
-                );
-
-                //supprimer l'ancienne photo s'il y en a une
-                if(!empty($participantImgNom)) {
-                    unlink('uploads' . '/' . $participantImgNom);
-                    $img = $participant->getImages();
-                    //On stocke image en BDD(son nom)
-                    $img->setName($fichier);
-
-                }
-                else{
-                    $img = new Images();
-                    $img->setName($fichier);
-                    $participant->setImages($img);
+                //si le mot de passe n'est pas changé
+                if(empty($form->get('password')->getData())){
+                    $participant->setPassword($currentPassword);
                 }
 
-            }
 
-            $entityManager->persist($participant);
-            $entityManager->flush();
 
-            $this->addFlash('success', 'Le profil à bien été modifié!');
+                //Récupération des images transmises
+                $image = $form->get('image')->getData();
 
-            return $this->redirectToRoute('user_profil', [
-                'id' => $participant->getId(),
-            ]);
 
+                if(!empty($image) && filesize($image)<500000) {
+                    //Générer nom de fichier
+                    $fichier = md5(uniqid()).'.'.$image->guessExtension();
+
+                    //On copie le fichier dans le dossier uploads
+                    $image->move(
+                        'uploads/',
+                        $fichier
+                    );
+
+                    //supprimer l'ancienne photo s'il y en a une
+                    if(!empty($participantImgNom)) {
+                        unlink('uploads' . '/' . $participantImgNom);
+                        $img = $participant->getImages();
+                        //On stocke image en BDD(son nom)
+                        $img->setName($fichier);
+
+                    }
+                    else{
+                        $img = new Images();
+                        $img->setName($fichier);
+                        $participant->setImages($img);
+                    }
+
+                }
+
+                $entityManager->persist($participant);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Le profil à bien été modifié!');
+
+                return $this->redirectToRoute('user_profil', [
+                    'id' => $participant->getId(),
+                ]);
         }
 
         return $this->render('user/edit.html.twig', [
@@ -114,16 +129,34 @@ class UserController extends AbstractController
     /**
      * @Route ("/validation" , name="validation")
      */
-    public function validation(AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator): Response
+    public function validation(Request $request, AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        $error ="";
+        // dernier username pour éviter de renvoyer le username
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $user = $this->getUser();
+        $confirmPasswordForm = $this->createForm(ConfirmPasswordType::class);
+        $confirmPasswordForm->handleRequest($request);
 
-        return $this->render('user/Validation.html.twig', ['last_username' => $lastUsername, 'error' => $error,]);
+        if($confirmPasswordForm->isSubmitted()){
+
+            $currentPassword = $user->getPassword();
+            $typedInPassword =  $confirmPasswordForm->get('plainPassword')->getData();
+
+            if(!empty($typedInPassword) && $currentPassword === $typedInPassword){
+                return $this->redirectToRoute('user_edit',['id'=>$user->getId()]);
+            }
+            else{
+                $error = 'Mot de passe incorrect';
+            }
+
+        }
+
+        return $this->render('user/validation.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'confirmPasswordForm'=> $confirmPasswordForm->createView()]);
 
     }
 

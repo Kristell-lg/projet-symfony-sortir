@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Identification {% endblock %}
+
+{% block body %}
+    <main>
+        <div class="general">
+
+            <h1>Veuillez confirmer votre mot de passe </h1>
+            <p>Connecté en tant que : {{ last_username }}</p>
+
+            {%  if error is not empty %}
+                <p>{{ error }}</p>
+            {% endif %}
+
+            {{ form_start(confirmPasswordForm)}}
+            {{ form_widget(confirmPasswordForm)}}
+            {{ form_end(confirmPasswordForm)}}
+        </div>
+    </main>
+
+{% endblock %}

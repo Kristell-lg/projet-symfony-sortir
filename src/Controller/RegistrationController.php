@@ -42,10 +42,6 @@ class RegistrationController extends AbstractController
                         $form->get('plainPassword')->getData()
                     )
             );
-           /* $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                $user->setImageFilename($imageFileName);} */
 
             $user->setActif(true);
 

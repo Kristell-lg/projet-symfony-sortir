@@ -314,20 +314,21 @@ nav li a:hover {
     font-weight: bold;
     font-size: medium;
     border-radius: 5px;
-    left: 45%;
-    width: 10vw;
-    height: 3vh;
     text-align: center;
+    height: 1vh;
+    padding: 1.5vh;
 }
 
 .flash--success {
     background-color: rgba(67, 94, 52, 0.75);
     color:white;
+    left : 43.5%;
 }
 
 .flash--fail {
     background-color: rgba(213, 71, 94, 0.75);
     color:white;
+    left : 42%;
 }
 
 

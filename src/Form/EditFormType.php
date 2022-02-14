@@ -33,12 +33,13 @@ class EditFormType extends AbstractType
                 'choice_label' => 'nom'
             ])
             ->add('password', RepeatedType::class, [
+                'mapped'=>false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
+                'required' => false,
                 'first_options'  => ['label' => 'Nouveau Mot de Passe'],
-                'second_options' => ['label' => 'Répéter le Mot de Passe'],
+                'second_options' => ['label' => 'Répéter le nouveau Mot de Passe'],
             ])
             ->add('image',FileType::class,[
                 'label'=>'Parcourir',
