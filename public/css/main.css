@@ -497,6 +497,7 @@ td:last-child p{
     background: #50A1A4;
     border-radius: 15px;
     padding: 0.3em;
+    margin: 0.1em;
     width: 10vh;
 }
 
