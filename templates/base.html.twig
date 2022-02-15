@@ -2,9 +2,12 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %} Sortir.com {% endblock %}</title>
         <link rel="icon" href="{{ asset('img/icon2.png') }}">
-        <link rel="stylesheet" media="screen and (min-width: 1024px)" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet"  href="{{ asset('css/main.css') }}">
+
+        <link rel="stylesheet"  href="{{ asset('css/bootsrap.min.css') }}">
         <link rel="stylesheet" media="screen and (min-width: 600px) and (max-width: 1024px)" href="{{ asset('css/tablette.css') }}">
         <link rel="stylesheet" media="screen and (min-width: 320px) and (max-width: 600px)" href="{{ asset('css/smartphone.css') }}">
 
@@ -12,11 +15,14 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
+
+
     </head>
     <body>
-        <header>
+        <header ><div class="nav">
             <a href="{{ path('main_home') }}"><img src="{{ asset('img/logo2.png') }}" alt="logo"></a>
             {%  include 'inc/nav.html.twig' %}
+            </div>
         </header>
 
         {% block body %}{% endblock %}
