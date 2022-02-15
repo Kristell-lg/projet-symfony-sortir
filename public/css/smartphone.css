@@ -1,4 +1,632 @@
-html{
+@media only screen and (min-width: 268px) and (max-device-width : 480px){
 
-    color: red;
+    html, body {
+        background-image: url("../img/backdrop.png");
+        font-family: 'Source Sans Pro', sans-serif;
+        margin: 0;
+        min-width: 90vh;
+
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        background: rgba(24, 29, 49, 0.75);
+        padding: 50px;
+        font-size:2em;
+    }
+
+    img{
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    main {
+        color: white;
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 150px;
+    }
+
+    label{
+        display: block;
+    }
+
+    .general {
+        background-color: rgba(24, 29, 49, 0.75);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding:1em;
+        border-radius: 30px;
+        min-width: 50vh;
+        font-size:1em;
+        height: 90vh;
+
+
+
+    }
+
+    .general input {
+        height: 5vh;
+        margin: 20px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: medium;
+        width: 80%;
+    }
+
+    .general h1 {
+        text-decoration: overline #50A1A4;
+        margin:15px;
+    }
+    .general p {
+        margin: 0;
+    }
+
+    .general a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .general button {
+        margin: 15px;
+        border-radius: 30px;
+        height: 20vh;
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        background: #50A1A4;
+        border: none;
+        font-size: 1em;
+    }
+    .general button:hover {
+        background: #205559;
+    }
+    .general table input{
+        width: 20vh;
+    }
+    .general table button{
+        width: 15vh;
+
+    }
+    .general form{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .general form .btn_valider{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around
+    }
+
+    .general form .btn_valider button{
+        width: 15vw;
+    }
+
+    .passOublie{
+        font-size: 0.8em;
+        text-decoration:underline;
+        margin:auto
+    }
+
+
+    #confirm_password{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #confirm_password div {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #confirm_password label {
+        width: 30%;
+    }
+
+    #confirm_password div button{
+        width: 50%;
+    }
+
+    .general .password{
+        margin: 2vh;
+        text-decoration: overline;
+    }
+
+
+
+
+
+
+
+
+    .generalBig {
+        background-color: rgba(24, 29, 49, 0.75);
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        padding: 20px;
+        height: 80vh;
+        border-radius: 30px;
+    }
+
+
+    .generalBig form .col1, .col2{
+        margin: 10px;
+    }
+
+    .generalBig input, textarea, select{
+        width: 50vh;
+        height: 4vh;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: medium;
+    }
+
+    .generalBig textarea {
+        resize: none;
+    }
+
+    .generalBig h1 {
+        text-decoration: overline #50A1A4;
+        padding: 0;
+        margin-bottom: 0;
+        margin-left:1em;
+        font-size: 5em;
+        margin-top:2em;
+
+
+    }
+
+    .generalBig a {
+        text-decoration: none;
+        color: white;
+    }
+
+
+
+    .generalBig a:hover {
+        color:#50A1A4;
+    }
+
+    .generalBig button {
+        margin: 15px;
+        border-radius: 30px;
+        height: 5vh;
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        background: #50A1A4;
+        border: none;
+        font-size: medium;
+
+    }
+
+    .generalBig button:hover {
+        color: #50A1A4;
+        background: white;
+    }
+
+    .generalBig form div{
+        flex-direction: column;
+    }
+
+    .generalBig .column{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .generalBig form div .lieu{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .generalBig form div .lieu button{
+        height: 4vh;
+        width: 5vh;
+        font-weight: bolder;
+    }
+
+    .generalBig .detail_lieu p{
+        margin: 0.3vh;
+        padding: 0;
+    }
+
+    .generalBig td p{
+        margin: 1vh;
+        padding: 0;
+    }
+
+    .generalBig th p{
+        margin: 1vh;
+        padding-left: 3vh;
+        padding-right: 3vh;
+    }
+
+    .generalBig .creation_sortie{
+        padding: 1vh;
+    }
+
+    .generalBig .btn_sortie{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .generalBig .btn_sortie button{
+        width: 30vh;
+    }
+
+    .generalBig .filtre {
+        margin-bottom: 2vh;
+        display:flex;
+        font-size: 1em;
+    }
+
+
+
+
+
+
+
+    .generalBig .filtre .col-1 input{
+        height: 2vh;
+        font-size: 4em;
+        margin-left:2.5em;
+
+    }
+
+    .generalBig .filtre .col-1 label{
+        font-size: 4em;
+        margin-left:2.5em;
+
+    }
+
+    .generalBig .filtre .col-1 select{
+        height: 2.3vh;
+        font-size: 4em;
+        width: available;
+        margin-left:2.5em;
+
+    }
+
+
+
+    .generalBig .col-2 {
+        margin: 2vh;
+        flex-direction: column;
+        display:flex;
+    }
+
+    .generalBig .col-2 div{
+        flex-direction: row;
+        align-items: center;
+        margin-top:4em;
+
+
+
+    }
+
+    .generalBig .filtre .col-2 input{
+        height: 2vh;
+        font-size: 2em;
+        width: 5vh;
+
+    }
+
+    .generalBig .filtre .col-2 label{
+        font-size: 2em;
+        width: 20vw;
+        margin-left:2.5em;
+
+    }
+
+    .generalBig .col-3 {
+        display: flex;
+        align-items: center;
+        margin-left:1em;
+        margin-top:60em;
+
+    }
+
+
+
+
+
+
+
+
+
+    .logincheckbox{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-weight: bolder;
+
+    }
+
+    .logincheckbox input{
+        width: 10%;
+    }
+
+
+
+
+
+
+    nav {
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+
+    }
+
+    nav li {
+        list-style: none;
+        margin: 10px;
+        padding: 8px;
+        display: flex;
+    }
+
+    li a {
+        color: #50A1A4;
+        text-decoration: none;
+    }
+
+    nav li a:hover {
+        color: white;
+        text-decoration: overline #50A1A4;
+    }
+
+
+
+
+
+    .flash {
+        position: absolute;
+        font-weight: bold;
+        font-size: medium;
+        border-radius: 5px;
+        text-align: center;
+        height: 1vh;
+        padding: 3vh;
+    }
+
+    .flash--success {
+        background-color: rgba(67, 94, 52, 0.75);
+        color:white;
+        left : 43.5%;
+        top : 20%
+    }
+
+    .flash--fail {
+        background-color: rgba(213, 71, 94, 0.75);
+        color:white;
+        left : 42%;
+        top : 20%;
+    }
+
+
+
+
+
+
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        clear: both;
+        font-family: 'Source Sans Pro', sans-serif;
+        color: #FFFFFF;
+        background-color: rgba(24, 29, 49, 0.75);
+        padding: 10px 30px;
+        height: 70vh;
+        border-radius: 30px;
+    }
+
+    .register form div{
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .register input {
+        width: 50vh;
+        height: 3vh;
+        margin: 15px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 2em;
+    }
+
+    .container h1 {
+        text-decoration: overline #50A1A4;
+        color: #FFFFFF;
+        margin: 0;
+    }
+    .register select{
+        width: 50vh;
+        height: 3vh;
+        margin: 15px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 16px;
+    }
+    .register button {
+        display: block;
+        width: 100%;
+        border: none;
+        padding: 7px 14px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 30px;
+        height: 5vh;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: medium;
+        color: white;
+        background: #50A1A4;
+
+    }
+
+    .register button :hover {
+        color: #50A1A4;
+        background: white;
+    }
+
+    .btn-remember-me{
+        position: absolute;
+        padding-left: 75px;
+    }
+
+
+
+
+
+
+    table {
+        border:none;
+        border-radius: 30px;
+        border-collapse: collapse;
+        color: white;
+        overflow: hidden;
+        box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
+    }
+
+    thead {
+        background-color: rgba(24, 29, 49, 0.92);
+        border:1px solid rgba(24, 29, 49, 0.75);
+    }
+
+    tbody {
+        background-color: rgba(40, 52, 75, 0.75);
+        border:1px solid rgba(24, 29, 49, 0.75);
+    }
+
+    th {
+        border:1px dotted rgba(24, 29, 49, 0.75);
+        background-color:rgba(24, 29, 49, 0.75);
+        color:#50A1A4;
+        padding: 1vh;
+    }
+
+    td {
+        font-weight: bold;
+        border:1px solid rgba(24, 29, 49, 0.75);
+        text-align:center;
+        padding: 1vh;
+    }
+
+    .general td a{
+        text-decoration: underline;
+        color: #99c7c7;
+    }
+
+    .generalBig td a{
+        text-decoration: underline;
+        color: #99c7c7;
+    }
+
+    td div input{
+        width: 100px;
+    }
+
+    tr{
+        width: 100vw;
+
+    }
+
+
+
+
+    .pp{
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .ppmini{
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        padding: 5px;
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+    }
+
+
+
+
+
+
+    .sorties table {
+        border:none;
+        border-radius: 30px;
+        border-collapse: collapse;
+        color: white;
+        overflow: hidden;
+        box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
+        display: block;
+        max-height: 30vh;
+        overflow-y: scroll;
+    }
+
+    .sorties thead {
+        position: sticky;
+        background-color: rgba(24, 29, 49, 0.92);
+        border:1px solid rgba(24, 29, 49, 0.75);
+    }
+
+    .sorties tbody {
+        background-color: rgba(40, 52, 75, 0.75);
+        border:1px solid rgba(24, 29, 49, 0.75);
+    }
+
+    .sorties th {
+        border:1px dotted rgba(24, 29, 49, 0.75);
+        background-color:rgba(24, 29, 49, 0.75);
+        color:#50A1A4;
+        padding: 0.1vh;
+    }
+
+    .sorties td {
+        font-weight: bold;
+        border:1px solid rgba(24, 29, 49, 0.75);
+        text-align:center;
+        padding: 0.2vh;
+    }
+
+    .sorties td div input{
+        width: 100px;
+    }
+
+    .sorties tr{
+        width: 100vw;
+    }
+
+
+    footer{
+        position: absolute;
+        bottom:-67em;
+        width:100%;
+        background: rgba(24, 29, 49, 0.75);
+        display: flex;
+        justify-content: space-around;
+        color: white;
+        font-size: smaller;
+        min-width: 90vh;
+
+    }
+
+    footer p {
+        padding: 0;
+        margin: 2px;
+    }
 }
