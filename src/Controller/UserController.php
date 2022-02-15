@@ -156,15 +156,9 @@ class UserController extends AbstractController
         if($confirmPasswordForm->isSubmitted()){
 
             $currentPassword = $user->getPassword();
-            dump($currentPassword);
-
             $typedInPassword = $confirmPasswordForm->get('plainPassword')->getData();
-            dump($typedInPassword);
 
-            dd($this->encoder->isPasswordValid($user,$typedInPassword ));
-
-
-            if(!empty($typedInPassword) && hash_equals($typedInPassword,$currentPassword)){
+            if(!empty($typedInPassword) && password_verify($typedInPassword,$currentPassword)){
                 return $this->redirectToRoute('user_edit',['id'=>$user->getId()]);
             }
             else{

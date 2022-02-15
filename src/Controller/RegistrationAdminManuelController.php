@@ -6,17 +6,13 @@ use App\Entity\Participant;
 use App\Form\RegisterCSVType;
 use App\Form\RegistrationFormType;
 use App\Repository\CampusRepository;
-use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Client\Curl\User;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationAdminManuelController extends AbstractController
 {
