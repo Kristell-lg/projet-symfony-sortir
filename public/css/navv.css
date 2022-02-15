@@ -10,18 +10,16 @@
 
     .liste {
         display: flex;
-
-        justify-content: center;
     }
 
 
 .nav{display: flex;
-    align-items: center;
+    justify-content: space-between;
 }
     li {
         display: flex;
         list-style-type: none;
-        font-size: 20px;
+        font-size: 30px;
         justify-content: space-between;
         margin-bottom: 1em;
     }
