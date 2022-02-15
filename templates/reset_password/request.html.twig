@@ -3,10 +3,12 @@
 {% block title %}{{ parent()}} |réinitialisation du MDP{% endblock %}
 
 {% block body %}
+<main>
+    <form  class="general" method="post">
     {% for flashError in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
-    <h1 class="h3 mb-3 font-weight-normal">Réinitialisation de votre mot de passe</h1>
+    <h1 class="h3 mb-3 font-weight-normal" >Réinitialisation de votre mot de passe</h1>
 
     {{ form_start(requestForm) }}
         {{ form_row(requestForm.email) }}
@@ -17,6 +19,9 @@
             </small>
         </div>
 
-        <button class="btn btn-primary">Envoyer</button>
+        <button class="btn btn-lg btn-primary" type="submit">Envoyer</button>
+
+    </form>
+</main>
     {{ form_end(requestForm) }}
 {% endblock %}
