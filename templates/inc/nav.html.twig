@@ -28,13 +28,16 @@
                 <li><a class="dropdown-item" href="{{ path('app_logout') }}" title="seDeconnecter">Se Déconnecter
                     ({{ app.user.userIdentifier }}
                         )</a></li>
-</div>
-        </ul>
-    </label>
+
+
 {% if app.user.images is not empty %}
     <a href="{{ path('user_profil',{'id':app.user.id}) }}" title="monProfil">
         <img class="ppmini" src="{{ asset('uploads/'~app.user.images.name) }}" alt="photo profil">
     </a>
+    </div>
+        </ul>
+    </label>
+
 {% endif %}
 
     {% endif %}
