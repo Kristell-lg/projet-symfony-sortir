@@ -3,10 +3,16 @@
 {% block title %}{{ parent()}} | réinitialisation du MDP{% endblock %}
 
 {% block body %}
-    <h1 >Réinitialisation de votre mot de passe</h1>
+
+<main>
+    <form  class="general" method="post">
+    <h1  class="h3 mb-3 font-weight-normal" >Réinitialisation de votre mot de passe</h1>
 
     {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Réinitialisation</button>
+        <button class="btn btn-lg btn-primary" type="submit">Réinitialisation</button>
     {{ form_end(resetForm) }}
+
+    </form>
+</main>
 {% endblock %}
