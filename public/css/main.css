@@ -170,7 +170,6 @@ label{
 }
 
 
-
 .generalBig a:hover {
     background:#0c5460;
 }
@@ -187,8 +186,7 @@ label{
 }
 
 .generalBig button:hover {
-    color: #50A1A4;
-    background: white;
+    background: #0c5460;
 }
 
 .generalBig form div{
