@@ -126,11 +126,6 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('main_home');
         }
 
-        if($sortieForm->get('annuler_btn')->isClicked()){
-            unset($_SESSION["NewSortie"]);
-            return $this->redirectToRoute('main_home');
-        }
-
 
         return $this->render('/sortie/create.html.twig', [
             'sortieForm'=>$sortieForm->createView(),
@@ -204,11 +199,6 @@ class SortieController extends AbstractController
             return $this->redirectToRoute('main_home');
         }
 
-
-        //Annuler et revenir à l'accueil
-        if($sortieForm->get('annuler_btn')->isClicked()){
-            return $this->redirectToRoute('main_home');
-        }
 
         return $this->render('/sortie/update.html.twig',
             [

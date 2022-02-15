@@ -289,7 +289,19 @@ label{
     margin: 2vh;
 }
 
+.generalBig .group-btn{
+    display: flex;
+    align-items: center;
+}
 
+.generalBig .group-btn button{
+    width: 50%;
+}
+.generalBig .group-btn div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
 
 
 

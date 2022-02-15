@@ -19,7 +19,7 @@
         {{ form_row(motifForm.motif) }}
          <div class="btn_valider">
              {{ form_row(motifForm.enregistrer_btn) }}
-             {{ form_row(motifForm.annuler_btn) }}
+             <button><a href="{{ path('main_home')}}">Annuler</a></button>
          </div>
          {{ form_end(motifForm) }}
      </div>

@@ -28,10 +28,18 @@
                     {% endif %}
 
                     {{ form_row(registrationForm.image) }}
-                    {{ form_end(registrationForm) }}
-
                 </div>
             </div>
+
+                    <div class="group-btn">
+                        {{ form_row(registrationForm.creer_btn) }}
+                        <button><a href="{{ path('user_profil', {'id':participant.id})}}">Annuler</a></button>
+                    </div>
+
+                    {{ form_end(registrationForm) }}
+
+
+
 
         </div>
     </main>

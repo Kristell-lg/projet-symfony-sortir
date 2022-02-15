@@ -42,8 +42,7 @@
      <div class="btn_sortie">
          {{ form_row(sortieForm.creer_btn) }}
          {{ form_row(sortieForm.publier_btn) }}
-         {{ form_row(sortieForm.annuler_btn) }}
-
+         <button><a href="{{ path('main_home')}}">Annuler</a></button>
          {{form_end(sortieForm)}}
      </div>
  </div>
