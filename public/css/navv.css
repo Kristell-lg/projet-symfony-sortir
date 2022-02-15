@@ -6,22 +6,28 @@
         display: none;
     }
 
-
+.navbarre{display: flex;}
 
     .liste {
         display: flex;
     }
 
-
+ul{
+    display: flex;
+}
 .nav{display: flex;
     justify-content: space-between;
+
+    align-items: center;
 }
     li {
         display: flex;
         list-style-type: none;
-        font-size: 30px;
+        font-size: 20px;
         justify-content: space-between;
         margin-bottom: 1em;
+        margin: 10px;
+        padding: 8px;
     }
 }
 @media  (max-width: 991px) {
