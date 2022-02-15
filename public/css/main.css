@@ -172,7 +172,7 @@ label{
 
 
 .generalBig a:hover {
-    color:#50A1A4;
+    background:#0c5460;
 }
 
 .generalBig button {
@@ -219,7 +219,7 @@ label{
 }
 
 .generalBig td p{
-    margin: 1vh;
+    margin: 1em;
     padding: 0;
 }
 
@@ -484,9 +484,20 @@ td {
     color: #99c7c7;
 }
 
+td:last-child p{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin:0;
+    padding: 0;
+}
+
 .generalBig td a{
-    text-decoration: underline;
-    color: #99c7c7;
+    color: white;
+    background: #50A1A4;
+    border-radius: 15px;
+    padding: 0.3em;
+    width: 10vh;
 }
 
 td div input{
