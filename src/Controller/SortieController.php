@@ -36,7 +36,16 @@ class SortieController extends AbstractController
 
     ): Response {
 
-        $sortie = new Sorties();
+
+        try{
+            $sortie = $_SESSION["NewSortie"];
+            $sortie->setLieux($lieuxRepository->find($sortie->getLieux()->getId()));
+            //dd($sortie->getLieux());
+        } catch( \Exception $e) {
+            $sortie = new Sorties();
+        }
+
+        //$sortie->setLieux(null);
         $sortieForm = $this->createForm(SortiesType::class,$sortie);
         $sortieForm->handleRequest($request);
 
@@ -44,9 +53,10 @@ class SortieController extends AbstractController
         $lieuForm = $this->createForm(LieuxType::class,$lieu);
         $lieuForm->handleRequest($request);
 
-        //Afficher le détail du lieu quand sélectionner
+        //ajouter un lieu
         if($sortieForm->get('lieu_btn')->isClicked()){
-            $lieu = $lieuxRepository->find($sortieForm->getData()->getLieux()->getId());
+
+            $_SESSION["NewSortie"]=$sortie;
 
             $sortieForm = $this->createForm(SortiesType::class,$sortie);
             $sortieForm->handleRequest($request);
@@ -83,6 +93,7 @@ class SortieController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success','Evènement créé !');
+            unset($_SESSION["NewSortie"]);
             return $this->redirectToRoute('main_home');
         }
 
@@ -111,10 +122,12 @@ class SortieController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success','Evènement créé !');
+            unset($_SESSION["NewSortie"]);
             return $this->redirectToRoute('main_home');
         }
 
         if($sortieForm->get('annuler_btn')->isClicked()){
+            unset($_SESSION["NewSortie"]);
             return $this->redirectToRoute('main_home');
         }
 

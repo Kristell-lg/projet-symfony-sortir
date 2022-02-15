@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Lieux;
+use App\Entity\Sorties;
 use App\Form\LieuxType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,7 @@ class LieuxController extends AbstractController
         Request $request
     ){
         $lieux = new Lieux();
-
+        $sortie = new Sorties();
         $LieuxForm = $this->createForm(LieuxType::class,$lieux);
         $LieuxForm->handleRequest($request);
 
@@ -27,6 +28,10 @@ class LieuxController extends AbstractController
             $entityManager->persist($lieux);
             $entityManager->flush();
             $this->addFlash('success', 'Lieux ajouté !');
+
+            $sortie = $_SESSION["NewSortie"];
+            $sortie->setLieux($lieux);
+            $_SESSION["NewSortie"] = $sortie;
 
             return $this->redirectToRoute('sortie_create');
         }
