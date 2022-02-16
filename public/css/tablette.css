@@ -38,8 +38,8 @@
         justify-content: center;
         padding:1em;
         border-radius: 30px;
-        font-size:1.5em;
-        height: 60vh;
+        font-size:1.2em;
+        height: 80vh;
         width: 90%;
     }
     .general h1 {
@@ -123,15 +123,16 @@
     .generalBig textarea {
          resize: none;
      }
+
+    .generalBig td a {
+        text-decoration: underline;
+        color: #99c7c7;
+    }
+
     tr td:nth-child(1){
 
         text-decoration: underline;
     }
-    tr :nth-child(4),
-     tr :nth-child(5),
-     tr :nth-child(6),
-     tr :nth-child(7),
-     tr :nth-child(8),
      tr :nth-child(9)
      {
          display:none;
@@ -208,6 +209,9 @@
 
     .sorties tr{
         width: 100vw;
+    }
+    .general .sorties{
+        display: table-row;
     }
     /*          Nav         */
     nav {
