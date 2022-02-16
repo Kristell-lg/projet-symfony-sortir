@@ -63,6 +63,7 @@
 
     .general p {
         margin: 0;
+        font-size: small;
     }
 
     .general a {
@@ -153,7 +154,7 @@
     }
 
 /* gestion de l'affichage du tableau */
-    tr :nth-child(2),
+   .sorties tr :nth-child(2),
     tr :nth-child(5),
     tr :nth-child(6),
     tr :nth-child(7),
