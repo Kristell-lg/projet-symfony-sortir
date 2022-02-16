@@ -60,7 +60,7 @@
                         {% endfor %}
 
                         {# N'affiche que si c'est publié ou si l'on en est le owner #}
-                        {% if s.etats.id != '1' or s.organisateur.id == app.user.id %}
+                        {% if s.typeDeSortie ==0 and s.etats.id != '1' or s.organisateur.id == app.user.id %}
                         <tr>
                             <td><p>{{ s.nom }} </p></td>
                             <td><p>{{ s.dateHeureDebut | date('d/m/Y')}}</p></td>

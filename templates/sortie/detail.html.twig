@@ -20,6 +20,16 @@ Sorties | {{ parent() }}
                         <p>Rue : {{sortie.lieux.rue}}</p>
                         <p>Code postal : {{sortie.lieux.villes.codePostal}}</p>
                         <p>Etat : {{sortie.etats.libelle}} </p>
+                        <p>Type de sortie :
+                            {% if sortie.typeDeSortie %}
+                                Privée
+                                <div class="guestForm">
+                                    {{ form(guestForm) }}
+                                </div>
+                                {% else %}
+                                Public
+                            {% endif%}
+                        </p>
                         <p>Organisateur : {{sortie.organisateur.nom}} </p>
 
             </div>
