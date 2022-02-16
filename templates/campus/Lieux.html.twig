@@ -3,10 +3,15 @@
 {% block title %} {{ parent() }} | Campus {% endblock %}
 
 {% block body %}
-    {{ form_start(lieuxForm) }}
+    <main>
+        <div class="generalBig">
+            <h1>Formulaire Lieux</h1>
+            {{ form_start(lieuxForm) }}
 
-    {{ form_widget(lieuxForm) }}
-        <button type="submit">Enregistrer</button>
-        <a href="{{ path('sortie_create')}}" >Annuler</a>
-    {{ form_end(lieuxForm) }}
+            {{ form_widget(lieuxForm) }}
+                <button type="submit">Enregistrer</button>
+                <a href="{{ path('sortie_create')}}" >Annuler</a>
+            {{ form_end(lieuxForm) }}
+        </div>
+    </main>
 {% endblock %}
