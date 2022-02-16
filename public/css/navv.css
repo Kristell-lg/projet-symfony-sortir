@@ -6,7 +6,15 @@
         display: none;
     }
 
-.navbarre{display: flex;}
+.navbarre{
+    display: flex;
+    align-items: center;
+}
+
+    label a{
+    display: flex;
+    align-items: center;
+    }
 
     .liste {
         display: flex;
