@@ -4,15 +4,18 @@
         background-image: url("../img/backdrop.png");
         font-family: 'Source Sans Pro', sans-serif;
         margin: 0;
-
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
     }
 
     header {
         display: flex;
         justify-content: space-between;
         background: rgba(24, 29, 49, 0.75);
-        padding: 50px;
+        padding: 20px;
         font-size:2em;
+
     }
 
     img{
@@ -23,7 +26,7 @@
         color: white;
         display: flex;
         justify-content: space-evenly;
-        padding-top: 150px;
+        padding-top: 10px;
 
 
     }
@@ -40,9 +43,7 @@
         padding:1em;
         border-radius: 30px;
         font-size:1em;
-        height: 90vh;
-
-
+        height: 70vh;
 
     }
 
@@ -70,7 +71,7 @@
     .general button {
         margin: 15px;
         border-radius: 30px;
-        height: 20vh;
+        height: 10vh;
         font-family: 'Source Sans Pro', sans-serif;
         color: white;
         background: #50A1A4;
