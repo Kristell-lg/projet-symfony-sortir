@@ -75,6 +75,11 @@ class Sorties
      */
     private $organisateur;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $typeDeSortie;
+
     public function __construct()
     {
         $this->sortieParticipants = new ArrayCollection();
@@ -229,6 +234,18 @@ class Sorties
     public function setOrganisateur(?Participant $orga): self
     {
         $this->organisateur = $orga;
+
+        return $this;
+    }
+
+    public function getTypeDeSortie(): ?bool
+    {
+        return $this->typeDeSortie;
+    }
+
+    public function setTypeDeSortie(bool $typeDeSortie): self
+    {
+        $this->typeDeSortie = $typeDeSortie;
 
         return $this;
     }

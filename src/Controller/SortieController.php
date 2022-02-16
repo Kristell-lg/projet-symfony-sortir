@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Lieux;
 use App\Entity\Sorties;
+use App\Form\AjoutParticipantSortiePriveeType;
 use App\Form\LieuxType;
 use App\Form\MotifAnnulationType;
 use App\Form\SortiesType;
@@ -136,11 +137,18 @@ class SortieController extends AbstractController
     /**
      * @Route("sortie/detail/{id}", name="sortie_details")
      */
-    public function details(int $id, SortiesRepository $sortiesRepository): Response
+    public function details(int $id, Request $request, SortiesRepository $sortiesRepository,ParticipantRepository $participantRepository): Response
     {
         $sortie = $sortiesRepository->find($id);
 
-        return $this->render('sortie/detail.html.twig', ["sortie"=>$sortie]);
+        $guestForm = $this->createForm(AjoutParticipantSortiePriveeType::class);
+        $guestForm->handleRequest($request);
+
+        if ($guestForm->isSubmitted()){
+            $sortie->addSortieParticipants($participantRepository->findBy(["email"=>$guestForm->get('guestEmail')->getData()])[0]);
+        }
+
+        return $this->render('sortie/detail.html.twig', ["sortie"=>$sortie,"guestForm"=>$guestForm->createView()]);
     }
 
     /**

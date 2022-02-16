@@ -8,6 +8,7 @@ use App\Entity\Sorties;
 use App\Entity\Villes;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -45,6 +46,13 @@ class SortiesType extends AbstractType
             ])
             ->add('infosSortie', TextareaType::class,[
                 'label'=>'Informations'
+            ])
+            ->add('typeDeSortie', ChoiceType::class,[
+                'choices'=>[
+                    'Public (ouvert à tous)'=>0,
+                    'Privé (les inscriptions se font manuellement par le créateur)'=>1,
+                ],
+                'multiple'=> false
             ])
 
             ->add('lieux',EntityType::class,[
