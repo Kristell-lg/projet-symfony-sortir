@@ -157,11 +157,14 @@
         display:none;
     }
 
-
     .generalBig .sortie_research{
         display:none;
     }
     /*        Sortie        */
+    .sorties{
+        display: flex;
+        justify-content: center;
+    }
     .sorties table {
         border:none;
         border-radius: 30px;
@@ -172,6 +175,7 @@
         display: block;
         max-height: 100vh;
         overflow-y: scroll;
+        width: fit-content;
     }
 
     .sorties thead {
