@@ -504,6 +504,15 @@ td:last-child p{
     padding: 0;
 }
 
+.generalBig td p a{
+    color: white;
+    text-decoration: none;
+    background: none;
+}
+.generalBig td p a:hover{
+    background: none;
+}
+
 .generalBig td a{
     color: white;
     background: #50A1A4;
