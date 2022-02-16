@@ -14,7 +14,7 @@ Sorties | {{ parent() }}
                         <p>Date de Clôture : {{sortie.dateLimiteInscription | date('d/m/Y') }}</p>
                         <p>Inscription/Places : {{ sortie.sortieParticipants | length }} / {{sortie.nbInscriptionMax }}</p>
                         <p>Durée : {{sortie.duree}} minutes</p>
-                        <p>Descritpion et infos : {{sortie.infosSortie}}</p>
+                        <p>Description et infos : {{sortie.infosSortie}}</p>
                         <p>Campus : {{sortie.campus.nom}}</p>
                         <p>Lieu : {{sortie.lieux.nom}}</p>
                         <p>Rue : {{sortie.lieux.rue}}</p>
@@ -23,9 +23,6 @@ Sorties | {{ parent() }}
                         <p>Type de sortie :
                             {% if sortie.typeDeSortie %}
                                 Privée
-                                <div class="guestForm">
-                                    {{ form(guestForm) }}
-                                </div>
                                 {% else %}
                                 Public
                             {% endif%}
@@ -55,6 +52,15 @@ Sorties | {{ parent() }}
                     </tbody>
 
                 </table>
+
+            {% if sortie.typeDeSortie %}
+
+                <div class="guestForm">
+                    {{ form(guestForm) }}
+                </div>
+
+            {% endif%}
+
 
         </div>
     </main>

@@ -123,7 +123,9 @@ label{
 }
 
 
-
+.general #ajout_participant_sortie_privee {
+    display: flex;
+}
 
 
 

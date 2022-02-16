@@ -142,7 +142,8 @@ class SortieController extends AbstractController
         int                   $id,
         Request               $request,
         SortiesRepository     $sortiesRepository,
-        ParticipantRepository $participantRepository
+        ParticipantRepository $participantRepository,
+        EntityManagerInterface $entityManager
     ): Response
     {
         //Récupération de la sortie via son ID
@@ -153,8 +154,18 @@ class SortieController extends AbstractController
 
         $guestForm->handleRequest($request);
 
-        if ($guestForm->isSubmitted()) {
+        if ($guestForm->isSubmitted() && $sortie->getNbInscriptionMax() > count($sortie->getSortieParticipants()) && $sortie->getDateLimiteInscription() > new DateTime('NOW')) {
+
             $sortie->addSortieParticipants($participantRepository->findBy(["email" => $guestForm->get('guestEmail')->getData()])[0]);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash("success", "Invité ajouté !");
+            $this->redirectToRoute("sortie_details",["id"=>$sortie->getId()]);
+        }
+        else{
+            $this->addFlash("fail", "Invité n'a pas pu être ajouté !");
+            $this->redirectToRoute("sortie_details",["id"=>$sortie->getId()]);
         }
 
         return $this->render('sortie/detail.html.twig', [
