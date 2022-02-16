@@ -1,4 +1,259 @@
-html{
+@media only screen and (min-width: 481px) and (max-device-width : 1080px){
+    html, body {
+        background-image: url("../img/backdrop.png");
+        font-family: 'Source Sans Pro', sans-serif;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+        background: rgba(24, 29, 49, 0.75);
+        padding: 50px;
+        font-size:2em;
+    }
+    img{
+        height:65px;
+    }
+    .navbarre{
+        display:none
+    }
+    main {
+        color: white;
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 10px;
+    }
+    label{
+         display: block;
+     }
+    .general {
 
-    color: blue;
+        background-color: rgba(24, 29, 49, 0.75);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        padding:1em;
+        border-radius: 30px;
+        font-size:1.5em;
+        height: 60vh;
+        width: 90%;
+    }
+    .general h1 {
+        text-decoration: overline #50A1A4;
+        margin:15px;
+    }
+    .general a {
+         text-decoration: none;
+         color: white;
+     }
+    .passOublie{
+        font-size: 0.8em;
+        text-decoration:underline;
+        margin:auto
+    }
+    .general form{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .general form .btn_valider{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around
+    }
+    .general input {
+        height: 4vh;
+        margin: 20px;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: medium;
+        width: 70%;
+    }
+    .general button {
+        margin: 15px;
+        border-radius: 30px;
+        height: 8vh;
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        background: #50A1A4;
+        border: none;
+        font-size: 1em;
+    }
+    .general form .btn_valider button{
+        width: 15vw;
+    }
+    .logincheckbox{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-weight: bolder;
+
+    }
+    .logincheckbox input{
+        width: 10%;
+    }
+
+    footer{
+        position: absolute;
+        bottom:0;
+        width:100%;
+        background: rgba(24, 29, 49, 0.75);
+        display: flex;
+        justify-content: space-around;
+        color: white;
+        font-size: smaller;
+    }
+    footer p {
+          padding: 0;
+          margin: 2px;
+    }
+    .generalBig {
+        background-color: rgba(24, 29, 49, 0.75);
+        justify-content: center;
+        align-items: stretch;
+        padding: 20px;
+        height: 75vh;
+        width: 90%;
+        border-radius: 30px;
+    }
+    .generalBig textarea {
+         resize: none;
+     }
+    tr td:nth-child(1){
+
+        text-decoration: underline;
+    }
+    tr :nth-child(4),
+     tr :nth-child(5),
+     tr :nth-child(6),
+     tr :nth-child(7),
+     tr :nth-child(8),
+     tr :nth-child(9)
+     {
+         display:none;
+     }
+
+    .generalBig button {
+          display:none;
+
+      }
+    .generalBig h1 {
+        text-decoration: overline #50A1A4;
+        font-size: 1em;
+        display:none;
+    }
+    .columnFiltre{
+         display:none;
+    }
+    .generalBig .filtre .col-1{
+         display:none;
+     }
+
+    .generalBig .filtre .col-2{
+        display:none;
+    }
+
+
+    .generalBig .sortie_research{
+        display:none;
+    }
+    /*        Sortie        */
+    .sorties table {
+        border:none;
+        border-radius: 30px;
+        border-collapse: collapse;
+        color: white;
+        overflow: hidden;
+        box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
+        display: block;
+        max-height: 100vh;
+        overflow-y: scroll;
+    }
+
+    .sorties thead {
+        position: sticky;
+        background-color: rgba(24, 29, 49, 0.92);
+        border:1px solid rgba(24, 29, 49, 0.75);
+    }
+
+    .sorties tbody {
+        background-color: rgba(40, 52, 75, 0.75);
+        border:1px solid rgba(24, 29, 49, 0.75);
+    }
+
+    .sorties th {
+        border:1px dotted rgba(24, 29, 49, 0.75);
+        background-color:rgba(24, 29, 49, 0.75);
+        color:#50A1A4;
+
+    }
+    .sorties td {
+        font-weight: bold;
+        border:1px solid rgba(24, 29, 49, 0.75);
+        text-align:center;
+        padding: 0.2vh;
+    }
+
+    .sorties td div input{
+        width: 100px;
+    }
+
+    .sorties tr{
+        width: 100vw;
+    }
+    /*          Nav         */
+    nav {
+        display: flex;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+
+    }
+
+    nav li {
+        list-style: none;
+        margin: 10px;
+        padding: 8px;
+        display: flex;
+    }
+
+    li a {
+        color: #50A1A4;
+        text-decoration: none;
+    }
+
+    nav li a:hover {
+        color: white;
+        text-decoration: overline #50A1A4;
+    }
+    /*        Flash         */
+    .flash {
+        position: absolute;
+        font-weight: bold;
+        font-size: medium;
+        border-radius: 5px;
+        text-align: center;
+        height: 1vh;
+        padding: 3vh;
+    }
+
+    .flash--success {
+        background-color: rgba(67, 94, 52, 0.75);
+        color:white;
+        left : 43.5%;
+        top : 20%
+    }
+
+    .flash--fail {
+        background-color: rgba(213, 71, 94, 0.75);
+        color:white;
+        left : 42%;
+        top : 20%;
+    }
 }
