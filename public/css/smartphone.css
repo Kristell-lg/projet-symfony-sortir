@@ -146,18 +146,20 @@
         background-color: rgba(24, 29, 49, 0.75);
         justify-content: center;
         align-items: stretch;
-        padding: 20px;
-        height: 70vh;
+        padding: 10px;
+        height: 63vh;
         border-radius: 30px;
+        width: 98vw;
     }
 
 /* gestion de l'affichage du tableau */
-    tr :nth-child(4),
+    tr :nth-child(2),
     tr :nth-child(5),
     tr :nth-child(6),
     tr :nth-child(7),
     tr :nth-child(8),
-    tr :nth-child(9) {
+    tr :nth-child(9),
+    tr :nth-child(10) {
         display:none;
     }
 
@@ -552,6 +554,7 @@
         display: block;
         max-height: 100vh;
         overflow-y: scroll;
+        font-size: smaller;
     }
 
     .sorties thead {
