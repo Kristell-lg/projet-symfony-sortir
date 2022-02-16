@@ -15,7 +15,6 @@
         background: rgba(24, 29, 49, 0.75);
         padding: 20px;
         font-size:2em;
-
     }
 
     img{
@@ -23,7 +22,6 @@
     }
 
     .navbarre{
-
         display:none
     }
 
@@ -32,8 +30,6 @@
         display: flex;
         justify-content: space-evenly;
         padding-top: 10px;
-
-
     }
 
     label{
@@ -64,6 +60,7 @@
         text-decoration: overline #50A1A4;
         margin:15px;
     }
+
     .general p {
         margin: 0;
     }
@@ -83,16 +80,19 @@
         border: none;
         font-size: 1em;
     }
+
     .general button:hover {
         background: #205559;
     }
+
     .general table input{
         width: 20vh;
     }
+
     .general table button{
         width: 15vh;
-
     }
+
     .general form{
         display: flex;
         align-items: center;
@@ -114,7 +114,6 @@
         text-decoration:underline;
         margin:auto
     }
-
 
     #confirm_password{
         width: 100%;
@@ -142,13 +141,7 @@
         text-decoration: overline;
     }
 
-
-
-
-
-
-
-
+/* gestion de la page principale de la version mobile */
     .generalBig {
         background-color: rgba(24, 29, 49, 0.75);
         justify-content: center;
@@ -158,21 +151,19 @@
         border-radius: 30px;
     }
 
+/* gestion de l'affichage du tableau */
     tr :nth-child(4),
     tr :nth-child(5),
     tr :nth-child(6),
     tr :nth-child(7),
     tr :nth-child(8),
-    tr :nth-child(9)
-    {
+    tr :nth-child(9) {
         display:none;
     }
 
     tr td:nth-child(1){
-
         text-decoration: underline;
     }
-
 
     .generalBig form .col1, .col2{
         margin: 10px;
@@ -193,16 +184,12 @@
         text-decoration: overline #50A1A4;
         font-size: 1em;
         display:none;
-
-
     }
 
     .generalBig a {
         text-decoration: none;
         color: white;
     }
-
-
 
     .generalBig a:hover {
         color:#50A1A4;
@@ -283,9 +270,7 @@
         font-size: 1em;
     }
 
-
-
-
+/* retrait de la partie gauche de la page principale*/
     .columnFiltre{
         display:none;
     }
@@ -295,21 +280,17 @@
         display:none;
     }
 
-
     .generalBig .filtre .col-1 input{
         height: 2vh;
         font-size: 4em;
         margin-left:2.5em;
         display:none;
-
     }
 
     .generalBig .filtre .col-1 label{
         font-size: 4em;
         margin-left:2.5em;
         display:none;
-
-
     }
 
     .generalBig .filtre .col-1 select{
@@ -318,17 +299,14 @@
         width: available;
         margin-left:2.5em;
         display:none;
-
-
     }
 
 
-
+/* colone lié aux checkbox et filtre sur page principale */
     .generalBig .col-2 {
         margin: 2vh;
         flex-direction: column;
         display:none;
-
     }
 
     .generalBig .col-2 div{
@@ -336,10 +314,6 @@
         align-items: center;
         margin-top:4em;
         display:none;
-
-
-
-
     }
 
     .generalBig .filtre .col-2 input{
@@ -347,8 +321,6 @@
         font-size: 2em;
         width: 5vh;
         display:none;
-
-
     }
 
     .generalBig .filtre .col-2 label{
@@ -356,8 +328,6 @@
         width: 20vw;
         margin-left:2.5em;
         display:none;
-
-
     }
 
     .generalBig .col-3 {
@@ -365,33 +335,23 @@
         align-items: center;
         margin-left:1em;
         margin-top:60em;
-
     }
 
 
-
-
-
-
-
-
+/*page de connexion*/
 
     .logincheckbox{
         display: flex;
         flex-direction: row;
         align-items: center;
         font-weight: bolder;
-
     }
 
     .logincheckbox input{
         width: 10%;
     }
 
-
-
-
-
+/* Navigation*/
 
     nav {
         display: flex;
@@ -400,7 +360,6 @@
 
     nav ul {
         display: flex;
-
     }
 
     nav li {
@@ -420,10 +379,7 @@
         text-decoration: overline #50A1A4;
     }
 
-
-
-
-
+/* Gestion des messages flash */
     .flash {
         position: absolute;
         font-weight: bold;
@@ -447,11 +403,6 @@
         left : 42%;
         top : 20%;
     }
-
-
-
-
-
 
     .container{
         display: flex;
@@ -505,7 +456,6 @@
         font-size: medium;
         color: white;
         background: #50A1A4;
-
     }
 
     .register button :hover {
@@ -518,11 +468,7 @@
         padding-left: 75px;
     }
 
-
-
-
-
-
+/* Gestion des tableaux*/
     table {
         border:none;
         border-radius: 30px;
@@ -572,12 +518,9 @@
 
     tr{
         width: 100vw;
-
     }
 
-
-
-
+    /*Photo de profil */
     .pp{
         border: 1px solid #ddd;
         border-radius: 4px;
@@ -598,11 +541,7 @@
         display:none;
     }
 
-
-
-
-
-
+    /*Tableau affichage sorties*/
     .sorties table {
         border:none;
         border-radius: 30px;
@@ -630,7 +569,6 @@
         border:1px dotted rgba(24, 29, 49, 0.75);
         background-color:rgba(24, 29, 49, 0.75);
         color:#50A1A4;
-
     }
 
     .sorties td {
@@ -648,7 +586,7 @@
         width: 100vw;
     }
 
-
+    /*Gestion du footer */
     footer{
         position: absolute;
         bottom:-67em;
@@ -659,7 +597,6 @@
         color: white;
         font-size: smaller;
         min-width: 90vh;
-
     }
 
     footer p {
