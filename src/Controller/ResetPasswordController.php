@@ -22,6 +22,9 @@ use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 /**
  * @Route("/reset-password")
  */
+
+//*******************************Réinitialisation du mot de passe du participant****************************************
+
 class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;

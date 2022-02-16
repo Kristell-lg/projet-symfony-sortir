@@ -19,30 +19,33 @@ class RegistrationAdminManuelController extends AbstractController
     /**
      * @Route("/registerAdmin", name="gestion_registerAdmin")
      */
-    public function register(CampusRepository $campusRepository,
-                             Request $request,
+
+    //************************************Création de participant AMDIN MANUELLEMENT ***********************************
+    public function register(CampusRepository            $campusRepository,
+                             Request                     $request,
                              UserPasswordHasherInterface $userPasswordHasher,
-                             EntityManagerInterface $entityManager
+                             EntityManagerInterface      $entityManager
     ): Response
     {
         $user = new Participant();
+        //Création du formulaire de création de participant ADMIN
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // encodage du mot de passe
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
             );
 
             $user->setActif(true);
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+
 
             $this->addFlash('success', 'Utilisateur créé !');
             return $this->redirectToRoute('user_gestion');
@@ -56,18 +59,25 @@ class RegistrationAdminManuelController extends AbstractController
     /**
      * @Route("/registerAdminCSV", name="gestion_registerAdminCSV")
      */
-    public function registerCSV(Request $request, CampusRepository $campusRepository, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
-    {
 
+    //*************************Création de participant par fichier CSV**************************************************
+    public function registerCSV(
+        Request                     $request,
+        CampusRepository            $campusRepository,
+        EntityManagerInterface      $entityManager,
+        UserPasswordHasherInterface $userPasswordHasher
+    ): Response
+    {
+        //Création du formulaire
         $formCSV = $this->createForm(RegisterCSVType::class);
         $formCSV->handleRequest($request);
 
         if ($formCSV->isSubmitted() && $formCSV->isValid()) {
 
-            //on récup le fichier CSV
+            //Récupération du fichier CSV
             $data = $formCSV->get('data')->getData();
 
-            //Check si l'extension est bien un csv
+            //Vérification de l'extention du fichier = CSV
             if ($data->getClientOriginalExtension() === "csv") {
                 dump("success");
 
@@ -80,61 +90,59 @@ class RegistrationAdminManuelController extends AbstractController
                 $reader = Reader::createFromPath('uploads/data.csv', 'r');
                 $reader->setHeaderOffset(0);
 
-                $headersRule = ["nom","prenom","telephone","password","email","campus"];
+                $headersRule = ["nom", "prenom", "telephone", "password", "email", "campus"];
                 $headers = $reader->getHeader();
 
-                if(empty(array_diff($headersRule,$headers))){
+                if (empty(array_diff($headersRule, $headers))) {
 
-                //query sur les enregistrements du documents
-                $records = $reader->getRecords();
+                    //query sur les enregistrements du document
+                    $records = $reader->getRecords();
 
-                foreach ($records as $record) {
-                    try{
-                        $participant = new Participant();
-                        $participant->setNom($record['nom']);
-                        $participant->setPrenom($record['prenom']);
-                        $participant->setTelephone($record['telephone']);
-                        $participant->setEmail($record['email']);
-                        $participant->setPassword(
-                            $userPasswordHasher->hashPassword(
-                                $participant,
-                                $record['password']
-                            )
-                        );
-                        $participant->setActif(true);
-                        $participant->setRoles(["ROLE_USER"]);
+                    foreach ($records as $record) {
+                        try {
+                            $participant = new Participant();
+                            $participant->setNom($record['nom']);
+                            $participant->setPrenom($record['prenom']);
+                            $participant->setTelephone($record['telephone']);
+                            $participant->setEmail($record['email']);
+                            $participant->setPassword(
+                                $userPasswordHasher->hashPassword(
+                                    $participant,
+                                    $record['password']
+                                )
+                            );
+                            $participant->setActif(true);
+                            $participant->setRoles(["ROLE_USER"]);
 
-                        $allCampus = $campusRepository->findAll();
+                            $allCampus = $campusRepository->findAll();
 
-                        foreach ($allCampus as $c){
-                            if ($c->getNom() === $record['campus']){
-                                $participant->setCampus($c);
+                            foreach ($allCampus as $c) {
+                                if ($c->getNom() === $record['campus']) {
+                                    $participant->setCampus($c);
+                                }
                             }
+                            $entityManager->persist($participant);
+                        } catch (\Exception $e) {
+                            $this->addFlash('fail', 'Une erreur est survenue: ' . $e->getMessage() . '!');
+                            return $this->redirectToRoute('user_gestion');
                         }
-                        $entityManager->persist($participant);
-                    }
-                    catch(\Exception $e){
-                        $this->addFlash('fail', 'Une erreur est survenue: '.$e->getMessage().'!');
-                        return $this->redirectToRoute('user_gestion');
+
                     }
 
-                }
+                    $entityManager->flush();
 
-                $entityManager->flush();
+                    //Suppréssion du fichier lors à la fin du process
+                    unlink('uploads/data.csv');
 
-                //supprimer le fichier quand fini
-                unlink('uploads/data.csv');
+                    $this->addFlash('success', 'Utilisateurs créés !');
+                    return $this->redirectToRoute('user_gestion');
 
-                $this->addFlash('success', 'Utilisateurs créés !');
-                return $this->redirectToRoute('user_gestion');
-
-            }
-                //les headers ne sont pas corrects
+                } //Si les headers ne sont pas corrects
                 else {
                     $this->addFlash('fail', 'La création n\'a pas pu aboutir - Veuillez vérifier les en-têtes du fichier  !');
                     return $this->redirectToRoute('user_gestion');
                 }
-                //le fichier n'est pas un CSV
+                //Si le fichier n'est pas un CSV
             } else {
                 $this->addFlash('fail', 'La création n\'a pas pu aboutir - Veuillez vérifier le type du fichier  !');
                 return $this->redirectToRoute('user_gestion');

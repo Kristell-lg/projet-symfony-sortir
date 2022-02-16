@@ -22,6 +22,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
+    //************************************Création de participant ******************************************************
     public function register(CampusRepository $campusRepository,
                              Request $request,
                              UserPasswordHasherInterface $userPasswordHasher,
@@ -31,11 +32,12 @@ class RegistrationController extends AbstractController
     ): Response
     {
         $user = new Participant();
+        //Création du formulaire de création du participant
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // encodage du mot d epasse
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                         $user,
@@ -47,17 +49,17 @@ class RegistrationController extends AbstractController
 
             //Récupération des images transmises
             $image = $form->get('images')->getData();
-            //Générer nom de fichier
+            //Génération du nom de fichier
             $fichier = md5(uniqid()).'.'.$image->guessExtension();
 
             if(filesize($image)<500000){
-                //On copie le fichier dans le dossier uploads
+                //Copie du fichier dans le dossier uploads
                 $image->move(
                     'uploads/',
                     $fichier
                 );
 
-                //On stocke image en BDD(son nom)
+                //Stockage de l'image en BDD(son nom)
                 $img = new Images();
                 $img->setName($fichier);
                 $user->setImages($img);
@@ -65,7 +67,6 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
             return $userAuthenticator->authenticateUser(
                 $user,

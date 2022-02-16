@@ -20,53 +20,63 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_home")
      */
-    public function home(CampusRepository  $campusRepository,SortiesRepository $sortiesRepository, EtatsRepository $etatsRepository,ParticipantRepository $participantRepository, Request $request,EntityManagerInterface $entityManager): Response
+
+    //*********************************** Page d'accueil du site********************************************************
+    public function home(
+        CampusRepository       $campusRepository,
+        SortiesRepository      $sortiesRepository,
+        EtatsRepository        $etatsRepository,
+        ParticipantRepository  $participantRepository,
+        Request                $request,
+        EntityManagerInterface $entityManager
+    ): Response
     {
         $participe = false;
-        $organisateur= null;
+        $organisateur = null;
 
-        $recherche= new  SortieSearch();
-        $filterForm = $this->createForm(SortieResearchType::class,$recherche);
+        $recherche = new  SortieSearch();
+        //Création du formulaire de sortie
+        $filterForm = $this->createForm(SortieResearchType::class, $recherche);
         $filterForm->handleRequest($request);
 
         $participantList = $participantRepository->findAll();
-        foreach ($participantList as $p){
-            if ($p->getEmail()===$this->getUser()->getUserIdentifier()){
-                $organisateur =$p;
+        foreach ($participantList as $p) {
+            if ($p->getEmail() === $this->getUser()->getUserIdentifier()) {
+                $organisateur = $p;
             }
         }
 
-        $sortie = $sortiesRepository->findWanted($recherche,$organisateur);
+        $sortie = $sortiesRepository->findWanted($recherche, $organisateur);
 
 
         $change = false;
 
         //Mettre à jour les clôture des évènements
-        foreach ($sortie as $s){
+        foreach ($sortie as $s) {
 
             //ne peut être annulée
-            if($s->getEtats()->getId()<5 && $s->getEtats()->getId()>1) {
-                    //clôturée
-                    if ($s->getDateLimiteInscription() < new \DateTime('NOW')) {
-                        $s->setEtats($etatsRepository->find(3));
-                        $change = true;
+            if ($s->getEtats()->getId() < 5 && $s->getEtats()->getId() > 1) {
+                //clôturée
+                if ($s->getDateLimiteInscription() < new \DateTime('NOW')) {
+                    $s->setEtats($etatsRepository->find(3));
+                    $change = true;
 
-                        //en cours
-                    } else if ($s->getDateLimiteInscription() === new \DateTime('NOW')) {
-                        $s->setEtats($etatsRepository->find(4));
-                        $change = true;
+                    //en cours
+                } else if ($s->getDateLimiteInscription() === new \DateTime('NOW')) {
+                    $s->setEtats($etatsRepository->find(4));
+                    $change = true;
 
-                        //passée
-                    } else if ($s->getDateHeureDebut() < new \DateTime('NOW')) {
-                        $s->setEtats($etatsRepository->find(5));
-                        $change = true;
-                    }
+                    //passée
+                } else if ($s->getDateHeureDebut() < new \DateTime('NOW')) {
+                    $s->setEtats($etatsRepository->find(5));
+                    $change = true;
                 }
+            }
 
-            if($change==true){
+            if ($change == true) {
                 $entityManager->persist($s);
                 $entityManager->flush();
-                $change=false;
+                $change = false;
             }
 
 
@@ -74,8 +84,8 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig', [
             "sortie" => $sortie,
             'participe' => $participe,
-            'filterForm'=>$filterForm->createView()
-            ]);
+            'filterForm' => $filterForm->createView()
+        ]);
     }
 
 }

@@ -15,16 +15,19 @@ class LieuxController extends AbstractController
     /**
      * @Route("/Lieux/create", name="lieux_create")
      */
+//*******************************Creation des lieux pour les sorties***************************************************
     public function create(
         EntityManagerInterface $entityManager,
-        Request $request
-    ){
+        Request                $request
+    )
+    {
         $lieux = new Lieux();
         $sortie = new Sorties();
-        $LieuxForm = $this->createForm(LieuxType::class,$lieux);
+        //Création du formulaire de sortie
+        $LieuxForm = $this->createForm(LieuxType::class, $lieux);
         $LieuxForm->handleRequest($request);
 
-        if($LieuxForm->isSubmitted() && $LieuxForm->isValid()) {
+        if ($LieuxForm->isSubmitted() && $LieuxForm->isValid()) {
             $entityManager->persist($lieux);
             $entityManager->flush();
             $this->addFlash('success', 'Lieux ajouté !');
@@ -36,7 +39,7 @@ class LieuxController extends AbstractController
             return $this->redirectToRoute('sortie_create');
         }
         return $this->render('campus/Lieux.html.twig', [
-            'lieuxForm'=>$LieuxForm->createView()
+            'lieuxForm' => $LieuxForm->createView()
         ]);
     }
 }
