@@ -38,6 +38,7 @@
                             <th><p>Nom de la sortie</p></th>
                             <th><p>Date de la sortie</p></th>
                             <th><p>Date de Clôture</p></th>
+                            <th><p>Lieu</p></th>
                             <th><p>Inscription/Places</p></th>
                             <th><p>Etat</p></th>
                             <th><p>Inscrit</p></th>
@@ -65,6 +66,7 @@
                             <td><p><a href="{{ path('sortie_details',{'id': s.id}) }}">{{ s.nom }}</a></p></td>
                             <td><p>{{ s.dateHeureDebut | date('d/m/Y')}}</p></td>
                             <td><p>{{ s.dateLimiteInscription | date('d/m/Y')}}</p></td>
+                            <td><p>{{ s.lieux.villes.nom }}</p></td>
                             <td><p> {{ s.sortieParticipants |length }} / {{ s.nbInscriptionMax  }}</p></td>
                             <td><p>{{ s.etats.libelle }}</p></td>
                             <td>

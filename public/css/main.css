@@ -504,12 +504,12 @@ td:last-child p{
     padding: 0;
 }
 
-.generalBig td p a{
+.generalBig td:first-child p a{
     color: white;
     text-decoration: none;
     background: none;
 }
-.generalBig td p a:hover{
+.generalBig td:first-child p a:hover{
     background: none;
 }
 
