@@ -168,6 +168,11 @@
         display:none;
     }
 
+    tr td:nth-child(1){
+
+        text-decoration: underline;
+    }
+
 
     .generalBig form .col1, .col2{
         margin: 10px;
@@ -580,6 +585,7 @@
         width: 150px;
         height: 150px;
         object-fit: cover;
+        display: none;
     }
 
     .ppmini{
@@ -589,6 +595,7 @@
         width: 40px;
         height: 40px;
         object-fit: cover;
+        display:none;
     }
 
 
