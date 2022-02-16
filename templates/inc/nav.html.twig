@@ -1,47 +1,36 @@
 <link rel="stylesheet"   href="{{ asset('css/navv.css') }}">
-<script src={{ asset('JS/nav.js') }}></script>
 
-<section class="top-nav">
-    <label class =navbarre>
-        <input class="hamb" type="checkbox">
-        <span class="menu"> <span class="hamburger"></span> </span>
-        <ul>
+{% if app.user %}
+    <section class="top-nav">
+        <label class =navbarre>
+            <input class="hamb" type="checkbox">
 
-            {% if is_granted("ROLE_ADMIN") %}
-<div class="liste">
-            <li>   <a class="dropdown-item" href="{{ path('campusville_campus') }}" title="Campus">Campus</a></li>
+            <span class="menu">
+                <span class="hamburger"></span>
+            </span>
 
-            <li>    <a class="dropdown-item" href="{{ path('campusville_villes') }}" title="Villes">Ville</a></li>
-
-            <li>    <a class="dropdown-item" href="{{ path('user_gestion') }}" title="User">Gestions des
-                    Participants</a></li>
-
-            {% endif %}
-
-            {% if app.user %}
-
-            <li><a class="dropdown-item" href="{{ path('main_home') }}" title="Accueil">Accueil</a></li>
-
-               <li> <a href="{{ path('user_profil',{'id':app.user.id}) }}"
-                       title="monProfil">Mon Profil</a></li>
-
-                <li><a class="dropdown-item" href="{{ path('app_logout') }}" title="seDeconnecter">Se Déconnecter
-                    ({{ app.user.userIdentifier }}
-                        )</a></li>
-
-</div>
-        </ul>
-    </label>
-{% if app.user.images is not empty %}
-    <a href="{{ path('user_profil',{'id':app.user.id}) }}" title="monProfil">
-        <img class="ppmini" src="{{ asset('uploads/'~app.user.images.name) }}" alt="photo profil">
-    </a>
+            <ul>
+                {% if is_granted("ROLE_ADMIN") %}
+                <div class="liste">
+                    <li> <a class="dropdown-item" href="{{ path('campusville_campus') }}" title="Campus">Campus</a></li>
+                    <li> <a class="dropdown-item" href="{{ path('campusville_villes') }}" title="Villes">Ville</a></li>
+                    <li><a class="dropdown-item" href="{{ path('user_gestion') }}" title="User">Gestions des Participants</a></li>
+                {% endif %}
 
 
+                    <li><a class="dropdown-item" href="{{ path('main_home') }}" title="Accueil">Accueil</a></li>
+                    <li> <a href="{{ path('user_profil',{'id':app.user.id}) }}" title="monProfil">Mon Profil</a></li>
+                    <li><a class="dropdown-item" href="{{ path('app_logout') }}" title="seDeconnecter">Se Déconnecter ({{ app.user.userIdentifier }})</a></li>
+                </div>
+            </ul>
+
+        </label>
+
+                {% if app.user.images is not empty %}
+                    <a href="{{ path('user_profil',{'id':app.user.id}) }}" title="monProfil">
+                        <img class="ppmini" src="{{ asset('uploads/'~app.user.images.name) }}" alt="photo profil">
+                    </a>
+                {% endif %}
 {% endif %}
-
-    {% endif %}
-
-
-
+        </section>
 
