@@ -150,11 +150,10 @@
 
     .generalBig {
         background-color: rgba(24, 29, 49, 0.75);
-        display:flex;
         justify-content: center;
         align-items: stretch;
         padding: 20px;
-        height: 80vh;
+        height: 70vh;
         border-radius: 30px;
     }
 
@@ -604,7 +603,7 @@
         overflow: hidden;
         box-shadow: 0 0 0 1px rgba(191, 197, 220, 0.75);
         display: block;
-        max-height: 30vh;
+        max-height: 100vh;
         overflow-y: scroll;
     }
 
