@@ -24,14 +24,23 @@ class CampusVilleController extends AbstractController
      */
     public function campusListe(EntityManagerInterface $entityManager, CampusRepository $campusRepository, Request $request, ?campus $pCampus): Response
     {
+        $recherche = new PropertySearch();
+        try{
+            $recherche->setRecherche($_SESSION["campusSearch"]->getRecherche());
+        } catch( \Exception $e) {}
         $modif = false;
 
-        $recherche = new PropertySearch();
         $filterForm = $this->createForm(FilterResearchType::class,$recherche);
         $filterForm->handleRequest($request);
 
-        if($filterForm->isSubmitted()){
-            $campus= $campusRepository->findWanted($recherche);
+        if($filterForm->isSubmitted()||$recherche->getRecherche()!=''){
+            if($recherche->getRecherche()!=''){
+                $_SESSION["campusSearch"]=$recherche;
+                $campus= $campusRepository->findWanted($recherche);
+            }else{
+                unset($_SESSION["campusSearch"]);
+                $campus = $campusRepository->findAll();
+            }
         } else{
             $campus = $campusRepository->findAll();
         }
@@ -71,14 +80,23 @@ class CampusVilleController extends AbstractController
      */
     public function villesListe(EntityManagerInterface $entityManager, VillesRepository $villesRepository, Request $request,?Villes $ville): Response
     {
+        $recherche = new PropertySearch();
+        try{
+            $recherche->setRecherche($_SESSION["VilleSearch"]->getRecherche());
+        } catch( \Exception $e) {}
         $modif = false;
 
-        $recherche = new PropertySearch();
         $filterForm = $this->createForm(FilterResearchType::class,$recherche);
         $filterForm->handleRequest($request);
 
-        if($filterForm->isSubmitted()){
-            $villes= $villesRepository->findWanted($recherche);
+        if($filterForm->isSubmitted()||$recherche->getRecherche()!=''){
+            if($recherche->getRecherche()!=''){
+                $_SESSION["VilleSearch"]=$recherche;
+                $villes= $villesRepository->findWanted($recherche);
+            }else{
+                unset($_SESSION["VilleSearch"]);
+                $villes = $villesRepository->findAll();
+            }
         } else{
             $villes= $villesRepository->findAll();
         }
