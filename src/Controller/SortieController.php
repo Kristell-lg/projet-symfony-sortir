@@ -154,19 +154,20 @@ class SortieController extends AbstractController
 
         $guestForm->handleRequest($request);
 
-        if ($guestForm->isSubmitted() && $sortie->getNbInscriptionMax() > count($sortie->getSortieParticipants()) && $sortie->getDateLimiteInscription() > new DateTime('NOW')) {
+        if ($guestForm->isSubmitted()) {
+            if ($sortie->getNbInscriptionMax() > count($sortie->getSortieParticipants()) && $sortie->getDateLimiteInscription() > new DateTime('NOW')) {
 
             $sortie->addSortieParticipants($participantRepository->findBy(["email" => $guestForm->get('guestEmail')->getData()])[0]);
             $entityManager->persist($sortie);
             $entityManager->flush();
 
             $this->addFlash("success", "Invité ajouté !");
-            $this->redirectToRoute("sortie_details",["id"=>$sortie->getId()]);
-        }
-        else{
+            $this->redirectToRoute("sortie_details", ["id" => $sortie->getId()]);
+        } else {
             $this->addFlash("fail", "Invité n'a pas pu être ajouté !");
-            $this->redirectToRoute("sortie_details",["id"=>$sortie->getId()]);
+            $this->redirectToRoute("sortie_details", ["id" => $sortie->getId()]);
         }
+    }
 
         return $this->render('sortie/detail.html.twig', [
             "sortie" => $sortie, "guestForm" => $guestForm->createView()
