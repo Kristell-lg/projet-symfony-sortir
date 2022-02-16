@@ -43,12 +43,13 @@
     .general {
         background-color: rgba(24, 29, 49, 0.75);
         display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: stretch;
-        padding:1em;
+        padding: 20px;
+        height: 60vh;
         border-radius: 30px;
-        font-size:1em;
-        height: 70vh;
-
+        min-width: 50vh;
     }
 
     .general input {
