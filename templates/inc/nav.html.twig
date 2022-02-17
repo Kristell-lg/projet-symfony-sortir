@@ -12,15 +12,18 @@
             <ul>
                 {% if is_granted("ROLE_ADMIN") %}
                 <div class="liste">
-                    <li> <a class="dropdown-item" href="{{ path('campusville_campus') }}" title="Campus">Campus</a></li>
-                    <li> <a class="dropdown-item" href="{{ path('campusville_villes') }}" title="Villes">Ville</a></li>
-                    <li><a class="dropdown-item" href="{{ path('user_gestion') }}" title="User">Gestions des Participants</a></li>
+                    <div class="adminList">
+                        <li> <a class="dropdown-item" href="{{ path('campusville_campus') }}" title="Campus">Campus</a></li>
+                        <li> <a class="dropdown-item" href="{{ path('campusville_villes') }}" title="Villes">Ville</a></li>
+                        <li><a class="dropdown-item" href="{{ path('user_gestion') }}" title="User">Gestions des Participants</a></li>
+                    </div>
                 {% endif %}
 
-
-                    <li><a class="dropdown-item" href="{{ path('main_home') }}" title="Accueil">Accueil</a></li>
-                    <li> <a href="{{ path('user_profil',{'id':app.user.id}) }}" title="monProfil">Mon Profil</a></li>
-                    <li><a class="dropdown-item" href="{{ path('app_logout') }}" title="seDeconnecter">Se Déconnecter ({{ app.user.userIdentifier }})</a></li>
+                    <div class="userList">
+                        <li><a class="dropdown-item" href="{{ path('main_home') }}" title="Accueil">Accueil</a></li>
+                        <li> <a class="dropdown-item" href="{{ path('user_profil',{'id':app.user.id}) }}" title="monProfil">Mon Profil</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_logout') }}" title="seDeconnecter">Se Déconnecter ({{ app.user.userIdentifier }})</a></li>
+                    </div>
                 </div>
             </ul>
 
