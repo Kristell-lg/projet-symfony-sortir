@@ -9,9 +9,6 @@
             <h1>Veuillez confirmer votre mot de passe </h1>
             <p class="password">Connecté en tant que : {{ last_username }}</p>
 
-            {%  if error is not empty %}
-                <p>{{ error }}</p>
-            {% endif %}
 
             {{ form_start(confirmPasswordForm)}}
             {{ form_widget(confirmPasswordForm)}}

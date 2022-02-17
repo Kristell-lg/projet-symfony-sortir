@@ -88,14 +88,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             //si le mot de passe n'est pas changé et s'il a changé on le hash avant d'envoyer en BDD
-            if (empty($form->get('password')->getData())) {
-                $participant->setPassword(
-                    $userPasswordHasher->hashPassword(
-                        $participant,
-                        $currentPassword
-                    )
-                );
-            } else {
+            if (!empty($form->get('password')->getData())) {
                 $participant->setPassword(
                     $userPasswordHasher->hashPassword(
                         $participant,
@@ -157,16 +150,13 @@ class UserController extends AbstractController
     //***********************************************************Validation du mot de passe avant l'edit du profil ******************************************************************************************************************************************************
 
     public function validation(
-        Request                     $request,
-        AuthenticationUtils         $authenticationUtils,
-        UserPasswordHasherInterface $userPasswordHasher
+        Request                     $request
     ): Response
     {
-        $error = "";
-        // dernier username pour éviter de renvoyer le username
-        $lastUsername = $authenticationUtils->getLastUsername();
 
         $user = $this->getUser();
+        $lastUsername= $user->getUserIdentifier();
+
         $confirmPasswordForm = $this->createForm(ConfirmPasswordType::class);
         $confirmPasswordForm->handleRequest($request);
 
@@ -177,15 +167,12 @@ class UserController extends AbstractController
 
             if (!empty($typedInPassword) && password_verify($typedInPassword, $currentPassword)) {
                 return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
-            } else {
-                $error = 'Mot de passe incorrect';
             }
 
         }
 
         return $this->render('user/validation.html.twig', [
             'last_username' => $lastUsername,
-            'error' => $error,
             'confirmPasswordForm' => $confirmPasswordForm->createView()]);
 
     }

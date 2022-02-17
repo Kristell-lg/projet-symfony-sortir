@@ -90,7 +90,7 @@
 
                                     &emsp;
                                     {% if s.etats.id == '2' and s.organisateur.id != app.user.id and participe == 0
-                                        and s.dateLimiteInscription | date('d/m/Y') < "now" | date('d/m/Y')
+                                        and s.dateLimiteInscription | date('d/m/Y') > "now" | date('d/m/Y')
                                         and s.nbInscriptionMax > s.sortieParticipants | length %}
                                         <a href="{{ path('sortie_register', {'idSortie':s.id, 'idUser':app.user.id }) }}"
                                            onclick="return confirm('Etes-vous sûr de vouloir vous inscrire à cette sortie?')">S'inscrire</a>
