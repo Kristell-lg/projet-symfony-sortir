@@ -7,6 +7,7 @@
         height: 100vh;
         overflow: hidden;
     }
+
     header {
         display: flex;
         justify-content: space-between;
@@ -14,12 +15,15 @@
         padding: 50px;
         font-size:2em;
     }
+
     img{
         height:65px;
     }
-    .navbarre{
+
+    .navbarre img{
         display:none
     }
+
     main {
         color: white;
         display: flex;

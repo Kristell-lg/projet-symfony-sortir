@@ -1,10 +1,11 @@
 *, *:before, *:after
 { box-sizing: border-box; }
-@media  (min-width: 991px) {
 
-    .hamb {
-        display: none;
-    }
+@media  (min-width: 1081px) {
+
+.hamb {
+    display: none;
+}
 
 .navbarre{
     display: flex;
@@ -51,7 +52,7 @@
 
 
 
-@media  (max-width:990px) {
+@media  (max-width:1080px) {
     .navbarre .menu {
         position: absolute;
         right: -100px;
