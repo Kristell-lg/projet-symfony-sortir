@@ -8,6 +8,7 @@
         <title>{% block title %} Sortir.com {% endblock %}</title>
         <link rel="icon" href="{{ asset('img/icon2.png') }}">
         <link rel="stylesheet" media="screen and (min-width: 1081px)" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet"  href="{{ asset('css/navv.css') }}">
         <link rel="stylesheet" media="screen and (min-width: 481px) and (max-width: 1080px)" href="{{ asset('css/tablette.css') }}">
         <link rel="stylesheet" media="screen and (max-device-width : 480px)" href="{{ asset('css/smartphone.css') }}">
 
@@ -20,13 +21,13 @@
 
     </head>
     <body>
-        <header >
+        <header>
 
             <a href="{{ path('main_home') }}"><img class="logo" src="{{ asset('img/logo2.png') }}" alt="logo"></a>
 
-            <div class="nav">
-                {%  include 'inc/nav.html.twig' %}
-            </div>
+
+            {%  include 'inc/nav.html.twig' %}
+
         </header>
 
         {% block body %}{% endblock %}

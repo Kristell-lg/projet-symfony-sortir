@@ -46,20 +46,20 @@
                                 <td>
 
                                     {% if p.actif %}
-                                        <a href="{{ path('user_gestion_desactivate', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir désactiver cet utilisateur?')" >Désactiver</a>&emsp;
+                                        <a href="{{ path('user_gestion_desactivate', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir désactiver cet utilisateur?')" >Désactiver &#10060;</a>&emsp;
                                     {% else %}
                                         <a href="{{ path('user_gestion_reactivate', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir réactiver cet utilisateur?')">Réactiver</a>&emsp;
                                     {% endif %}
 
 
                                     {% if isAdmin %}
-                                        <a href="{{ path('user_gestion_stripAdmin', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir retirer les droits d\'admin?')">Retirer droits "admin"</a>&emsp;
+                                        <a href="{{ path('user_gestion_stripAdmin', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir retirer les droits d\'admin?')">Retirer droits "admin" &#10060;</a>&emsp;
                                         {% set isAdmin = 0 %}
                                     {% else %}
-                                        <a href="{{ path('user_gestion_grantAdmin', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir octroyer des droits d\'admin?')">Donner droits "admin"</a>&emsp;
+                                        <a href="{{ path('user_gestion_grantAdmin', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir octroyer des droits d\'admin?')">Donner droits "admin" </a>&emsp;
                                     {% endif %}
 
-                                    <a href="{{ path('user_gestion_delete', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur?')">Supprimer</a>&emsp;
+                                    <a href="{{ path('user_gestion_delete', {'id': p.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur?')">Supprimer &#10060;</a>&emsp;
 
                                 </td>
                             </tr>

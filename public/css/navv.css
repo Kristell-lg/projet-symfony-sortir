@@ -22,9 +22,18 @@
 
     }
 
-ul{
-    display: flex;
-}
+
+     .navbarre .userList{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .navbarre .adminList{
+        display: flex;
+        flex-direction: row;
+    }
+
+
 .nav{display: flex;
     justify-content: space-between;
 
