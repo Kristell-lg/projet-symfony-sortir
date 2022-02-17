@@ -57,19 +57,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $telephone;
 
 
-
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $actif;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Sorties::class, mappedBy="sortie")
+     * @ORM\ManyToMany(targetEntity=Sorties::class, mappedBy="sortie", cascade={"persist", "remove"})
      */
     private $sorties;
 
     /**
-     * @ORM\OneToMany(targetEntity=Sorties::class, mappedBy="orga")
+     * @ORM\OneToMany(targetEntity=Sorties::class, mappedBy="orga",cascade={"persist", "remove"})
      */
     private $sortiesOrganisees;
 
@@ -83,9 +82,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $images;
 
-    /*/**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+
 
 
 

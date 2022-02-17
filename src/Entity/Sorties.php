@@ -66,7 +66,7 @@ class Sorties
     private $campus;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties")
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties", orphanRemoval=true)
      */
     private $sortieParticipants;
 

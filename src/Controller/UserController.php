@@ -154,6 +154,7 @@ class UserController extends AbstractController
     ): Response
     {
 
+        $error="";
         $user = $this->getUser();
         $lastUsername= $user->getUserIdentifier();
 
@@ -167,12 +168,14 @@ class UserController extends AbstractController
 
             if (!empty($typedInPassword) && password_verify($typedInPassword, $currentPassword)) {
                 return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
-            }
+            } else {
+            $error = 'Mot de passe incorrect';}
 
         }
 
         return $this->render('user/validation.html.twig', [
             'last_username' => $lastUsername,
+            'error'=>$error,
             'confirmPasswordForm' => $confirmPasswordForm->createView()]);
 
     }
