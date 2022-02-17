@@ -28,7 +28,7 @@
                             <a href="{{ path('campusville_modifierville',{'id': v.id }) }}" title="Modifier">Modifier</a>
                             &emsp;
                             <a href="{{ path('campusville_supprimerville',{'id': v.id })}}" title="Supprimer"
-                               onclick ='return confirm("Etes vous sûr de vouloir supprimer la sortie?")'> Supprimer</a>
+                               onclick ='return confirm("Etes vous sûr de vouloir supprimer la ville?")'> Supprimer</a>
                         </td>
                     </tr>
                 {% endif %}
@@ -42,7 +42,7 @@
                         <button type="submit">Enregistrer</button>
                         <a href="{{ path('campusville_villes')}}">Annuler</a>
                         <a href="{{ path('campusville_supprimerville',{'id': ville.id })}}" title="Supprimer"
-                        onclick ='return confirm("Etes vous sûr de vouloir supprimer la sortie?")'>Supprimer</a>
+                        onclick ='return confirm("Etes vous sûr de vouloir supprimer la ville?")'>Supprimer</a>
                     </td>
                 {% else %}
                     <td><button>Ajouter</button></td>
